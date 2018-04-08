@@ -14,7 +14,3 @@ phases:
     commands:
       - aws --region us-east-2 s3 sync ./dist/ s3://brocktubre.com-angular-code/ --acl=public-read --delete
       - aws cloudfront create-invalidation --distribution-id EYZAXH6Y01AFW --paths /index.html
-artifacts:
-  files:
-    - dist*/**
-  discard-paths: yes
