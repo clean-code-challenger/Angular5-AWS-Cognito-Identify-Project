@@ -1,15 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 
 @Component({
   selector: 'app-footer',
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.css']
 })
-export class FooterComponent implements OnInit {
+export class FooterComponent implements OnInit, AfterViewInit {
+  public randomFactText: string;
 
   constructor() { }
 
   ngOnInit() {
+    this.getRandomFact();
+  }
+
+  ngAfterViewInit() {
+
   }
 
 
@@ -135,9 +141,7 @@ public getRandomFact() {
   randomArray[i++] = 'There are two credit cards for every person in the United States.';
 
   const which = Math.round(Math.random() * (randomArray.length - 1));
-  return randomArray[which];
-  // document.getElementById('textrotator').innerHTML = randomArray[which];
-
+  this.randomFactText = randomArray[which];
 }
 
 }
