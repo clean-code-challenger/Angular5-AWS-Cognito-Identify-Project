@@ -5,18 +5,17 @@ phases:
   install:
     commands:
       - printenv
+      - rm -rf node_modules
       - npm install
   build:
     commands:
       - npm run build
   post_build:
     commands:
-      - mkdir -p build
-      - tar jcf build/bt-website-$(date +%Y%m%d%H%m%S).tar.bz2 .eslintrc.js .gitignore README.md buildspec.yml package.json serverless.yml src test
-      - npm install -g serverless
-      - serverless -v -s $(echo ${CODEBUILD_INITIATOR} | cut -d'/' -f2 | cut -d'_' -f3) deploy
-
+      - cd dist
+      - aws --region us-east-2 s3 sync ./ s3://brocktubre.com-angular-code/ --acl=public-read --delete
+      - aws cloudfront create-invalidation --distribution-id EYZAXH6Y01AFW --paths /index.html
 artifacts:
   files:
-    - build*/**
+    - dist*/**
   discard-paths: yes
