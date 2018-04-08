@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-navbar',
@@ -11,19 +12,23 @@ export class NavbarComponent implements OnInit {
   public isPortfolioActive: boolean;
   public isAboutActive: boolean;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,
+              private titleService: Title) { }
 
   ngOnInit() {
     const url = this.router.url;
     switch (url) {
       case '/home':
         this.isHomeActive = true;
+        this.titleService.setTitle('Home | Brock Tubre');
         break;
         case '/portfolio':
         this.isPortfolioActive = true;
+        this.titleService.setTitle('Portfolio | Brock Tubre');
         break;
         case '/about':
         this.isAboutActive = true;
+        this.titleService.setTitle('About | Brock Tubre');
         break;
     }
   }
