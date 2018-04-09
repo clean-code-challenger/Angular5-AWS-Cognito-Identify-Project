@@ -11,9 +11,12 @@ export class NavbarComponent implements OnInit {
   public isHomeActive: boolean;
   public isPortfolioActive: boolean;
   public isAboutActive: boolean;
+  public collapse: boolean;
 
   constructor(private router: Router,
-              private titleService: Title) { }
+              private titleService: Title) {
+                this.collapse = false;
+              }
 
   ngOnInit() {
     const url = this.router.url;
