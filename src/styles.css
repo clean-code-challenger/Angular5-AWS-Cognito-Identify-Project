@@ -31,7 +31,12 @@ a{
 
 .nav a{
 	color: white;
+	font-size: 12px;
 }
 .nav a:hover{
 	color: #080808;
+}
+
+.btn {
+	font-size: 12px;
 }
