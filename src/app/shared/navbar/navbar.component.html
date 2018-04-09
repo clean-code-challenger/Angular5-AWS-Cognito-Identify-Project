@@ -2,23 +2,27 @@
 
     <!-- [BEGIN] Navbar -->
     <nav class="navbar navbar-inverse navbar-static-top">
-      <a class='navbar-brand mr-auto' href='/home'> <img src='assets/img/singLogoWhite.png' style='max-height: 40px; '></a>
-      <button class='navbar-toggle' type='button' data-toggle='collapse' data-target='#navbar-main'>
-          <span class='icon-bar'></span>
-          <span class='icon-bar'></span>
-          <span class='icon-bar'></span>
-        </button>
-    
-      <div class="navbar-collapse" id='navbar-main'>
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item"  [ngClass]="{'active': isHomeActive}">
-              <a class="nav-link"  href='/home'>
-                <i class="fa fa-home"></i>HOME
-              </a>
-            </li>
-          <li class="nav-item"  [ngClass]="{'active': isPortfolioActive}"><a class="nav-link" href='/portfolio'><i class="fa fa-paperclip"></i>PORTFOLIO</a></li>
-          <li class="nav-item"  [ngClass]="{'active': isAboutActive}"><a class="nav-link" href='/about'><i class="fa fa-question"></i>ABOUT ME</a></li>
-        </ul>
+      <div class="navbar-inner">
+        <div class="container">
+          <a class='navbar-brand' style='padding: 10px 5px 0 5px;' href='/home'> <img src='assets/img/singLogoWhite.png' style='max-height: 40px; '></a>
+          <button class='navbar-toggle' type='button' data-toggle='collapse' data-target='#navbar-main'>
+              <span class='icon-bar'></span>
+              <span class='icon-bar'></span>
+              <span class='icon-bar'></span>
+            </button>
+        
+          <div class="navbar-collapse" id='navbar-main'>
+            <ul class="nav mr-auto">
+              <li class="nav-item"  [ngClass]="{'active': isHomeActive}">
+                  <a class="nav-link"  href='/home'>
+                    <i class="fa fa-home"></i>HOME
+                  </a>
+                </li>
+              <li class="nav-item"  [ngClass]="{'active': isPortfolioActive}"><a class="nav-link" href='/portfolio'><i class="fa fa-paperclip"></i>PORTFOLIO</a></li>
+              <li class="nav-item"  [ngClass]="{'active': isAboutActive}"><a class="nav-link" href='/about'><i class="fa fa-question"></i>ABOUT ME</a></li>
+            </ul>
+          </div>
+      </div>
       </div>
     </nav>
     <!-- [END] Navbar -->

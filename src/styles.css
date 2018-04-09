@@ -24,3 +24,14 @@ hr{
 body p{
 	font-size: 14px;
 }
+
+a{
+	color: #3399f3;
+}
+
+.nav a{
+	color: white;
+}
+.nav a:hover{
+	color: #080808;
+}
