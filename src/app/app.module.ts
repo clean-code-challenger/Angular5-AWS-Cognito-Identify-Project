@@ -8,6 +8,7 @@ import { FooterComponent } from './shared/footer/footer.component';
 import { RouterModule } from '@angular/router';
 import { routes } from './app.routes';
 import { NavbarComponent } from './shared/navbar/navbar.component';
+import { S3SandboxComponent } from './s3-sandbox/s3-sandbox.component';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { NavbarComponent } from './shared/navbar/navbar.component';
     PortfolioComponent,
     FooterComponent,
     NavbarComponent,
+    S3SandboxComponent,
 
   ],
   imports: [
