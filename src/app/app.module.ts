@@ -1,3 +1,4 @@
+import { S3SandboxService } from './s3-sandbox/s3-sandbox.service';
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
@@ -26,7 +27,7 @@ import { S3SandboxComponent } from './s3-sandbox/s3-sandbox.component';
     BrowserModule,
     RouterModule.forRoot(routes),
   ],
-  providers: [ Title ],
+  providers: [ Title, S3SandboxService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
