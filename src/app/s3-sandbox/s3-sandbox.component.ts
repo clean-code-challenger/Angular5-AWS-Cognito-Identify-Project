@@ -14,17 +14,15 @@ import { Observable } from 'rxjs/Observable';
 export class S3SandboxComponent implements OnInit {
   public aws;
   public s3;
-  public objectList: S3ObjectModel[];
+  public objectList: Array<S3ObjectModel>;
 
   constructor(private s3SandboxService: S3SandboxService) {
   }
 
   ngOnInit() {
-    this.s3SandboxService.getItems().subscribe(data => {
-      debugger;
-      this.objectList = data.Contents;
+    this.s3SandboxService.getItemsFromBucket('brocktubre-s3-sandbox-bucket').subscribe(items => {
+      this.objectList = items;
     });
-    // this.objectList =
   }
 
 }

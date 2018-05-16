@@ -22,19 +22,19 @@ export class S3SandboxService {
     this.s3 = new AWS.S3({ signatureVersion: 'v4', credentials: creds });
   }
 
-  public getItems(): Observable<any> {
-    const sendResult = new Subject<any>();
+  public getItemsFromBucket(bucketName: string): Observable<Array<S3ObjectModel>> {
+    const sendResult = new Subject<Array<S3ObjectModel>>();
     // Bucket names must be unique across all S3 users
     // const myBucket = 'brocktubre-s3-sandbox-bucket';
     const params = {
-      Bucket: 'brocktubre-s3-sandbox-bucket',
+      Bucket: bucketName,
       MaxKeys: 5
     };
     this.s3.listObjectsV2(params, function(err, data) {
       if (err) {
         sendResult.error(err);
       }else {
-        sendResult.next(data);
+        sendResult.next(data.Contents);
       }
     });
     return sendResult.asObservable();
