@@ -42,6 +42,11 @@
                   </span>
               </label>
               <input type="text" class="form-control" #fileInputVal readonly>
+              <label class="input-group-btn">
+                  <span class="btn btn-success">
+                      Upload <input type="button" style="display: none;" multiple (click)="uploadObject()">
+                  </span>
+              </label>
           </div>
       </div>
   <app-footer></app-footer>

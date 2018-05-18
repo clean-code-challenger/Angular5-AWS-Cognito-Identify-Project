@@ -38,4 +38,8 @@ export class S3SandboxComponent implements OnInit {
 
   }
 
+  public uploadObject(){
+    console.log('We want to upload this document: ', this.myFileInputVal.nativeElement.value);
+  }
+
 }
