@@ -34,8 +34,7 @@ export class NavbarComponent implements OnInit {
           this.titleService.setTitle('About | Brock Tubre');
           break;
         default:
-          this.isHomeActive = true;
-          this.titleService.setTitle('Home | Brock Tubre');
+          this.titleService.setTitle('Brock Tubre');
           break;
     }
   }
