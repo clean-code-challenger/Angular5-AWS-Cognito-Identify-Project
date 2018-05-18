@@ -1,0 +1,39 @@
+<app-navbar></app-navbar>
+
+<!-- [BEGIN] Entire Page Container -->
+<div class="container-fluid background" >
+
+  <!-- [BEGIN] Content Container -->
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <strong><h2> <i class="fa fa-video"></i>VIDEOS <span class="text-primary"> // Tutorials </span></h2></strong>
+        </div>
+      </div>
+      <hr>
+
+      <!-- [BEGIN] Web Applications Section -->
+      <div class="row">
+       <div  class="col-md-12 col-sm-12 col-xs-12 text-center">
+              <video controls="controls" width="800" height="600"
+                  name="Video Name" src="{{videoSrc}}"></video>
+        </div>
+      </div>
+      <!-- [END] Web Applications Section -->
+      <hr>
+      <!-- [BEGIN] row -->
+      <app-footer></app-footer>
+      <!-- [END] Footer content row -->
+    </div>
+  <!-- [END] Content Container -->
+
+  <!-- [BEGIN] Footer Container -->
+  <footer class="navbar-default" style="margin-top: 25px;">
+    <div class="container-fluid" style="padding: 5px 0 5px 0;">
+      <div class="text-center">
+        <p style="color: #FFFFFF;"> © {{year}} Created by Brock Tubre.</p>
+      </div>
+    </div>
+  </footer>
+  <!-- [END] Footer Container -->
+</div>
