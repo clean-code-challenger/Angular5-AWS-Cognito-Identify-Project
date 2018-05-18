@@ -28,7 +28,8 @@ export class S3SandboxService {
     // const myBucket = 'brocktubre-s3-sandbox-bucket';
     const params = {
       Bucket: bucketName,
-      MaxKeys: 5
+      MaxKeys: 5,
+
     };
     this.s3.listObjectsV2(params, function(err, data) {
       if (err) {
