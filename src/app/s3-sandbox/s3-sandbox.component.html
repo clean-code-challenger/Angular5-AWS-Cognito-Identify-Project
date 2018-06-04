@@ -12,6 +12,8 @@
                   <th>ETag</th>
                   <th>Size</th>
                   <th></th>
+                  <th></th>
+                  <th></th>
               </tr>
           </thead>
           <tbody>
@@ -27,7 +29,10 @@
                   </td>
                   <td>
                     <i class="fa fa-download" (click)="downloadObject(o)" style="cursor:pointer"></i>
-                </td>
+                  </td>
+                  <td>
+                    <i class="fa fa-remove" (click)="deleteObject(o)" style="cursor:pointer; color: red"></i>
+                  </td>
               </tr>
           </tbody>
           </table>

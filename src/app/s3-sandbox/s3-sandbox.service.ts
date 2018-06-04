@@ -11,7 +11,6 @@ import { Subject } from 'rxjs/Subject';
 @Injectable()
 export class S3SandboxService {
   private s3;
-  private bucketName: string;
 
   constructor() {
     const config = new AWS.Config({
@@ -21,7 +20,6 @@ export class S3SandboxService {
     });
     const creds = new AWS.Credentials(config.credentials);
     this.s3 = new AWS.S3({ signatureVersion: 'v4', credentials: creds });
-    this.bucketName = environment.public_bucket_name;
   }
 
   public getItemsFromBucket(bucketName: string): Observable<Array<S3ObjectModel>> {
@@ -42,13 +40,13 @@ export class S3SandboxService {
     return sendResult.asObservable();
   }
 
-  public uploadObjectToS3(object: any): Observable<Array<S3ObjectModel>> {
+  public uploadObjectToS3(bucketName: string, object: any): Observable<Array<S3ObjectModel>> {
     const sendResult = new Subject<Array<S3ObjectModel>>();
 
     const params = {
       ACL: 'authenticated-read',
       Body: object,
-      Bucket: this.bucketName,
+      Bucket: bucketName,
       Key: object.name
      };
 
@@ -65,11 +63,30 @@ export class S3SandboxService {
   public getObjectFromS3(bucketName: string, key: string): Observable<any> {
     const sendResult = new Subject<any>();
     const params = {
-      Bucket: this.bucketName,
+      Bucket: bucketName,
       Key: key
     };
 
     this.s3.getObject(params,
+      function (error, data) {
+        if (error) {
+          sendResult.error(error);
+        } else {
+          sendResult.next(data);
+          // do something with data.Body
+        }
+      });
+    return sendResult.asObservable();
+  }
+
+  public deleteObjectFromS3(bucketName: string, key: string): Observable<any> {
+    const sendResult = new Subject<any>();
+    const params = {
+      Bucket: bucketName,
+      Key: key
+    };
+
+    this.s3.deleteObject(params,
       function (error, data) {
         if (error) {
           sendResult.error(error);
