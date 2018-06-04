@@ -62,7 +62,7 @@ export class S3SandboxComponent implements OnInit {
       this.s3SandboxService.uploadObjectToS3(this.bucketName, this.fileToUpload).subscribe(item => {
         this.myFileInputVal.nativeElement.value = null;
         this.fileToUpload = null;
-        setTimeout(this.loadObjects.bind(this), 500);
+        setTimeout(this.loadObjects.bind(this), 1000);
       });
     }
   }
@@ -79,18 +79,26 @@ export class S3SandboxComponent implements OnInit {
   }
 
   public downloadObject(object: any) {
-    this.s3SandboxService.getObjectFromS3(this.bucketName, object.name).subscribe(item => {
+    const objectName = this.cleanObjectName(object.name);
+    this.s3SandboxService.getObjectFromS3(this.bucketName, objectName).subscribe(item => {
       const blob = new Blob([item.Body], { type: item.ContentType });
-      FileSaver.saveAs(blob, object.name);
+      FileSaver.saveAs(blob, objectName);
     });
   }
 
   public deleteObject(object: any) {
     this.loadingObjs = true;
-    this.s3SandboxService.deleteObjectFromS3(this.bucketName, object.name).subscribe(item => {
+    const objectName = this.cleanObjectName(object.name);
+    this.s3SandboxService.deleteObjectFromS3(this.bucketName, objectName).subscribe(item => {
         this.fileToUpload = null;
-        setTimeout(this.loadObjects.bind(this), 500);
+        setTimeout(this.loadObjects.bind(this), 1000);
     });
+  }
+
+  private cleanObjectName(fileName: string) {
+    let returnName = fileName;
+    returnName = returnName.split('+').join(' ');
+    return returnName;
   }
 
 }
