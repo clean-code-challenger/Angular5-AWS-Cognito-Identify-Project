@@ -5,7 +5,6 @@
 
 export const environment = {
   production: false,
-  aws_access_key_id: 'AKIAIFYPN7LFWNIQN4IQ',
-  aws_secret_access_key: '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',
   region: 'us-east-1',
+  public_bucket_name: 'brocktubre-s3-sandbox-bucket'
 };
