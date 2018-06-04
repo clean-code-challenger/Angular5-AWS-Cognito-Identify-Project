@@ -51,6 +51,7 @@ export class S3SandboxComponent implements OnInit {
   }
 
   public uploadObject() {
+    this.loadingObjs = true;
     const file = this.myFileInputVal.nativeElement.files;
 
     if (file === undefined) {
@@ -60,8 +61,8 @@ export class S3SandboxComponent implements OnInit {
       this.s3SandboxService.uploadObjectToS3(this.fileToUpload).subscribe(item => {
         this.myFileInputVal.nativeElement.value = null;
         this.fileToUpload = null;
-        this.loadingObjs = true;
-        setTimeout(this.loadObjects(), 10000);
+        this.objectList = null;
+        setTimeout(this.loadObjects.bind(this), 500);
       });
     }
   }
@@ -71,8 +72,7 @@ export class S3SandboxComponent implements OnInit {
     //   this.objectList = items;
     //   this.loadingObjs = false;
     // });
-
-     this.dynamodbSandboxService.getItemsFromDynamoDb(this.tableName).subscribe(items => {
+    this.dynamodbSandboxService.getItemsFromDynamoDb(this.tableName).subscribe(items => {
       this.objectList = items;
       this.loadingObjs = false;
     });
