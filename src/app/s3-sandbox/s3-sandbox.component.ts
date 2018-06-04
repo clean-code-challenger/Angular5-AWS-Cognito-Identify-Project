@@ -6,6 +6,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import * as S3 from 'aws-sdk/clients/s3';
 import * as AWS from 'aws-sdk';
 import { Observable } from 'rxjs/Observable';
+import * as FileSaver from 'file-saver';
 
 @Component({
   selector: 'app-s3-sandbox',
@@ -75,6 +76,13 @@ export class S3SandboxComponent implements OnInit {
     this.dynamodbSandboxService.getItemsFromDynamoDb(this.tableName).subscribe(items => {
       this.objectList = items;
       this.loadingObjs = false;
+    });
+  }
+
+  public downloadObject(object: any) {
+    this.s3SandboxService.getObjectFromS3(this.bucketName, object.name).subscribe(item => {
+      const blob = new Blob([item.Body], { type: item.ContentType });
+      FileSaver.saveAs(blob, object.name);
     });
   }
 

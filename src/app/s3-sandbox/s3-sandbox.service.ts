@@ -62,4 +62,23 @@ export class S3SandboxService {
      return sendResult.asObservable();
   }
 
+  public getObjectFromS3(bucketName: string, key: string): Observable<any> {
+    const sendResult = new Subject<any>();
+    const params = {
+      Bucket: this.bucketName,
+      Key: key
+    };
+
+    this.s3.getObject(params,
+      function (error, data) {
+        if (error) {
+          sendResult.error(error);
+        } else {
+          sendResult.next(data);
+          // do something with data.Body
+        }
+      });
+    return sendResult.asObservable();
+  }
+
 }
