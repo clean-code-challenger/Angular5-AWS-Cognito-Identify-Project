@@ -16,6 +16,8 @@ export class S3SandboxComponent implements OnInit {
   public s3;
   public objectList: Array<S3ObjectModel>;
   public loadingObjs: boolean;
+  public bucketName: string;
+  public fileToUpload: any;
 
   @ViewChild('fileInput') myFileInput: ElementRef;
   @ViewChild('fileInputVal') myFileInputVal: ElementRef;
@@ -23,23 +25,39 @@ export class S3SandboxComponent implements OnInit {
   constructor(private s3SandboxService: S3SandboxService) {
     this.objectList = new Array<S3ObjectModel>();
     this.loadingObjs = false;
+    this.bucketName = environment.public_bucket_name;
   }
 
   ngOnInit() {
-    // this.s3SandboxService.getItemsFromBucket('brocktubre-s3-sandbox-bucket').subscribe(items => {
+    // this.s3SandboxService.getItemsFromBucket(this.bucketName).subscribe(items => {
     //   this.objectList = items;
     //   this.loadingObjs = false;
     // });
   }
 
-  public fileChanged($event){
-    console.log('File change detected. ', this.myFileInput.nativeElement.files[0]);
-    this.myFileInputVal.nativeElement.value = this.myFileInput.nativeElement.files[0].name;
+  public fileChanged($event) {
+    const file = this.myFileInput.nativeElement.files[0];
+
+    if (file === undefined) {
+      console.log('Cancel selected. Do nothing. ', file);
+
+    } else {
+      console.log('File change detected. ', file);
+      this.myFileInputVal.nativeElement.value = file.name;
+      this.fileToUpload = file;
+    }
 
   }
 
-  public uploadObject(){
-    console.log('We want to upload this document: ', this.myFileInputVal.nativeElement.value);
+  public uploadObject() {
+    const file = this.myFileInputVal.nativeElement.files;
+
+    if (file === undefined) {
+      console.log('No file selected.');
+    }else {
+      console.log('We want to upload this document: ', this.fileToUpload);
+      this.s3SandboxService.uploadObjectToS3(this.fileToUpload);
+    }
   }
 
 }

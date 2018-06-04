@@ -11,6 +11,7 @@ import { Subject } from 'rxjs/Subject';
 @Injectable()
 export class S3SandboxService {
   private s3;
+  public bucketName: string;
 
   constructor() {
     const config = new AWS.Config({
@@ -20,12 +21,12 @@ export class S3SandboxService {
     });
     const creds = new AWS.Credentials(config.credentials);
     this.s3 = new AWS.S3({ signatureVersion: 'v4', credentials: creds });
+    this.bucketName = environment.public_bucket_name;
   }
 
   public getItemsFromBucket(bucketName: string): Observable<Array<S3ObjectModel>> {
     const sendResult = new Subject<Array<S3ObjectModel>>();
-    // Bucket names must be unique across all S3 users
-    // const myBucket = 'brocktubre-s3-sandbox-bucket';
+
     const params = {
       Bucket: bucketName,
       MaxKeys: 5,
@@ -39,6 +40,23 @@ export class S3SandboxService {
       }
     });
     return sendResult.asObservable();
+  }
+
+  public uploadObjectToS3(object: any) {
+    const params = {
+      ACL: 'authenticated-read',
+      Body: object,
+      Bucket: this.bucketName,
+      Key: object.name
+     };
+
+     this.s3.putObject(params, function(err, data) {
+       if (err) {
+         console.log(err, err.stack); // an error occurred
+       }else {
+         console.log(data);           // successful response
+       }
+     });
   }
 
 }
