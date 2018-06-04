@@ -11,7 +11,7 @@ import { Subject } from 'rxjs/Subject';
 @Injectable()
 export class S3SandboxService {
   private s3;
-  public bucketName: string;
+  private bucketName: string;
 
   constructor() {
     const config = new AWS.Config({
@@ -42,7 +42,9 @@ export class S3SandboxService {
     return sendResult.asObservable();
   }
 
-  public uploadObjectToS3(object: any) {
+  public uploadObjectToS3(object: any): Observable<Array<S3ObjectModel>> {
+    const sendResult = new Subject<Array<S3ObjectModel>>();
+
     const params = {
       ACL: 'authenticated-read',
       Body: object,
@@ -51,12 +53,13 @@ export class S3SandboxService {
      };
 
      this.s3.putObject(params, function(err, data) {
-       if (err) {
-         console.log(err, err.stack); // an error occurred
-       }else {
-         console.log(data);           // successful response
-       }
+      if (err) {
+        sendResult.error(err);
+      }else {
+        sendResult.next(data.Contents);
+      }
      });
+     return sendResult.asObservable();
   }
 
 }

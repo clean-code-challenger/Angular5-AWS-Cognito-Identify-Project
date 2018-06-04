@@ -1,3 +1,4 @@
+import { DynamodbSandboxService } from './../dynamodb-sandbox/dynamodb-sandbox.service';
 import { S3SandboxService } from './s3-sandbox.service';
 import { S3ObjectModel } from './../shared/models/s3-object.model';
 import { environment } from './../../environments/environment';
@@ -17,22 +18,22 @@ export class S3SandboxComponent implements OnInit {
   public objectList: Array<S3ObjectModel>;
   public loadingObjs: boolean;
   public bucketName: string;
+  public tableName: string;
   public fileToUpload: any;
 
   @ViewChild('fileInput') myFileInput: ElementRef;
   @ViewChild('fileInputVal') myFileInputVal: ElementRef;
 
-  constructor(private s3SandboxService: S3SandboxService) {
+  constructor(private s3SandboxService: S3SandboxService,
+              private dynamodbSandboxService: DynamodbSandboxService) {
     this.objectList = new Array<S3ObjectModel>();
-    this.loadingObjs = false;
+    this.loadingObjs = true;
     this.bucketName = environment.public_bucket_name;
+    this.tableName = environment.dynamodb_table_name;
   }
 
   ngOnInit() {
-    // this.s3SandboxService.getItemsFromBucket(this.bucketName).subscribe(items => {
-    //   this.objectList = items;
-    //   this.loadingObjs = false;
-    // });
+    this.loadObjects();
   }
 
   public fileChanged($event) {
@@ -56,8 +57,25 @@ export class S3SandboxComponent implements OnInit {
       console.log('No file selected.');
     }else {
       console.log('We want to upload this document: ', this.fileToUpload);
-      this.s3SandboxService.uploadObjectToS3(this.fileToUpload);
+      this.s3SandboxService.uploadObjectToS3(this.fileToUpload).subscribe(item => {
+        this.myFileInputVal.nativeElement.value = null;
+        this.fileToUpload = null;
+        this.loadingObjs = true;
+        setTimeout(this.loadObjects(), 10000);
+      });
     }
+  }
+
+  public loadObjects() {
+    // this.s3SandboxService.getItemsFromBucket(this.bucketName).subscribe(items => {
+    //   this.objectList = items;
+    //   this.loadingObjs = false;
+    // });
+
+     this.dynamodbSandboxService.getItemsFromDynamoDb(this.tableName).subscribe(items => {
+      this.objectList = items;
+      this.loadingObjs = false;
+    });
   }
 
 }

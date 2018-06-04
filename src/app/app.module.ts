@@ -1,3 +1,4 @@
+import { DynamodbSandboxService } from './dynamodb-sandbox/dynamodb-sandbox.service';
 import { S3SandboxService } from './s3-sandbox/s3-sandbox.service';
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -27,7 +28,7 @@ import { S3SandboxComponent } from './s3-sandbox/s3-sandbox.component';
     BrowserModule,
     RouterModule.forRoot(routes),
   ],
-  providers: [ Title, S3SandboxService ],
+  providers: [ Title, S3SandboxService, DynamodbSandboxService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
