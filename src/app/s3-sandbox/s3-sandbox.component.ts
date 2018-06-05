@@ -7,6 +7,7 @@ import * as S3 from 'aws-sdk/clients/s3';
 import * as AWS from 'aws-sdk';
 import { Observable } from 'rxjs/Observable';
 import * as FileSaver from 'file-saver';
+import { BsModalComponent } from 'ng2-bs3-modal';
 
 @Component({
   selector: 'app-s3-sandbox',
@@ -21,9 +22,11 @@ export class S3SandboxComponent implements OnInit {
   public bucketName: string;
   public tableName: string;
   public fileToUpload: any;
+  public uploadedObject: string;
 
   @ViewChild('fileInput') myFileInput: ElementRef;
   @ViewChild('fileInputVal') myFileInputVal: ElementRef;
+  @ViewChild('myModal') modal: BsModalComponent;
 
   constructor(private s3SandboxService: S3SandboxService,
               private dynamodbSandboxService: DynamodbSandboxService) {
@@ -96,10 +99,22 @@ export class S3SandboxComponent implements OnInit {
   }
 
   private cleanObjectName(fileName: string) {
-    debugger;
     let returnName = fileName;
     returnName = returnName.split('+').join(' ');
     return returnName;
+  }
+
+  private openEditModal(object: any) {
+    this.uploadedObject = object;
+    this.modal.open();
+  }
+
+  private closeEditModal() {
+    this.modal.close();
+  }
+
+  private updateObject(object: any) {
+    console.log('Need to update this object: ', object);
   }
 
 }

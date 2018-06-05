@@ -11,6 +11,7 @@ import { RouterModule } from '@angular/router';
 import { routes } from './app.routes';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { S3SandboxComponent } from './s3-sandbox/s3-sandbox.component';
+import { BsModalModule } from 'ng2-bs3-modal';
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import { S3SandboxComponent } from './s3-sandbox/s3-sandbox.component';
   imports: [
     BrowserModule,
     RouterModule.forRoot(routes),
+    BsModalModule
   ],
   providers: [ Title, S3SandboxService, DynamodbSandboxService ],
   bootstrap: [AppComponent]

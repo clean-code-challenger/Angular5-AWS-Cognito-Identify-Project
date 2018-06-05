@@ -14,6 +14,7 @@
                   <th></th>
                   <th></th>
                   <th></th>
+                  <th></th>
               </tr>
           </thead>
           <tbody>
@@ -26,6 +27,9 @@
                   </td>
                   <td>
                       {{o.size}}
+                  </td>
+                  <td>
+                    <i class="fa fa-edit" (click)="openEditModal(o)" style="cursor:pointer"></i>
                   </td>
                   <td>
                     <i class="fa fa-download" (click)="downloadObject(o)" style="cursor:pointer"></i>
@@ -72,6 +76,19 @@
   </div>
 </footer>
 <!-- [END] Footer Container -->
-
 </div>
 <!-- [END] Entire Page Container -->
+
+<bs-modal #myModal>
+  <bs-modal-header [showDismiss]="true">
+      <h4 class="modal-title">Edit Upload</h4>
+  </bs-modal-header>
+  <bs-modal-body>
+      <label>Name</label>
+      <input class="form-control" type="text" value="{{uploadedObject ? uploadedObject.object_name : null}}">
+  </bs-modal-body>
+  <bs-modal-footer>
+      <button class="btn btn-default" type="button" (click)="closeEditModal()"> Cancel </button>
+      <button class="btn btn-primary" type="button" (click)="updateObject(uploadedObject)"> Save </button>
+  </bs-modal-footer>
+</bs-modal>
