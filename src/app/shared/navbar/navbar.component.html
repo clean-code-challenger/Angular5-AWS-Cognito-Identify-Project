@@ -9,7 +9,7 @@
           </button>
           <a class='navbar-brand' href='/home' style="padding-top: 7px;"> <img src='assets/img/singLogoWhite.png' style='max-height: 35px;'></a>
         </div>
-    
+
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav navbar-right">
             <li [ngClass]="{'active': isHomeActive}">
@@ -19,6 +19,7 @@
             </li>
           <li [ngClass]="{'active': isPortfolioActive}"><a href='/portfolio'><i class="fa fa-paperclip"></i>PORTFOLIO</a></li>
           <li [ngClass]="{'active': isAboutActive}"><a href='/about'><i class="fa fa-question"></i>ABOUT ME</a></li>
+          <li [ngClass]="{'active': isLoginActive}"><a href='/login'><i class="fa fa-lock"></i>LOGIN</a></li>
           </ul>
         </div>
       </div>

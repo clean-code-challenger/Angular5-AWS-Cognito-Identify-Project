@@ -11,6 +11,7 @@ export class NavbarComponent implements OnInit {
   public isHomeActive: boolean;
   public isPortfolioActive: boolean;
   public isAboutActive: boolean;
+  public isLoginActive: boolean;
   public collapse: boolean;
 
   constructor(private router: Router,
@@ -33,9 +34,13 @@ export class NavbarComponent implements OnInit {
           this.isAboutActive = true;
           this.titleService.setTitle('About | Brock Tubre');
           break;
+        case '/login':
+          this.isLoginActive = true;
+          this.titleService.setTitle('Login | Brock Tubre');
+        break;
         default:
           this.titleService.setTitle('Brock Tubre');
-          break;
+        break;
     }
   }
 
