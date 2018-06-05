@@ -42,4 +42,8 @@ export class AuthService {
         this.router.navigate(['home']);
       });
   }
+
+  public getUsersDeatils() {
+    return this.userDetails;
+  }
 }

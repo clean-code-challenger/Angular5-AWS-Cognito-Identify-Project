@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
+import { AuthService } from '../auth/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -13,10 +14,14 @@ export class NavbarComponent implements OnInit {
   public isAboutActive: boolean;
   public isLoginActive: boolean;
   public collapse: boolean;
+  public isUserLoggedIn: boolean;
+  public usersEmail: string;
 
   constructor(private router: Router,
-              private titleService: Title) {
+              private titleService: Title,
+              private authService: AuthService) {
                 this.collapse = false;
+                this.isUserLoggedIn = false;
               }
 
   ngOnInit() {
@@ -42,6 +47,15 @@ export class NavbarComponent implements OnInit {
           this.titleService.setTitle('Brock Tubre');
         break;
     }
+
+    if (this.authService.isLoggedIn()) {
+      this.isUserLoggedIn = true;
+      this.usersEmail = this.authService.getUsersDeatils().email;
+    }
+  }
+
+  public logoutUser() {
+    this.authService.logout();
   }
 
 }
