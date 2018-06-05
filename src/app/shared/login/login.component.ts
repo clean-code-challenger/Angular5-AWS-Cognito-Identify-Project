@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
       this.authService.signInRegular(email, password).then((res) => {
           console.log('Successfully logged in: ', res);
           this.isSubmitted = false;
-          this.router.navigate(['tickets']);
+          this.router.navigate(['s3-sandbox']);
         }).catch((err) => {
           console.error('Error occurred when logging in: ', err);
           this.isSubmitted = false;
