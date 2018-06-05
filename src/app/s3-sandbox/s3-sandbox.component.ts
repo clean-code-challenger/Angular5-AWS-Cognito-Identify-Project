@@ -8,6 +8,7 @@ import * as AWS from 'aws-sdk';
 import { Observable } from 'rxjs/Observable';
 import * as FileSaver from 'file-saver';
 import { BsModalComponent } from 'ng2-bs3-modal';
+import { DynamodbS3ObjectModel } from '../shared/models/dynamodb-s3-object.modal';
 
 @Component({
   selector: 'app-s3-sandbox',
@@ -17,12 +18,14 @@ import { BsModalComponent } from 'ng2-bs3-modal';
 export class S3SandboxComponent implements OnInit {
   public aws;
   public s3;
-  public objectList: Array<S3ObjectModel>;
+  public objectList: Array<DynamodbS3ObjectModel>;
   public loadingObjs: boolean;
   public bucketName: string;
   public tableName: string;
   public fileToUpload: any;
-  public uploadedObject: string;
+  public uploadedObject: DynamodbS3ObjectModel;
+  public currentFileExt: string;
+  public inputFieldVal: string;
 
   @ViewChild('fileInput') myFileInput: ElementRef;
   @ViewChild('fileInputVal') myFileInputVal: ElementRef;
@@ -30,7 +33,7 @@ export class S3SandboxComponent implements OnInit {
 
   constructor(private s3SandboxService: S3SandboxService,
               private dynamodbSandboxService: DynamodbSandboxService) {
-    this.objectList = new Array<S3ObjectModel>();
+    this.objectList = new Array<DynamodbS3ObjectModel>();
     this.loadingObjs = true;
     this.bucketName = environment.public_bucket_name;
     this.tableName = environment.dynamodb_table_name;
@@ -104,8 +107,10 @@ export class S3SandboxComponent implements OnInit {
     return returnName;
   }
 
-  private openEditModal(object: any) {
+  private openEditModal(object: DynamodbS3ObjectModel) {
     this.uploadedObject = object;
+    this.currentFileExt = object.object_name.split('.').pop();
+    this.inputFieldVal = object.object_name.replace(/\.[^/.]+$/, '');
     this.modal.open();
   }
 
@@ -113,8 +118,15 @@ export class S3SandboxComponent implements OnInit {
     this.modal.close();
   }
 
-  private updateObject(object: any) {
-    console.log('Need to update this object: ', object);
+  private updateObject() {
+    let updateObj = new DynamodbS3ObjectModel;
+    updateObj = this.uploadedObject;
+    updateObj.object_name = this.inputFieldVal;
+    console.log('Need to update this object: ', updateObj);
+  }
+
+  public updateInputVal($event) {
+    this.inputFieldVal = $event.target.value;
   }
 
 }

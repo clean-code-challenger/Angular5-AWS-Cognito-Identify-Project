@@ -4,6 +4,7 @@ import { environment } from '../../environments/environment';
 import { S3ObjectModel } from '../shared/models/s3-object.model';
 import { Subject } from 'rxjs/Subject';
 import * as AWS from 'aws-sdk';
+import { DynamodbS3ObjectModel } from '../shared/models/dynamodb-s3-object.modal';
 
 @Injectable()
 export class DynamodbSandboxService {
@@ -22,8 +23,8 @@ export class DynamodbSandboxService {
     this.tableName = environment.dynamodb_table_name;
   }
 
-  public getItemsFromDynamoDb(tableName: string): Observable<Array<S3ObjectModel>> {
-    const sendResult = new Subject<Array<S3ObjectModel>>();
+  public getItemsFromDynamoDb(tableName: string): Observable<Array<DynamodbS3ObjectModel>> {
+    const sendResult = new Subject<Array<DynamodbS3ObjectModel>>();
 
     const params = {
       TableName: this.tableName

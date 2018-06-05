@@ -85,10 +85,10 @@
   </bs-modal-header>
   <bs-modal-body>
       <label>Name</label>
-      <input class="form-control" type="text" value="{{uploadedObject ? uploadedObject.object_name : null}}">
+      <input class="form-control" type="text" value="{{inputFieldVal ? inputFieldVal : null}}" (change)="updateInputVal($event)">
   </bs-modal-body>
   <bs-modal-footer>
       <button class="btn btn-default" type="button" (click)="closeEditModal()"> Cancel </button>
-      <button class="btn btn-primary" type="button" (click)="updateObject(uploadedObject)"> Save </button>
+      <button class="btn btn-primary" type="button" (click)="updateObject()"> Save </button>
   </bs-modal-footer>
 </bs-modal>
