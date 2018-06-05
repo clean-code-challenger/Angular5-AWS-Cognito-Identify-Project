@@ -79,7 +79,7 @@ export class S3SandboxComponent implements OnInit {
   }
 
   public downloadObject(object: any) {
-    const objectName = this.cleanObjectName(object.name);
+    const objectName = this.cleanObjectName(object.object_name);
     this.s3SandboxService.getObjectFromS3(this.bucketName, objectName).subscribe(item => {
       const blob = new Blob([item.Body], { type: item.ContentType });
       FileSaver.saveAs(blob, objectName);
@@ -88,7 +88,7 @@ export class S3SandboxComponent implements OnInit {
 
   public deleteObject(object: any) {
     this.loadingObjs = true;
-    const objectName = this.cleanObjectName(object.name);
+    const objectName = this.cleanObjectName(object.object_name);
     this.s3SandboxService.deleteObjectFromS3(this.bucketName, objectName).subscribe(item => {
         this.fileToUpload = null;
         setTimeout(this.loadObjects.bind(this), 1000);
@@ -96,6 +96,7 @@ export class S3SandboxComponent implements OnInit {
   }
 
   private cleanObjectName(fileName: string) {
+    debugger;
     let returnName = fileName;
     returnName = returnName.split('+').join(' ');
     return returnName;
