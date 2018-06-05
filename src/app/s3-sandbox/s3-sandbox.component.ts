@@ -26,6 +26,7 @@ export class S3SandboxComponent implements OnInit {
   public uploadedObject: DynamodbS3ObjectModel;
   public currentFileExt: string;
   public inputFieldVal: string;
+  public inputFieldValidationMessage: string;
 
   @ViewChild('fileInput') myFileInput: ElementRef;
   @ViewChild('fileInputVal') myFileInputVal: ElementRef;
@@ -108,6 +109,7 @@ export class S3SandboxComponent implements OnInit {
   }
 
   private openEditModal(object: DynamodbS3ObjectModel) {
+    this.inputFieldValidationMessage = null;
     this.uploadedObject = object;
     this.currentFileExt = object.object_name.split('.').pop();
     this.inputFieldVal = object.object_name.replace(/\.[^/.]+$/, '');
@@ -115,18 +117,34 @@ export class S3SandboxComponent implements OnInit {
   }
 
   private closeEditModal() {
+    this.inputFieldValidationMessage = null;
     this.modal.close();
   }
 
   private updateObject() {
-    let updateObj = new DynamodbS3ObjectModel;
-    updateObj = this.uploadedObject;
-    updateObj.object_name = this.inputFieldVal;
-    console.log('Need to update this object: ', updateObj);
+    if (this.isFormValid()) {
+      const updateObj = new DynamodbS3ObjectModel;
+      updateObj.object_name = this.inputFieldVal + '.' + this.currentFileExt;
+      console.log('Need to update this object: ', updateObj);
+      this.loadingObjs = true;
+      this.dynamodbSandboxService.updateItemFromDynamoDb(updateObj).subscribe((data) => {
+        setTimeout(this.loadObjects.bind(this), 1000);
+        this.closeEditModal();
+      });
+    }
   }
 
   public updateInputVal($event) {
     this.inputFieldVal = $event.target.value;
+  }
+
+  private isFormValid() {
+    this.inputFieldValidationMessage = null;
+    if (!this.inputFieldVal) {
+      this.inputFieldValidationMessage = 'Name is required.';
+      return false;
+    }
+    return true;
   }
 
 }

@@ -40,4 +40,10 @@ export class DynamodbSandboxService {
     return sendResult.asObservable();
   }
 
+  public updateItemFromDynamoDb(objectName: DynamodbS3ObjectModel): Observable<Array<DynamodbS3ObjectModel>> {
+    const sendResult = new Subject<Array<DynamodbS3ObjectModel>>();
+    sendResult.next(null);
+    return sendResult.asObservable();
+  }
+
 }
