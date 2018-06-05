@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule, CanActivate } from '@angular/router';
 import { S3SandboxComponent } from './s3-sandbox/s3-sandbox.component';
+import { LoginComponent } from './shared/login/login.component';
 
 // Route Configuration
 export const routes: Routes = [
@@ -13,6 +14,7 @@ export const routes: Routes = [
     { path: 'portfolio', component: PortfolioComponent },
     { path: 'about', component: AboutComponent },
     { path: 's3-sandbox', component: S3SandboxComponent },
+    { path: 'login', component: LoginComponent },
     { path: '**', redirectTo: '' }
 ];
 

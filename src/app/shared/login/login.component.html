@@ -1,0 +1,47 @@
+<app-navbar></app-navbar>
+
+<!-- [BEGIN] Entire Page Container -->
+<div class="container-fluid background" style="padding: 0;" >
+  <!-- [BEGIN] Login input -->
+  <div class="container">
+    <div class="col-md-4 col-lg-4 col-sm-12 col-xs-4 offset-md-4 offset-lg-4">
+         <div class="panel panel-default">
+             <div class="panel-heading text-center">
+                 <h3 class="panel-title">Sign in</h3>
+             </div>
+             <div class="alert alert-danger text-center" *ngIf="loginFailed">
+                 {{firebaseErrorMessage}}
+             </div>
+             <div class="panel-body">
+                 <form [formGroup]="loginForm" (submit)="submitForm()">
+                     <fieldset>
+                         <div class="form-group">
+                             <input class="form-control" formControlName="email" id="email" placeholder="E-mail" name="email" type="text" />
+                             <app-validation-messages [control]="loginForm.controls.email" [isFormSubmitted]="isSubmitted" [name]="'Email'"></app-validation-messages>
+                         </div>
+
+                         <div class="form-group">
+                             <input class="form-control" formControlName="password" id="password" type="password" placeholder="Password" name="password" />
+                         </div>
+                         <app-validation-messages [control]="loginForm.controls.password" [isFormSubmitted]="isSubmitted" [name]="'Password'"></app-validation-messages>
+
+                         <input class="btn btn-primary btn-block" type="submit" value="Login" [disabled]="isSubmitted">
+                     </fieldset>
+                 </form>
+             </div>
+         </div>
+    </div>
+  </div>
+  <!-- [END] Login input -->
+
+  <!-- [BEGIN] Footer Container -->
+<footer class="navbar-default" style="margin-top: 1000px;">
+  <div class="container-fluid" style="padding: 5px 0 5px 0;">
+    <div class="text-center">
+      <p style="color: #FFFFFF;"> © {{year}} Created by Brock Tubre.</p>
+    </div>
+  </div>
+</footer>
+<!-- [END] Footer Container -->
+</div>
+<!-- [END] Entire Page Container -->

@@ -12,6 +12,16 @@ import { routes } from './app.routes';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { S3SandboxComponent } from './s3-sandbox/s3-sandbox.component';
 import { BsModalModule } from 'ng2-bs3-modal';
+import { AuthService } from './shared/auth/auth.service';
+import { AuthGuardService } from './shared/auth/auth-guard.service';
+import { ValidationMessagesService } from './shared/validation-messages/validation-messages.service';
+import { LoginComponent } from './shared/login/login.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { environment } from '../environments/environment';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { ValidationMessagesComponent } from './shared/validation-messages/validation-messages.component';
 
 
 @NgModule({
@@ -23,14 +33,27 @@ import { BsModalModule } from 'ng2-bs3-modal';
     FooterComponent,
     NavbarComponent,
     S3SandboxComponent,
+    LoginComponent,
+    ValidationMessagesComponent,
 
   ],
   imports: [
     BrowserModule,
     RouterModule.forRoot(routes),
-    BsModalModule
+    BsModalModule,
+    ReactiveFormsModule,
+    AngularFireModule.initializeApp(environment.firebase, 'angular-auth-firebase'),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule
   ],
-  providers: [ Title, S3SandboxService, DynamodbSandboxService ],
+  providers: [
+    Title,
+    S3SandboxService,
+    DynamodbSandboxService,
+    AuthService,
+    AuthGuardService,
+    ValidationMessagesService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
