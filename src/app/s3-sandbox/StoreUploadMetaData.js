@@ -7,12 +7,13 @@ exports.handler = function(event, context) {
     var item = event.Records[0].s3.object;
     var tableName = "brocktubre-s3-lambda-dynamodb-integration-sandbox-table";
     var datetime = new Date().getTime().toString();
+    var objectName = item.key.split('+').join(' ');
     var params = {
         TableName:tableName,
         Item:{
             "object_id": item.eTag,
             "date": datetime,
-            "name": item.key,
+            "object_name": objectName,
             "etag": item.eTag,
             "size": item.size
         }
