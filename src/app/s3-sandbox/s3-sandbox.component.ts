@@ -69,7 +69,7 @@ export class S3SandboxComponent implements OnInit {
       this.s3SandboxService.uploadObjectToS3(this.bucketName, this.fileToUpload).subscribe(item => {
         this.myFileInputVal.nativeElement.value = null;
         this.fileToUpload = null;
-        setTimeout(this.loadObjects.bind(this), 1000);
+        setTimeout(this.loadObjects.bind(this), 2000);
       });
     }
   }
@@ -98,7 +98,7 @@ export class S3SandboxComponent implements OnInit {
     const objectName = this.cleanObjectName(object.object_name);
     this.s3SandboxService.deleteObjectFromS3(this.bucketName, objectName).subscribe(item => {
         this.fileToUpload = null;
-        setTimeout(this.loadObjects.bind(this), 1000);
+        setTimeout(this.loadObjects.bind(this), 2000);
     });
   }
 
@@ -127,10 +127,12 @@ export class S3SandboxComponent implements OnInit {
       updateObj.object_name = this.inputFieldVal + '.' + this.currentFileExt;
       console.log('Need to update this object: ', updateObj);
       this.loadingObjs = true;
-      this.dynamodbSandboxService.updateItemFromDynamoDb(updateObj).subscribe((data) => {
-        setTimeout(this.loadObjects.bind(this), 1000);
-        this.closeEditModal();
-      });
+      this.closeEditModal();
+      setTimeout(this.loadObjects.bind(this), 1000);
+      // this.dynamodbSandboxService.updateItemFromDynamoDb(updateObj).subscribe((data) => {
+      //   setTimeout(this.loadObjects.bind(this), 1000);
+      //   this.closeEditModal();
+      // });
     }
   }
 
