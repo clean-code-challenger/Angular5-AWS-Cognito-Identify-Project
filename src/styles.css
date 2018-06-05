@@ -5,7 +5,7 @@
 
 footer > .container-fluid{
 	min-height: 40px;
-	min-width: 100%; 
+	min-width: 100%;
 }
 
 footer {
@@ -44,3 +44,8 @@ a{
 .text-secondary {
 	color: #2d2d2d;
  }
+
+.login-form {
+  padding-bottom: 500px;
+  padding-top: 50px;
+}
