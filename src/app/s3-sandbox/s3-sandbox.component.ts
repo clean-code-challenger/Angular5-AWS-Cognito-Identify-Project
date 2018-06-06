@@ -59,12 +59,12 @@ export class S3SandboxComponent implements OnInit {
   }
 
   public uploadObject() {
-    this.loadingObjs = true;
     const file = this.myFileInputVal.nativeElement.files;
 
-    if (file === undefined) {
+    if (file === undefined || this.myFileInputVal.nativeElement.value.length === 0) {
       console.log('No file selected.');
     }else {
+      this.loadingObjs = true;
       console.log('We want to upload this document: ', this.fileToUpload);
       this.s3SandboxService.uploadObjectToS3(this.bucketName, this.fileToUpload).subscribe(item => {
         this.myFileInputVal.nativeElement.value = null;
