@@ -80,6 +80,7 @@ export class S3SandboxComponent implements OnInit {
     //   this.loadingObjs = false;
     // });
     this.dynamodbSandboxService.getItemsFromDynamoDb(this.tableName).subscribe(items => {
+      debugger;
       this.objectList = items;
       this.loadingObjs = false;
     });
