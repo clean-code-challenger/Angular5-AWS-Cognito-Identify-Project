@@ -80,7 +80,6 @@ export class S3SandboxComponent implements OnInit {
     //   this.loadingObjs = false;
     // });
     this.dynamodbSandboxService.getItemsFromDynamoDb(this.tableName).subscribe(items => {
-      debugger;
       this.objectList = items;
       this.loadingObjs = false;
     });
@@ -89,7 +88,7 @@ export class S3SandboxComponent implements OnInit {
   public downloadObject(object: any) {
     this.s3SandboxService.getObjectFromS3(this.bucketName, object.object_name).subscribe(item => {
       const blob = new Blob([item.Body], { type: item.ContentType });
-      FileSaver.saveAs(blob, object.object_original_name);
+      FileSaver.saveAs(blob, object.object_display_name);
     });
   }
 
@@ -110,8 +109,8 @@ export class S3SandboxComponent implements OnInit {
   private openEditModal(object: DynamodbS3ObjectModel) {
     this.inputFieldValidationMessage = null;
     this.uploadedObject = object;
-    this.currentFileExt = object.object_original_name.split('.').pop();
-    this.inputFieldVal = object.object_original_name.replace(/\.[^/.]+$/, '');
+    this.currentFileExt = object.object_display_name.split('.').pop();
+    this.inputFieldVal = object.object_display_name.replace(/\.[^/.]+$/, '');
     this.modal.open();
   }
 
@@ -123,15 +122,15 @@ export class S3SandboxComponent implements OnInit {
   private updateObject() {
     if (this.isFormValid()) {
       const updateObj = new DynamodbS3ObjectModel;
-      updateObj.object_original_name = this.inputFieldVal + '.' + this.currentFileExt;
+      updateObj.object_display_name = this.inputFieldVal + '.' + this.currentFileExt;
+      updateObj.etag = this.uploadedObject.etag;
       console.log('Need to update this object: ', updateObj);
       this.loadingObjs = true;
       this.closeEditModal();
-      setTimeout(this.loadObjects.bind(this), 1000);
-      // this.dynamodbSandboxService.updateItemFromDynamoDb(updateObj).subscribe((data) => {
-      //   setTimeout(this.loadObjects.bind(this), 1000);
-      //   this.closeEditModal();
-      // });
+      this.dynamodbSandboxService.updateItemFromDynamoDb(updateObj).subscribe((data) => {
+        setTimeout(this.loadObjects.bind(this), 1000);
+        this.closeEditModal();
+      });
     }
   }
 

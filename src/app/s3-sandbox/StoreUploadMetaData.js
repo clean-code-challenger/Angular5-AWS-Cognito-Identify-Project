@@ -28,7 +28,7 @@ exports.handler = function(event, context) {
                 Item:{
                     "object_id": item.eTag,
                     "object_name": objectName,
-                    "object_original_name": metadata.object_original_name,
+                    "object_display_name": metadata.object_display_name,
                     "created_by": metadata.created_by,
                     "created_on": datetime,
                     "modified_on": datetime,

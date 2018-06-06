@@ -45,10 +45,6 @@ export class S3SandboxService {
   public uploadObjectToS3(bucketName: string, object: any): Observable<Array<S3ObjectModel>> {
     const sendResult = new Subject<Array<S3ObjectModel>>();
     const UUID = uuid();
-    // const metadata = new Map();
-    // metadata.set('object_original_name', object.name);
-    // metadata.set('created_by', this.authService.getUsersDeatils().email);
-    // metadata.set('modified_by', this.authService.getUsersDeatils().email);
 
     const params = {
       ACL: 'authenticated-read',
@@ -56,7 +52,7 @@ export class S3SandboxService {
       Bucket: bucketName,
       Key: UUID,
       Metadata: {
-        'object_original_name' : object.name,
+        'object_display_name' : object.name,
         'created_by': this.authService.getUsersDeatils().email
       }
     };
