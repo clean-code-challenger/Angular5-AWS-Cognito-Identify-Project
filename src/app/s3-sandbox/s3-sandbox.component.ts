@@ -87,17 +87,15 @@ export class S3SandboxComponent implements OnInit {
   }
 
   public downloadObject(object: any) {
-    const objectName = this.cleanObjectName(object.object_name);
-    this.s3SandboxService.getObjectFromS3(this.bucketName, objectName).subscribe(item => {
+    this.s3SandboxService.getObjectFromS3(this.bucketName, object.object_name).subscribe(item => {
       const blob = new Blob([item.Body], { type: item.ContentType });
-      FileSaver.saveAs(blob, objectName);
+      FileSaver.saveAs(blob, object.object_original_name);
     });
   }
 
   public deleteObject(object: any) {
     this.loadingObjs = true;
-    const objectName = this.cleanObjectName(object.object_name);
-    this.s3SandboxService.deleteObjectFromS3(this.bucketName, objectName).subscribe(item => {
+    this.s3SandboxService.deleteObjectFromS3(this.bucketName, object.object_name).subscribe(item => {
         this.fileToUpload = null;
         setTimeout(this.loadObjects.bind(this), 2000);
     });
@@ -112,8 +110,8 @@ export class S3SandboxComponent implements OnInit {
   private openEditModal(object: DynamodbS3ObjectModel) {
     this.inputFieldValidationMessage = null;
     this.uploadedObject = object;
-    this.currentFileExt = object.object_name.split('.').pop();
-    this.inputFieldVal = object.object_name.replace(/\.[^/.]+$/, '');
+    this.currentFileExt = object.object_original_name.split('.').pop();
+    this.inputFieldVal = object.object_original_name.replace(/\.[^/.]+$/, '');
     this.modal.open();
   }
 
@@ -125,7 +123,7 @@ export class S3SandboxComponent implements OnInit {
   private updateObject() {
     if (this.isFormValid()) {
       const updateObj = new DynamodbS3ObjectModel;
-      updateObj.object_name = this.inputFieldVal + '.' + this.currentFileExt;
+      updateObj.object_original_name = this.inputFieldVal + '.' + this.currentFileExt;
       console.log('Need to update this object: ', updateObj);
       this.loadingObjs = true;
       this.closeEditModal();
