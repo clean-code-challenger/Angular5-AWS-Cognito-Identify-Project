@@ -15,13 +15,19 @@ export class S3SandboxService {
   private s3;
 
   constructor(private authService: AuthService) {
-    const config = new AWS.Config({
-      accessKeyId: environment.aws_access_key_id,
-      secretAccessKey: environment.aws_secret_access_key,
-      region: environment.region,
+    // const config = new AWS.Config({
+    //   accessKeyId: environment.aws_access_key_id,
+    //   secretAccessKey: environment.aws_secret_access_key,
+    //   region: environment.region,
+    // });
+    const cognitoCreds = new AWS.CognitoIdentityCredentials({
+      IdentityPoolId: environment.aws_identity_pool_id,
     });
-    const creds = new AWS.Credentials(config.credentials);
-    this.s3 = new AWS.S3({ signatureVersion: 'v4', credentials: creds });
+    AWS.config.update({
+        region: environment.region,
+        credentials: cognitoCreds
+    });
+    this.s3 = new AWS.S3({ signatureVersion: 'v4' });
   }
 
   public getItemsFromBucket(bucketName: string): Observable<Array<S3ObjectModel>> {
