@@ -58,8 +58,15 @@ export class LoginComponent implements OnInit {
             const paramsIdentityId = {
               IdentityId: data.IdentityId
             };
-            cognitoidentity.getCredentialsForIdentity(paramsIdentityId, (errIdentityId, dataIdentityId) => {
-                this.authService.setIdentity(dataIdentityId);
+            cognitoidentity.getOpenIdToken(paramsIdentityId, (errIdentityId, dataIdentityId) => {
+                AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+                    IdentityPoolId: environment.aws_identity_pool_id,
+                    IdentityId: dataIdentityId.IdentityId,
+                    Logins: {
+                      'login.s3integration.brocktubre.com': dataIdentityId.Token
+                    }
+                });
+                debugger;
                 this.isSubmitted = false;
                 this.router.navigate(['s3-sandbox']);
             });
