@@ -3,6 +3,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth/auth.service';
 import { ValidationMessagesService } from '../validation-messages/validation-messages.service';
+import { environment } from '../../../environments/environment';
+import * as AWS from 'aws-sdk';
 
 @Component({
   selector: 'app-login',
@@ -39,6 +41,35 @@ export class LoginComponent implements OnInit {
 
       this.authService.signInRegular(email, password).then((res) => {
           console.log('Successfully logged in: ', res);
+          const creds = new AWS.CognitoIdentityCredentials({
+            IdentityPoolId: environment.aws_identity_pool_id,
+            Logins: {
+              'securetoken.google.com/brocktubre-bt-website': 'test-user',
+            }
+          });
+          AWS.config.update({
+              region: environment.region,
+              credentials: creds
+          });
+
+          // const cognitoidentity = new AWS.CognitoIdentity({credentials: AWS.config.credentials});
+          // const paramsDev = {
+          //   IdentityPoolId: environment.aws_identity_pool_id,
+          //   IdentityId: null,
+          //   Logins: {
+          //     'securetoken.google.com/brocktubre-bt-website': 'test-user',
+          //   }
+          // };
+
+          // cognitoidentity.getOpenIdTokenForDeveloperIdentity(paramsDev, function(err, data) {
+          //   debugger;
+          //   if (err) {
+          //     console.log(err, err.stack); // an error occurred
+          //   }else {
+          //     console.log(data);           // successful response
+          //   }
+          // });
+
           this.isSubmitted = false;
           this.router.navigate(['s3-sandbox']);
         }).catch((err) => {

@@ -13,13 +13,8 @@ export class DynamodbSandboxService {
   private docClient;
 
   constructor(private authService: AuthService) {
-    // const config = new AWS.Config({
-    //   accessKeyId: environment.aws_access_key_id,
-    //   secretAccessKey: environment.aws_secret_access_key,
-    //   region: environment.region,
-    // });
-    // const creds = new AWS.Credentials(config.credentials);
-    // const dynamodb = new AWS.DynamoDB({ region: environment.region, credentials: creds });
+    console.log(authService.getUsersDeatils());
+
     const creds = new AWS.CognitoIdentityCredentials({
       IdentityPoolId: environment.aws_identity_pool_id
     });
@@ -27,16 +22,12 @@ export class DynamodbSandboxService {
         region: environment.region,
         credentials: creds
     });
-    const cognitoidentity = new AWS.CognitoIdentity({credentials: AWS.config.credentials});
-    const paramsDev = {
-      IdentityPoolId: environment.aws_identity_pool_id,
-      Logins: {
-        'login.s3integration.brocktubre.com': 'test-user',
-      },
-      TokenDuration: 10000
-    };
 
-    cognitoidentity.getOpenIdTokenForDeveloperIdentity(paramsDev, function(err, data) {
+    const params = {
+      IdentityPoolId: environment.aws_identity_pool_id
+    };
+    const cognitoidentity = new AWS.CognitoIdentity({credentials: AWS.config.credentials});
+    cognitoidentity.getId(params, function(err, data) {
       debugger;
       if (err) {
         console.log(err, err.stack); // an error occurred
@@ -45,10 +36,9 @@ export class DynamodbSandboxService {
       }
     });
 
-
-    // const dynamodb = new AWS.DynamoDB({ region: environment.region });
-    // this.docClient = new AWS.DynamoDB.DocumentClient({service: dynamodb});
-    // this.tableName = environment.dynamodb_table_name;
+    const dynamodb = new AWS.DynamoDB({ region: environment.region });
+    this.docClient = new AWS.DynamoDB.DocumentClient({service: dynamodb});
+    this.tableName = environment.dynamodb_table_name;
   }
 
   public getItemsFromDynamoDb(tableName: string): Observable<Array<DynamodbS3ObjectModel>> {
