@@ -13,14 +13,15 @@ export class AuthService {
   public accessKeyId: string;
   public secretAccessKey: string;
   public sessionToken: string;
+  public userProfile;
 
-  auth0 = new auth0.WebAuth({
-    clientID: 'o10co8Eu-ethIXGsm36vwKdvbIY9FdTp',
-    domain: 'brocktubre.auth0.com',
-    responseType: 'token id_token',
-    audience: 'https://brocktubre.auth0.com/userinfo',
-    redirectUri: 'http://localhost:4200/callback',
-    scope: 'openid'
+  public auth0 = new auth0.WebAuth({
+    clientID: environment.auth0.clientID,
+    domain:  environment.auth0.domain,
+    responseType: environment.auth0.responseType,
+    audience:  environment.auth0.audience,
+    redirectUri:  environment.auth0.redirectUri,
+    scope:  environment.auth0.scope,
   });
 
   constructor(private router: Router) {
@@ -106,4 +107,17 @@ export class AuthService {
     this.secretAccessKey = creds.secretAccessKey;
     this.sessionToken = creds.sessionToken;
   }
+
+  // public gertUserProfile(): Observable<any> {
+  //   const sendResult = new Subject<any>();
+  //   const accessToken = localStorage.getItem('access_token');
+  //   if (!accessToken) {
+  //     this.auth0.client.userInfo(accessToken, function(userInfoError, profile) {
+  //       if (profile) {
+  //         sendResult.next(profile);
+  //       }
+  //     });
+  //   }
+  //   return sendResult.asObservable();
+  // }
 }

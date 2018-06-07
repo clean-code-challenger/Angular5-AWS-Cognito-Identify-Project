@@ -5,4 +5,12 @@ export const environment = {
   region: 'us-east-1',
   public_bucket_name: 'brocktubre-s3-sandbox-bucket',
   dynamodb_table_name: 'brocktubre-s3-lambda-dynamodb-integration-sandbox-table',
+  auth0: {
+    clientID: 'q1cRb6y45UdiZtAfYQ21Bt1LkLg2FbZg',
+    domain: 'brocktubre.auth0.com',
+    responseType: 'token id_token',
+    audience: 'https://brocktubre.auth0.com/userinfo',
+    redirectUri: 'http://brocktubre.com/callback',
+    scope: 'openid'
+  }
 };

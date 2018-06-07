@@ -10,4 +10,12 @@ export const environment = {
   region: 'us-east-1',
   public_bucket_name: 'brocktubre-s3-sandbox-bucket',
   dynamodb_table_name: 'brocktubre-s3-lambda-dynamodb-integration-sandbox-table',
+  auth0: {
+    clientID: 'o10co8Eu-ethIXGsm36vwKdvbIY9FdTp',
+    domain: 'brocktubre.auth0.com',
+    responseType: 'token id_token',
+    audience: 'https://brocktubre.auth0.com/userinfo',
+    redirectUri: 'http://localhost:4200/callback',
+    scope: 'openid profile'
+  }
 };

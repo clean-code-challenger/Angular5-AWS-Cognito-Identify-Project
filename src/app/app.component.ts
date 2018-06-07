@@ -18,6 +18,11 @@ export class AppComponent {
         this.router.navigate(['s3-sandbox']);
       }
     });
+    // authService.gertUserProfile().subscribe(profile => {
+    //   if (profile) {
+    //    authService.userProfile = profile;
+    //   }
+    // });
   }
   public setTitle( newTitle: string) {
     this.titleService.setTitle( newTitle );
