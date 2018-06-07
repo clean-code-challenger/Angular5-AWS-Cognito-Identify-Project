@@ -50,6 +50,9 @@ export class AuthService {
             }
           };
           cognitoidentity.getOpenIdToken(paramsIdentityId, (getOpenIdTokenError, getOpenIdTokenData) => {
+            if (getOpenIdTokenError) {
+              console.error(getOpenIdTokenError);
+            }
             const paramsAssumeRole = {
               DurationSeconds: 3600,
               RoleArn: environment.aws_auth_role,
