@@ -54,13 +54,11 @@ export class LoginComponent implements OnInit {
             IdentityPoolId: environment.aws_identity_pool_id
           };
           const cognitoidentity = new AWS.CognitoIdentity({credentials: AWS.config.credentials});
-          cognitoidentity.getId(paramsIdentityPool, function(err, data) {
+          cognitoidentity.getId(paramsIdentityPool, (err, data) => {
             const paramsIdentityId = {
               IdentityId: data.IdentityId
             };
-            cognitoidentity.getCredentialsForIdentity(paramsIdentityId, function(errIdentityId, dataIdentityId) {
-                console.log(dataIdentityId);
-                debugger;
+            cognitoidentity.getCredentialsForIdentity(paramsIdentityId, (errIdentityId, dataIdentityId) => {
                 this.authService.setIdentity(dataIdentityId);
                 this.isSubmitted = false;
                 this.router.navigate(['s3-sandbox']);

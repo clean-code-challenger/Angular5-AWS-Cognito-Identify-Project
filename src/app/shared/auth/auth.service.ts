@@ -28,7 +28,7 @@ export class AuthService {
 
   public signInRegular(email, password) {
     const credential = firebase.auth.EmailAuthProvider.credential(email, password);
-    return this._firebaseAuth.auth.signInAndRetrieveDataWithEmailAndPassword(email, password);
+    return this._firebaseAuth.auth.signInWithEmailAndPassword(email, password);
   }
 
   public isLoggedIn() {
@@ -51,7 +51,6 @@ export class AuthService {
   }
 
   public setIdentity(dataIdentityId: any) {
-    debugger;
     this.accessKeyId = dataIdentityId.Credentials.AccessKeyId;
     this.secretKey = dataIdentityId.Credentials.SecretKey;
     this.expiration = dataIdentityId.Credentials.Expiration;

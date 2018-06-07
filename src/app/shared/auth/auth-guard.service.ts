@@ -12,15 +12,6 @@ export class AuthGuardService implements CanActivate {
               private router: Router,
               private angularFireAuth: AngularFireAuth) {}
 
-  // canActivate(): boolean {
-  //   debugger;
-  //   if (!this.auth.isLoggedIn()) {
-  //     this.router.navigate(['home']);
-  //     return false;
-  //   }
-  //   return true;
-  // }
-
   public canActivate(): Observable<boolean> | boolean {
     return this.angularFireAuth.authState.map((auth) => {
         if (auth) {
