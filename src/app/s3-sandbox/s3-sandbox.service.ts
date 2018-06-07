@@ -16,9 +16,9 @@ export class S3SandboxService {
 
   constructor(private authService: AuthService) {
     AWS.config.update({
-      accessKeyId: this.authService.accessKeyId,
-      secretAccessKey: this.authService.secretAccessKey,
-      sessionToken: this.authService.sessionToken
+      accessKeyId: localStorage.getItem('accessKeyId'),
+      secretAccessKey: localStorage.getItem('secretAccessKey'),
+      sessionToken: localStorage.getItem('sessionToken')
     });
     const creds = new AWS.Credentials(AWS.config.credentials);
     this.s3 = new AWS.S3({ signatureVersion: 'v4', credentials: creds });

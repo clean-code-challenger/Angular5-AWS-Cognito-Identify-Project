@@ -130,7 +130,7 @@ export class S3SandboxComponent implements OnInit {
       this.loadingObjs = true;
       this.closeEditModal();
       this.dynamodbSandboxService.updateItemFromDynamoDb(updateObj).subscribe((data) => {
-        setTimeout(this.loadObjects.bind(this), 1000);
+        setTimeout(this.loadObjects.bind(this), 2000);
         this.closeEditModal();
       });
     }

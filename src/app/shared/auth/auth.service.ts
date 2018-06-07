@@ -10,9 +10,6 @@ import { Subject } from 'rxjs/Subject';
 
 @Injectable()
 export class AuthService {
-  public accessKeyId: string;
-  public secretAccessKey: string;
-  public sessionToken: string;
   public userProfile;
 
   public auth0 = new auth0.WebAuth({
@@ -94,6 +91,9 @@ export class AuthService {
     localStorage.removeItem('access_token');
     localStorage.removeItem('id_token');
     localStorage.removeItem('expires_at');
+    localStorage.removeItem('accessKeyId');
+    localStorage.removeItem('secretAccessKey');
+    localStorage.removeItem('sessionToken');
     // Go back to the home route
     this.router.navigate(['home']);
   }
@@ -106,9 +106,9 @@ export class AuthService {
   }
 
   public setCreds(creds: any) {
-    this.accessKeyId = creds.accessKeyId;
-    this.secretAccessKey = creds.secretAccessKey;
-    this.sessionToken = creds.sessionToken;
+    localStorage.setItem('accessKeyId', creds.accessKeyId);
+    localStorage.setItem('secretAccessKey', creds.secretAccessKey);
+    localStorage.setItem('sessionToken', creds.sessionToken);
   }
 
   // public gertUserProfile(): Observable<any> {
