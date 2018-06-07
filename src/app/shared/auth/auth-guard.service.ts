@@ -12,7 +12,6 @@ export class AuthGuardService implements CanActivate {
 
 
   public canActivate(): boolean {
-    debugger;
     if (this.auth.isAuthenticated()) {
       return true;
     }
