@@ -2,11 +2,17 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import * as auth0 from 'auth0-js';
+import * as AWS from 'aws-sdk';
+import { environment } from '../../../environments/environment';
+import { Subject } from 'rxjs/Subject';
 
 (window as any).global = window;
 
 @Injectable()
 export class AuthService {
+  public accessKeyId: string;
+  public secretAccessKey: string;
+  public sessionToken: string;
 
   auth0 = new auth0.WebAuth({
     clientID: 'o10co8Eu-ethIXGsm36vwKdvbIY9FdTp',
@@ -25,17 +31,50 @@ export class AuthService {
     this.auth0.authorize();
   }
 
-  public handleAuthentication(): void {
+  public handleAuthentication(): Observable<any> {
+    const sendResult = new Subject<any>();
     this.auth0.parseHash((err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
         window.location.hash = '';
         this.setSession(authResult);
-        this.router.navigate(['s3-sandbox']);
+        const params = { IdentityPoolId: environment.aws_identity_pool_id };
+        AWS.config.update({ region: environment.region });
+
+        const cognitoidentity = new AWS.CognitoIdentity();
+        const val = cognitoidentity.getId(params, (getIdError, getIdData) => {
+          const paramsIdentityId = {
+            IdentityId: getIdData.IdentityId,
+            Logins: {
+              'brocktubre.auth0.com': localStorage.getItem('id_token')
+            }
+          };
+          cognitoidentity.getOpenIdToken(paramsIdentityId, (getOpenIdTokenError, getOpenIdTokenData) => {
+            const paramsAssumeRole = {
+              DurationSeconds: 3600,
+              RoleArn: environment.aws_auth_role,
+              RoleSessionName: 'brocktubre-role-session',
+              WebIdentityToken: getOpenIdTokenData.Token
+            };
+            const sts = new AWS.STS();
+            sts.assumeRoleWithWebIdentity(paramsAssumeRole, (assumeRoleWithWebIdentityError, assumeRoleWithWebIdentityData) => {
+              const cred = {
+                accessKeyId: assumeRoleWithWebIdentityData.Credentials.AccessKeyId,
+                secretAccessKey: assumeRoleWithWebIdentityData.Credentials.SecretAccessKey,
+                region: environment.region,
+                sessionToken: assumeRoleWithWebIdentityData.Credentials.SessionToken
+              };
+              sendResult.next(cred);
+            });
+          });
+        });
       } else if (err) {
+        sendResult.error(err);
         this.router.navigate(['home']);
         console.log(err);
       }
     });
+
+    return sendResult.asObservable();
   }
 
   private setSession(authResult): void {
@@ -60,5 +99,11 @@ export class AuthService {
     // Access Token's expiry time
     const expiresAt = JSON.parse(localStorage.getItem('expires_at') || '{}');
     return new Date().getTime() < expiresAt;
+  }
+
+  public setCreds(creds: any) {
+    this.accessKeyId = creds.accessKeyId;
+    this.secretAccessKey = creds.secretAccessKey;
+    this.sessionToken = creds.sessionToken;
   }
 }

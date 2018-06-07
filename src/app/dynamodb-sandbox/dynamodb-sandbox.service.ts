@@ -13,12 +13,12 @@ export class DynamodbSandboxService {
   private docClient;
 
   constructor(private authService: AuthService) {
-    const config = new AWS.Config({
-      accessKeyId: environment.aws_access_key_id,
-      secretAccessKey: environment.aws_secret_access_key,
-      region: environment.region,
-    });
-    const creds = new AWS.Credentials(config.credentials);
+    AWS.config.credentials = {
+      accessKeyId: this.authService.accessKeyId,
+      secretAccessKey: this.authService.secretAccessKey,
+      sessionToken: this.authService.sessionToken
+    };
+    const creds = new AWS.Credentials(AWS.config.credentials);
     const dynamodb = new AWS.DynamoDB({ region: environment.region, credentials: creds });
     this.docClient = new AWS.DynamoDB.DocumentClient({service: dynamodb});
     this.tableName = environment.dynamodb_table_name;
