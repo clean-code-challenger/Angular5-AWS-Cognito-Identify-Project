@@ -1,12 +1,12 @@
 export const environment = {
   production: true,
-  aws_identity_pool_id: 'us-east-1:9ec9ca94-5d0f-4be2-bdd5-1ab0c0bbbd8c',
-  aws_auth_role: 'arn:aws:iam::880898370811:role/Cognito_BrockTubreCognitoIntegrationPoolAuth_Role',
+  aws_identity_pool_id: 'us-east-1:7bb23c9c-8021-4603-b31d-09287867c85c',
+  aws_auth_role: 'arn:aws:iam::880898370811:role/Cognito_BrockTubreCognitoIdentityPoolProdAuth_Role',
   region: 'us-east-1',
   public_bucket_name: 'brocktubre-s3-sandbox-bucket',
   dynamodb_table_name: 'brocktubre-s3-lambda-dynamodb-integration-sandbox-table',
   auth0: {
-    clientID: 'o10co8Eu-ethIXGsm36vwKdvbIY9FdTp',
+    clientID: 'q1cRb6y45UdiZtAfYQ21Bt1LkLg2FbZg',
     domain: 'brocktubre.auth0.com',
     responseType: 'token id_token',
     audience: 'https://brocktubre.auth0.com/userinfo',
