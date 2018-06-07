@@ -11,6 +11,6 @@ export const environment = {
     responseType: 'token id_token',
     audience: 'https://brocktubre.auth0.com/userinfo',
     redirectUri: 'http://brocktubre.com/callback',
-    scope: 'openid'
+    scope: 'openid profile'
   }
 };
