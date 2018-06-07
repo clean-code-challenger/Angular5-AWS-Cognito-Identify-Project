@@ -15,10 +15,11 @@ export class S3SandboxService {
   private s3;
 
   constructor(private authService: AuthService) {
-    AWS.config.credentials = {
+    AWS.config.update({
       accessKeyId: this.authService.accessKeyId,
-      secretAccessKey: this.authService.secretAccessKey
-    };
+      secretAccessKey: this.authService.secretAccessKey,
+      sessionToken: this.authService.sessionToken
+    });
     const creds = new AWS.Credentials(AWS.config.credentials);
     this.s3 = new AWS.S3({ signatureVersion: 'v4', credentials: creds });
   }
