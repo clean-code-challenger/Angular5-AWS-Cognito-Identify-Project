@@ -15,13 +15,13 @@ import { BsModalModule } from 'ng2-bs3-modal';
 import { AuthService } from './shared/auth/auth.service';
 import { AuthGuardService } from './shared/auth/auth-guard.service';
 import { ValidationMessagesService } from './shared/validation-messages/validation-messages.service';
-import { LoginComponent } from './shared/login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { environment } from '../environments/environment';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { ValidationMessagesComponent } from './shared/validation-messages/validation-messages.component';
+import { CallbackComponent } from './shared/callback/callback.component';
 
 
 @NgModule({
@@ -33,8 +33,8 @@ import { ValidationMessagesComponent } from './shared/validation-messages/valida
     FooterComponent,
     NavbarComponent,
     S3SandboxComponent,
-    LoginComponent,
     ValidationMessagesComponent,
+    CallbackComponent
 
   ],
   imports: [

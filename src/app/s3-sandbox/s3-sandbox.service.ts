@@ -53,7 +53,7 @@ export class S3SandboxService {
       Key: UUID,
       Metadata: {
         'object_display_name' : object.name,
-        'created_by': this.authService.getUsersDeatils().email
+        'created_by': 'TODO'
       }
     };
 

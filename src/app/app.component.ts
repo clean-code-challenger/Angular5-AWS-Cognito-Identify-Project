@@ -1,3 +1,4 @@
+import { AuthService } from './shared/auth/auth.service';
 import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 
@@ -8,8 +9,8 @@ import { Title } from '@angular/platform-browser';
 })
 export class AppComponent {
 
-  constructor(private titleService: Title) {
-
+  constructor(private titleService: Title, private authService: AuthService) {
+    authService.handleAuthentication();
   }
   public setTitle( newTitle: string) {
     this.titleService.setTitle( newTitle );

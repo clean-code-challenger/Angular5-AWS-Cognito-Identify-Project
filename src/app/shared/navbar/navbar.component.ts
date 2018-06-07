@@ -48,10 +48,14 @@ export class NavbarComponent implements OnInit {
         break;
     }
 
-    if (this.authService.isLoggedIn()) {
+    if (this.authService.isAuthenticated()) {
       this.isUserLoggedIn = true;
-      this.usersEmail = this.authService.getUsersDeatils().email;
+      this.usersEmail = 'TODO';
     }
+  }
+
+  public navigateAuth0Login() {
+    this.authService.login();
   }
 
   public logoutUser() {

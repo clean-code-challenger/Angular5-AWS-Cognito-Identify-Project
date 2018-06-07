@@ -49,7 +49,7 @@ export class DynamodbSandboxService {
       ExpressionAttributeValues: {
        ':k': object.object_display_name,
        ':d': datetime,
-       ':m': this.authService.getUsersDeatils().email
+       ':m': 'TODO'
       },
       Key: { object_id : object.etag },
       TableName: this.tableName,

@@ -19,7 +19,7 @@
             </li>
           <li [ngClass]="{'active': isPortfolioActive}"><a href='/portfolio'><i class="fa fa-paperclip"></i>PORTFOLIO</a></li>
           <li [ngClass]="{'active': isAboutActive}"><a href='/about'><i class="fa fa-question"></i>ABOUT ME</a></li>
-          <li *ngIf="!isUserLoggedIn" [ngClass]="{'active': isLoginActive}"><a href='/login'><i class="fa fa-lock"></i>LOGIN</a></li>
+          <li *ngIf="!isUserLoggedIn" [ngClass]="{'active': isLoginActive}"><a href='#' (click)="navigateAuth0Login()"><i class="fa fa-lock"></i>LOGIN</a></li>
           <li *ngIf="isUserLoggedIn" [ngClass]="{'active': isLoginActive}"><a href='#' (click)="logoutUser()"><i class="fa fa-sign-out"></i>Hello, {{usersEmail}}</a></li>
           </ul>
         </div>

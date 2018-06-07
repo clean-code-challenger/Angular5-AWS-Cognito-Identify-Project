@@ -5,7 +5,6 @@ import { AppComponent } from './app.component';
 import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule, CanActivate } from '@angular/router';
 import { S3SandboxComponent } from './s3-sandbox/s3-sandbox.component';
-import { LoginComponent } from './shared/login/login.component';
 import { AuthGuardService } from './shared/auth/auth-guard.service';
 import { AuthGuardService as AuthGuard } from './shared/auth/auth-guard.service';
 
@@ -16,7 +15,6 @@ export const routes: Routes = [
     { path: 'portfolio', component: PortfolioComponent },
     { path: 'about', component: AboutComponent },
     { path: 's3-sandbox', component: S3SandboxComponent, canActivate: [AuthGuard] },
-    { path: 'login', component: LoginComponent },
     { path: '**', redirectTo: '' }
 ];
 
