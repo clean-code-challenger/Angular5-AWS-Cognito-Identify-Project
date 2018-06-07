@@ -10,7 +10,7 @@ export const environment = {
     domain: 'brocktubre.auth0.com',
     responseType: 'token id_token',
     audience: 'https://brocktubre.auth0.com/userinfo',
-    redirectUri: 'http://brocktubre.com/callback',
+    redirectUri: 'https://brocktubre.com/callback',
     scope: 'openid profile'
   },
   env: 'prod'
