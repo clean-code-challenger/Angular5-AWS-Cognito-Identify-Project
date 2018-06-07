@@ -13,30 +13,13 @@ export class DynamodbSandboxService {
   private docClient;
 
   constructor(private authService: AuthService) {
-    console.log(authService.getUsersDeatils());
-
-    const creds = new AWS.CognitoIdentityCredentials({
-      IdentityPoolId: environment.aws_identity_pool_id
+    const config = new AWS.Config({
+      accessKeyId: this.authService.accessKeyId,
+      secretAccessKey: this.authService.secretKey,
+      region: environment.region,
     });
-    AWS.config.update({
-        region: environment.region,
-        credentials: creds
-    });
-
-    const params = {
-      IdentityPoolId: environment.aws_identity_pool_id
-    };
-    const cognitoidentity = new AWS.CognitoIdentity({credentials: AWS.config.credentials});
-    cognitoidentity.getId(params, function(err, data) {
-      debugger;
-      if (err) {
-        console.log(err, err.stack); // an error occurred
-      }else {
-        console.log(data);           // successful response
-      }
-    });
-
-    const dynamodb = new AWS.DynamoDB({ region: environment.region });
+    const creds = new AWS.Credentials(config.credentials);
+    const dynamodb = new AWS.DynamoDB({ region: environment.region, credentials: creds });
     this.docClient = new AWS.DynamoDB.DocumentClient({service: dynamodb});
     this.tableName = environment.dynamodb_table_name;
   }

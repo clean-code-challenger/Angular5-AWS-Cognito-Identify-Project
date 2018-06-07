@@ -41,37 +41,31 @@ export class LoginComponent implements OnInit {
 
       this.authService.signInRegular(email, password).then((res) => {
           console.log('Successfully logged in: ', res);
+
           const creds = new AWS.CognitoIdentityCredentials({
-            IdentityPoolId: environment.aws_identity_pool_id,
-            Logins: {
-              'securetoken.google.com/brocktubre-bt-website': 'test-user',
-            }
+            IdentityPoolId: environment.aws_identity_pool_id
           });
           AWS.config.update({
               region: environment.region,
               credentials: creds
           });
 
-          // const cognitoidentity = new AWS.CognitoIdentity({credentials: AWS.config.credentials});
-          // const paramsDev = {
-          //   IdentityPoolId: environment.aws_identity_pool_id,
-          //   IdentityId: null,
-          //   Logins: {
-          //     'securetoken.google.com/brocktubre-bt-website': 'test-user',
-          //   }
-          // };
-
-          // cognitoidentity.getOpenIdTokenForDeveloperIdentity(paramsDev, function(err, data) {
-          //   debugger;
-          //   if (err) {
-          //     console.log(err, err.stack); // an error occurred
-          //   }else {
-          //     console.log(data);           // successful response
-          //   }
-          // });
-
-          this.isSubmitted = false;
-          this.router.navigate(['s3-sandbox']);
+          const paramsIdentityPool = {
+            IdentityPoolId: environment.aws_identity_pool_id
+          };
+          const cognitoidentity = new AWS.CognitoIdentity({credentials: AWS.config.credentials});
+          cognitoidentity.getId(paramsIdentityPool, function(err, data) {
+            const paramsIdentityId = {
+              IdentityId: data.IdentityId
+            };
+            cognitoidentity.getCredentialsForIdentity(paramsIdentityId, function(errIdentityId, dataIdentityId) {
+                console.log(dataIdentityId);
+                debugger;
+                this.authService.setIdentity(dataIdentityId);
+                this.isSubmitted = false;
+                this.router.navigate(['s3-sandbox']);
+            });
+          });
         }).catch((err) => {
           console.error('Error occurred when logging in: ', err);
           this.isSubmitted = false;

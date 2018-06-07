@@ -8,17 +8,14 @@ import { Observable } from 'rxjs/Observable';
 export class AuthService {
   private user: Observable<firebase.User>;
   private userDetails: firebase.User;
-  public idToken: string;
+  public accessKeyId: string;
+  public secretKey: string;
+  public expiration: Date;
+  public sessionToken: string;
 
   constructor(private _firebaseAuth: AngularFireAuth,
               private router: Router) {
     this.user = _firebaseAuth.authState;
-
-    // _firebaseAuth.idToken.subscribe(token => {
-    //   debugger;
-    //   this.idToken = token;
-    // });
-
     this.user.subscribe((user) => {
         if (user) {
           this.userDetails = user;
@@ -53,7 +50,12 @@ export class AuthService {
     return this.userDetails;
   }
 
-  public getIdToken() {
-    return this.idToken;
+  public setIdentity(dataIdentityId: any) {
+    debugger;
+    this.accessKeyId = dataIdentityId.Credentials.AccessKeyId;
+    this.secretKey = dataIdentityId.Credentials.SecretKey;
+    this.expiration = dataIdentityId.Credentials.Expiration;
+    this.sessionToken = dataIdentityId.Credentials.SessionToken;
   }
+
 }
