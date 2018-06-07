@@ -12,5 +12,6 @@ export const environment = {
     audience: 'https://brocktubre.auth0.com/userinfo',
     redirectUri: 'http://brocktubre.com/callback',
     scope: 'openid profile'
-  }
+  },
+  env: 'prod'
 };

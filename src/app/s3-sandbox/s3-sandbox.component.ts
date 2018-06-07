@@ -27,6 +27,7 @@ export class S3SandboxComponent implements OnInit {
   public currentFileExt: string;
   public inputFieldVal: string;
   public inputFieldValidationMessage: string;
+  public year: number;
 
   @ViewChild('fileInput') myFileInput: ElementRef;
   @ViewChild('fileInputVal') myFileInputVal: ElementRef;
@@ -38,6 +39,7 @@ export class S3SandboxComponent implements OnInit {
     this.loadingObjs = true;
     this.bucketName = environment.public_bucket_name;
     this.tableName = environment.dynamodb_table_name;
+    this.year = new Date().getFullYear();
   }
 
   ngOnInit() {
@@ -114,12 +116,12 @@ export class S3SandboxComponent implements OnInit {
     this.modal.open();
   }
 
-  private closeEditModal() {
+  public closeEditModal() {
     this.inputFieldValidationMessage = null;
     this.modal.close();
   }
 
-  private updateObject() {
+  public updateObject() {
     if (this.isFormValid()) {
       const updateObj = new DynamodbS3ObjectModel;
       updateObj.object_display_name = this.inputFieldVal + '.' + this.currentFileExt;
