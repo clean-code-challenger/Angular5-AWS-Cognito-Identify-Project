@@ -16,10 +16,6 @@ import { AuthService } from './shared/auth/auth.service';
 import { AuthGuardService } from './shared/auth/auth-guard.service';
 import { ValidationMessagesService } from './shared/validation-messages/validation-messages.service';
 import { ReactiveFormsModule } from '@angular/forms';
-import { AngularFireModule } from 'angularfire2';
-import { AngularFireAuthModule } from 'angularfire2/auth';
-import { environment } from '../environments/environment';
-import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { ValidationMessagesComponent } from './shared/validation-messages/validation-messages.component';
 import { CallbackComponent } from './shared/callback/callback.component';
 
@@ -41,10 +37,7 @@ import { CallbackComponent } from './shared/callback/callback.component';
     BrowserModule,
     RouterModule.forRoot(routes),
     BsModalModule,
-    ReactiveFormsModule,
-    AngularFireModule.initializeApp(environment.firebase, 'angular-auth-firebase'),
-    AngularFireDatabaseModule,
-    AngularFireAuthModule
+    ReactiveFormsModule
   ],
   providers: [
     Title,

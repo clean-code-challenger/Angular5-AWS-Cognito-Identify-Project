@@ -44,7 +44,6 @@ export class DynamodbSandboxService {
   public updateItemFromDynamoDb(object: DynamodbS3ObjectModel): Observable<Array<DynamodbS3ObjectModel>> {
     const sendResult = new Subject<Array<DynamodbS3ObjectModel>>();
     const datetime = new Date().getTime().toString();
-    debugger;
     const params = {
       ExpressionAttributeValues: {
        ':k': object.object_display_name,

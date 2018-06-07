@@ -28,6 +28,7 @@ export class NavbarComponent implements OnInit {
     const url = this.router.url;
     switch (url) {
       case '/home':
+      case '/':
           this.isHomeActive = true;
           this.titleService.setTitle('Home | Brock Tubre');
           break;
