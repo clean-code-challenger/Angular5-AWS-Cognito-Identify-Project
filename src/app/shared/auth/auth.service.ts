@@ -22,7 +22,6 @@ export class AuthService {
   });
 
   constructor(private router: Router) {
-
   }
 
   public login(): void {
@@ -94,6 +93,7 @@ export class AuthService {
     localStorage.removeItem('accessKeyId');
     localStorage.removeItem('secretAccessKey');
     localStorage.removeItem('sessionToken');
+    localStorage.removeItem('userEmail');
     // Go back to the home route
     this.router.navigate(['home']);
   }
@@ -111,16 +111,17 @@ export class AuthService {
     localStorage.setItem('sessionToken', creds.sessionToken);
   }
 
-  // public gertUserProfile(): Observable<any> {
-  //   const sendResult = new Subject<any>();
-  //   const accessToken = localStorage.getItem('access_token');
-  //   if (!accessToken) {
-  //     this.auth0.client.userInfo(accessToken, function(userInfoError, profile) {
-  //       if (profile) {
-  //         sendResult.next(profile);
-  //       }
-  //     });
-  //   }
-  //   return sendResult.asObservable();
-  // }
+  public gertUserProfile(): Observable<any> {
+    const sendResult = new Subject<any>();
+    const accessToken = localStorage.getItem('access_token');
+
+    if (accessToken) {
+      this.auth0.client.userInfo(accessToken, (userInfoError, profile) => {
+        if (profile) {
+          sendResult.next(profile);
+        }
+      });
+    }
+    return sendResult.asObservable();
+  }
 }

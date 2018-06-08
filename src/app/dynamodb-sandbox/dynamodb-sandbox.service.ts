@@ -48,7 +48,7 @@ export class DynamodbSandboxService {
       ExpressionAttributeValues: {
        ':k': object.object_display_name,
        ':d': datetime,
-       ':m': 'TODO'
+       ':m': localStorage.getItem('userEmail')
       },
       Key: { object_id : object.etag },
       TableName: this.tableName,

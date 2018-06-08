@@ -53,7 +53,7 @@ export class S3SandboxService {
       Key: UUID,
       Metadata: {
         'object_display_name' : object.name,
-        'created_by': 'TODO'
+        'created_by': localStorage.getItem('userEmail')
       }
     };
 

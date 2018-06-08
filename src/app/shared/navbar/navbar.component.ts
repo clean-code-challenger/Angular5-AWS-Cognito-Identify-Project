@@ -22,6 +22,9 @@ export class NavbarComponent implements OnInit {
               private authService: AuthService) {
                 this.collapse = false;
                 this.isUserLoggedIn = false;
+                this.authService.gertUserProfile().subscribe(profile => {
+                  this.usersEmail = profile.name;
+                });
               }
 
   ngOnInit() {
@@ -51,7 +54,7 @@ export class NavbarComponent implements OnInit {
 
     if (this.authService.isAuthenticated()) {
       this.isUserLoggedIn = true;
-      this.usersEmail = 'TODO';
+      this.usersEmail = localStorage.getItem('userEmail');
     }
   }
 
