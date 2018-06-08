@@ -26,7 +26,7 @@
                       {{o.etag}}
                   </td>
                   <td>
-                      {{o.size}}
+                      {{formatBytes(o.size)}}
                   </td>
                   <td>
                     <i class="fa fa-edit" (click)="openEditModal(o)" style="cursor:pointer"></i>
@@ -50,13 +50,13 @@
       <div class="col-md-12 col-sm-12 col-12">
           <div class="input-group">
               <label class="input-group-btn">
-                  <span class="btn btn-primary">
+                  <span class="btn btn-primary" [ngClass]="{'disabled' : loadingObjs}">
                       Browse&hellip; <input type="file" style="display: none;" multiple #fileInput (change)="fileChanged($event)">
                   </span>
               </label>
               <input type="text" class="form-control" #fileInputVal readonly>
               <label class="input-group-btn">
-                  <span class="btn btn-success">
+                  <span class="btn btn-success" [ngClass]="{'disabled' : loadingObjs}">
                       Upload <input type="button" style="display: none;" multiple (click)="uploadObject()">
                   </span>
               </label>
