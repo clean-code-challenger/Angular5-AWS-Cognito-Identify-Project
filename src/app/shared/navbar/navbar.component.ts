@@ -24,6 +24,7 @@ export class NavbarComponent implements OnInit {
                 this.isUserLoggedIn = false;
                 this.authService.gertUserProfile().subscribe(profile => {
                   this.usersEmail = profile.name;
+                  localStorage.setItem('userEmail', this.usersEmail);
                 });
               }
 

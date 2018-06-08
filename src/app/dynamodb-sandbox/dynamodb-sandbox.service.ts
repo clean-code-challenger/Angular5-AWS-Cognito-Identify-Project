@@ -28,7 +28,10 @@ export class DynamodbSandboxService {
     const sendResult = new Subject<Array<DynamodbS3ObjectModel>>();
 
     const params = {
-      TableName: this.tableName
+      TableName: this.tableName,
+      // ExpressionAttributeValues: {
+      //   ':m': localStorage.getItem('userEmail')
+      //  },
     };
 
     this.docClient.scan(params, function(err, data) {
