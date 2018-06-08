@@ -29,9 +29,10 @@ export class DynamodbSandboxService {
 
     const params = {
       TableName: this.tableName,
-      // ExpressionAttributeValues: {
-      //   ':m': localStorage.getItem('userEmail')
-      //  },
+      ExpressionAttributeValues: {
+        ':m': localStorage.getItem('userEmail')
+       },
+       FilterExpression: 'created_by IN (:m)',
     };
 
     this.docClient.scan(params, function(err, data) {

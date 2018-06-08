@@ -43,7 +43,7 @@ export class S3SandboxComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loadObjects();
+    setTimeout(this.loadObjects.bind(this), 2000);
   }
 
   public fileChanged($event) {
