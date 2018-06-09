@@ -69,9 +69,11 @@ export class S3SandboxComponent implements OnInit {
       this.loadingObjs = true;
       console.log('We want to upload this document: ', this.fileToUpload);
       this.s3SandboxService.uploadObjectToS3(this.bucketName, this.fileToUpload).subscribe(item => {
-        this.myFileInputVal.nativeElement.value = null;
-        this.fileToUpload = null;
-        setTimeout(this.loadObjects.bind(this), 5000);
+        setTimeout(function() {
+          this.loadObjects.bind(this);
+          this.myFileInputVal.nativeElement.value = null;
+          this.fileToUpload = null;
+        }, 5000);
       });
     }
   }
