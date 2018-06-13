@@ -1,5 +1,5 @@
-import { DynamodbSandboxService } from './dynamodb-sandbox/dynamodb-sandbox.service';
-import { S3SandboxService } from './s3-sandbox/s3-sandbox.service';
+import { DynamodbSandboxService } from './shared/dynamodb-sandbox/dynamodb-sandbox.service';
+import { S3SandboxService } from './shared/s3-sandbox/s3-sandbox.service';
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
@@ -10,7 +10,7 @@ import { FooterComponent } from './shared/footer/footer.component';
 import { RouterModule } from '@angular/router';
 import { routes } from './app.routes';
 import { NavbarComponent } from './shared/navbar/navbar.component';
-import { S3SandboxComponent } from './s3-sandbox/s3-sandbox.component';
+import { S3SandboxComponent } from './shared/s3-sandbox/s3-sandbox.component';
 import { BsModalModule } from 'ng2-bs3-modal';
 import { AuthService } from './shared/auth/auth.service';
 import { AuthGuardService } from './shared/auth/auth-guard.service';
@@ -18,6 +18,7 @@ import { ValidationMessagesService } from './shared/validation-messages/validati
 import { ReactiveFormsModule } from '@angular/forms';
 import { ValidationMessagesComponent } from './shared/validation-messages/validation-messages.component';
 import { CallbackComponent } from './shared/callback/callback.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { CallbackComponent } from './shared/callback/callback.component';
     NavbarComponent,
     S3SandboxComponent,
     ValidationMessagesComponent,
-    CallbackComponent
+    CallbackComponent,
+    DashboardComponent
 
   ],
   imports: [

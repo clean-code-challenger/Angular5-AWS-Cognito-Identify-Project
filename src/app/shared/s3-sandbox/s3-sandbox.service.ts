@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { S3ObjectModel } from './../shared/models/s3-object.model';
-import { environment } from './../../environments/environment';
+import { S3ObjectModel } from '../models/s3-object.model';
+import { environment } from '../../../environments/environment';
 import { Component, OnInit } from '@angular/core';
 import * as S3 from 'aws-sdk/clients/s3';
 import * as AWS from 'aws-sdk';
 import 'rxjs/add/observable/of';
 import { Subject } from 'rxjs/Subject';
 import { v4 as uuid } from 'uuid';
-import { AuthService } from '../shared/auth/auth.service';
+import { AuthService } from '../auth/auth.service';
 
 @Injectable()
 export class S3SandboxService {

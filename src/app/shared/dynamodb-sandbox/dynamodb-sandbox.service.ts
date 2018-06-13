@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { environment } from '../../environments/environment';
-import { S3ObjectModel } from '../shared/models/s3-object.model';
+import { environment } from '../../../environments/environment';
+import { S3ObjectModel } from '../models/s3-object.model';
 import { Subject } from 'rxjs/Subject';
 import * as AWS from 'aws-sdk';
-import { DynamodbS3ObjectModel } from '../shared/models/dynamodb-s3-object.modal';
-import { AuthService } from '../shared/auth/auth.service';
+import { DynamodbS3ObjectModel } from '../models/dynamodb-s3-object.modal';
+import { AuthService } from '../auth/auth.service';
 
 @Injectable()
 export class DynamodbSandboxService {

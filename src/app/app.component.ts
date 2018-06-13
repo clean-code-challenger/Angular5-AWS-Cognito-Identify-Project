@@ -15,7 +15,7 @@ export class AppComponent {
     authService.handleAuthentication().subscribe(creds => {
       if (creds) {
         this.authService.setCreds(creds);
-        this.router.navigate(['s3-sandbox']);
+        this.router.navigate(['dashboard']);
       }
     });
     // authService.gertUserProfile().subscribe(profile => {

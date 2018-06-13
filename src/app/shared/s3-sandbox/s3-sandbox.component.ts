@@ -1,14 +1,14 @@
 import { DynamodbSandboxService } from './../dynamodb-sandbox/dynamodb-sandbox.service';
 import { S3SandboxService } from './s3-sandbox.service';
-import { S3ObjectModel } from './../shared/models/s3-object.model';
-import { environment } from './../../environments/environment';
+import { S3ObjectModel } from '../models/s3-object.model';
+import { environment } from '../../../environments/environment';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import * as S3 from 'aws-sdk/clients/s3';
 import * as AWS from 'aws-sdk';
 import { Observable } from 'rxjs/Observable';
 import * as FileSaver from 'file-saver';
 import { BsModalComponent } from 'ng2-bs3-modal';
-import { DynamodbS3ObjectModel } from '../shared/models/dynamodb-s3-object.modal';
+import { DynamodbS3ObjectModel } from '../models/dynamodb-s3-object.modal';
 
 @Component({
   selector: 'app-s3-sandbox',
