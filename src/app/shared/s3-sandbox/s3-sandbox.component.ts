@@ -43,7 +43,7 @@ export class S3SandboxComponent implements OnInit {
   }
 
   ngOnInit() {
-    setTimeout(this.loadObjects.bind(this), 2000);
+    setTimeout(() => this.loadObjects(), 2000);
   }
 
   public fileChanged($event) {
@@ -69,8 +69,8 @@ export class S3SandboxComponent implements OnInit {
       this.loadingObjs = true;
       console.log('We want to upload this document: ', this.fileToUpload);
       this.s3SandboxService.uploadObjectToS3(this.bucketName, this.fileToUpload).subscribe(item => {
-        setTimeout(function() {
-          this.loadObjects.bind(this);
+        setTimeout(() => {
+          this.loadObjects();
           this.myFileInputVal.nativeElement.value = null;
           this.fileToUpload = null;
         }, 5000);
@@ -100,7 +100,7 @@ export class S3SandboxComponent implements OnInit {
     this.loadingObjs = true;
     this.s3SandboxService.deleteObjectFromS3(this.bucketName, object.object_name).subscribe(item => {
         this.fileToUpload = null;
-        setTimeout(this.loadObjects.bind(this), 2000);
+        setTimeout(() => this.loadObjects(), 2000);
     });
   }
 
@@ -132,7 +132,7 @@ export class S3SandboxComponent implements OnInit {
       this.loadingObjs = true;
       this.closeEditModal();
       this.dynamodbSandboxService.updateItemFromDynamoDb(updateObj).subscribe((data) => {
-        setTimeout(this.loadObjects.bind(this), 2000);
+        setTimeout(() => this.loadObjects(), 2000);
         this.closeEditModal();
       });
     }
