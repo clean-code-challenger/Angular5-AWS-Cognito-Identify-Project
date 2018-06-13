@@ -16,6 +16,7 @@ export class NavbarComponent implements OnInit {
   public collapse: boolean;
   public isUserLoggedIn: boolean;
   public usersEmail: string;
+  public isS3SandboxActive: boolean;
 
   constructor(private router: Router,
               private titleService: Title,
@@ -47,6 +48,10 @@ export class NavbarComponent implements OnInit {
         case '/login':
           this.isLoginActive = true;
           this.titleService.setTitle('Login | Brock Tubre');
+          break;
+        case '/s3-sandbox':
+          this.isS3SandboxActive = true;
+          this.titleService.setTitle('S3 Store | Brock Tubre');
         break;
         default:
           this.titleService.setTitle('Brock Tubre');
