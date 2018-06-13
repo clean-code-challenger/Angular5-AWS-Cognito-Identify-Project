@@ -18,7 +18,6 @@ import { ValidationMessagesService } from './shared/validation-messages/validati
 import { ReactiveFormsModule } from '@angular/forms';
 import { ValidationMessagesComponent } from './shared/validation-messages/validation-messages.component';
 import { CallbackComponent } from './shared/callback/callback.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
 
 
 @NgModule({
@@ -31,8 +30,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     NavbarComponent,
     S3SandboxComponent,
     ValidationMessagesComponent,
-    CallbackComponent,
-    DashboardComponent
+    CallbackComponent
 
   ],
   imports: [

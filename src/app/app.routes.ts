@@ -1,4 +1,3 @@
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { AboutComponent } from './about/about.component';
 import { PortfolioComponent } from './portfolio/portfolio.component';
 import { HomeComponent } from './home/home.component';
@@ -17,7 +16,6 @@ export const routes: Routes = [
     { path: 'portfolio', component: PortfolioComponent },
     { path: 'about', component: AboutComponent },
     { path: 'callback', component: CallbackComponent },
-    { path: 'dashboard', component: DashboardComponent },
     { path: 's3-sandbox', component: S3SandboxComponent, canActivate: [AuthGuard] },
     { path: '**', redirectTo: '' }
 ];

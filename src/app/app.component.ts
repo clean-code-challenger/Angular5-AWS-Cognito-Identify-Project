@@ -15,7 +15,7 @@ export class AppComponent {
     authService.handleAuthentication().subscribe(creds => {
       if (creds) {
         this.authService.setCreds(creds);
-        this.router.navigate(['dashboard']);
+        this.router.navigate(['portfolio']);
       }
     });
     // authService.gertUserProfile().subscribe(profile => {
