@@ -19,8 +19,8 @@
                 <h2 class="card-title"><i class="fa fa-calendar" style="padding-left: 0;"></i>{{o.day_of_week}} </h2>
                 <label class="response-dropdown">Response Type</label>
                 <div style="padding-bottom: 25px;">
-                    <select [(ngModel)]="o.response_type">
-                        <option *ngFor="let r of responses" [value]="r.name">{{r.name}}</option>
+                    <select [(ngModel)]="o.response_type" (change)="onResponseTypeChange($event, o)">
+                        <option *ngFor="let r of responses" [value]="r.name" class="response-text">{{r.name}}</option>
                     </select>
                 </div>
                 <ui-switch [checked]="o.enabled" (change)="onEnabledChange($event, o)"></ui-switch>

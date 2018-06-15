@@ -5,3 +5,7 @@
 .response-dropdown {
   padding-top: 25px;
 }
+
+.response-text {
+  text-transform: capitalize;
+}

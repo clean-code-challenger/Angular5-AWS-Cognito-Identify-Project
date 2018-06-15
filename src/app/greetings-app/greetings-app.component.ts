@@ -40,6 +40,7 @@ export class GreetingsAppComponent implements OnInit {
   public loadObjects() {
     this.dynamodbSandboxService.getGreetingItemsFromDynamoDb(environment.greetings_app.dynamodb_table_name).subscribe(items => {
       this.objectList = items;
+      this.objectList.sort(function(a, b) { return a.greetings_config_id - b.greetings_config_id; });
       this.loadingObjs = false;
     });
     this.dynamodbSandboxService.getGreetingResponsesItemsFromDynamoDb
@@ -64,6 +65,10 @@ export class GreetingsAppComponent implements OnInit {
 
   public onEnabledChange($event, o: DynamodbGreetingsObjectModel) {
     o.enabled = !o.enabled;
+    this.dynamodbSandboxService.updateGreetingsItemFromDynamoDb(o, this.tableName).subscribe();
+  }
+
+  public onResponseTypeChange($event, o: DynamodbGreetingsObjectModel) {
     this.dynamodbSandboxService.updateGreetingsItemFromDynamoDb(o, this.tableName).subscribe();
   }
 
