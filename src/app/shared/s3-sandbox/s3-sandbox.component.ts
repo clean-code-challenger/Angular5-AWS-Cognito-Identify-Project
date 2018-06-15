@@ -37,8 +37,8 @@ export class S3SandboxComponent implements OnInit {
               private dynamodbSandboxService: DynamodbSandboxService) {
     this.objectList = new Array<DynamodbS3ObjectModel>();
     this.loadingObjs = true;
-    this.bucketName = environment.public_bucket_name;
-    this.tableName = environment.dynamodb_table_name;
+    this.bucketName = environment.s3_sandbox.public_bucket_name;
+    this.tableName = environment.s3_sandbox.dynamodb_table_name;
     this.year = new Date().getFullYear();
   }
 
@@ -131,7 +131,7 @@ export class S3SandboxComponent implements OnInit {
       console.log('Need to update this object: ', updateObj);
       this.loadingObjs = true;
       this.closeEditModal();
-      this.dynamodbSandboxService.updateItemFromDynamoDb(updateObj).subscribe((data) => {
+      this.dynamodbSandboxService.updateItemFromDynamoDb(updateObj, this.tableName).subscribe((data) => {
         setTimeout(() => this.loadObjects(), 2000);
         this.closeEditModal();
       });

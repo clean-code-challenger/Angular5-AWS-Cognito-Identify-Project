@@ -1,3 +1,4 @@
+import { GreetingsAppComponent } from './greetings-app/greetings-app.component';
 import { AboutComponent } from './about/about.component';
 import { PortfolioComponent } from './portfolio/portfolio.component';
 import { HomeComponent } from './home/home.component';
@@ -17,6 +18,7 @@ export const routes: Routes = [
     { path: 'about', component: AboutComponent },
     { path: 'callback', component: CallbackComponent },
     { path: 's3-sandbox', component: S3SandboxComponent, canActivate: [AuthGuard] },
+    { path: 'greetings-app', component: GreetingsAppComponent, canActivate: [AuthGuard] },
     { path: '**', redirectTo: '' }
 ];
 

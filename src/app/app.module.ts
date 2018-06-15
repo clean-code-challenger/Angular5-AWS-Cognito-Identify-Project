@@ -18,6 +18,8 @@ import { ValidationMessagesService } from './shared/validation-messages/validati
 import { ReactiveFormsModule } from '@angular/forms';
 import { ValidationMessagesComponent } from './shared/validation-messages/validation-messages.component';
 import { CallbackComponent } from './shared/callback/callback.component';
+import { GreetingsAppComponent } from './greetings-app/greetings-app.component';
+import { UiSwitchModule } from 'ngx-toggle-switch';
 
 
 @NgModule({
@@ -30,14 +32,16 @@ import { CallbackComponent } from './shared/callback/callback.component';
     NavbarComponent,
     S3SandboxComponent,
     ValidationMessagesComponent,
-    CallbackComponent
+    CallbackComponent,
+    GreetingsAppComponent
 
   ],
   imports: [
     BrowserModule,
     RouterModule.forRoot(routes),
     BsModalModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    UiSwitchModule
   ],
   providers: [
     Title,
