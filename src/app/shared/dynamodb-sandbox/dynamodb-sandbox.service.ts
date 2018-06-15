@@ -105,4 +105,21 @@ export class DynamodbSandboxService {
       });
     return sendResult.asObservable();
   }
+
+  public getGreetingResponsesItemsFromDynamoDb(tableName: string): Observable<Array<any>> {
+    const sendResult = new Subject<Array<any>>();
+
+    const params = {
+      TableName: tableName
+    };
+
+    this.docClient.scan(params, function(err, data) {
+      if (err) {
+        sendResult.error(err);
+      }else {
+        sendResult.next(data.Items);
+      }
+    });
+    return sendResult.asObservable();
+  }
 }

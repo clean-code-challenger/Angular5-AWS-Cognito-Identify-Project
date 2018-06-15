@@ -13,7 +13,8 @@ export const environment = {
     dynamodb_table_name: 'brocktubre-s3-lambda-dynamodb-integration-sandbox-table',
   },
   greetings_app: {
-    dynamodb_table_name: 'greetings-config'
+    dynamodb_table_name: 'greetings-config',
+    greetings_config_response_types_table: 'greetings-config-response-types';
   },
   auth0: {
     clientID: 'o10co8Eu-ethIXGsm36vwKdvbIY9FdTp',

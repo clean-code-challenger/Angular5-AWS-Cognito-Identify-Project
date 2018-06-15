@@ -14,14 +14,21 @@
         <div *ngFor="let o of objectList" class="col-md-6 col-sm-6 col-xs-12">
             <div class="well">
               <div class="card-body">
-                <i class="fa fa-edit pull-right" (click)="openEditModal(o)" style="cursor:pointer"></i>
-                <h2 class="card-title"><i class="fa fa-calendar" style="padding-left: 0;"></i>{{o.day_of_week}}</h2>
-                <p>{{o.response_type}}</p>
+                <!-- <i class="fa fa-edit pull-right" (click)="openEditModal(o)" style="cursor:pointer"></i> -->
+                <span class="enabled-text" [ngClass]="{'text-success': o.enabled, 'text-danger': !o.enabled}">{{transformEnabled(o.enabled)}}</span>
+                <h2 class="card-title"><i class="fa fa-calendar" style="padding-left: 0;"></i>{{o.day_of_week}} </h2>
+                <label class="response-dropdown">Response Type</label>
+                <div style="padding-bottom: 25px;">
+                    <select [(ngModel)]="o.response_type">
+                        <option *ngFor="let r of responses" [value]="r.name">{{r.name}}</option>
+                    </select>
+                </div>
                 <ui-switch [checked]="o.enabled" (change)="onEnabledChange($event, o)"></ui-switch>
               </div>
             </div>
         </div>
       </div>
+      <hr />
   <app-footer></app-footer>
   <!-- [END] Footer content row -->
 </div>
@@ -41,11 +48,16 @@
 
 <!-- <bs-modal #myModal>
   <bs-modal-header [showDismiss]="true">
-      <h4 class="modal-title">Edit Greeting</h4>
+      <h4 class="modal-title">Edit Greeting <span class="enabled-text" [ngClass]="{'text-success': editObj.enabled, 'text-danger': !editObj.enabled}">{{transformEnabled(editObj.enabled)}}</span></h4>
   </bs-modal-header>
   <bs-modal-body>
       <h2 class="card-title"><i class="fa fa-calendar" style="padding-left: 0;"></i>{{editObj.day_of_week}}</h2>
-      <p>{{editObj.response_type}}</p>
+      <label>Response</label>
+        <div>
+            <select [(ngModel)]="editObj.response_type">
+                <option *ngFor="let r of responses" [value]="r.name">{{r.name}}</option>
+            </select>
+        </div>
   </bs-modal-body>
   <bs-modal-footer>
       <button class="btn btn-default" type="button" (click)="closeEditModal()"> Cancel </button>

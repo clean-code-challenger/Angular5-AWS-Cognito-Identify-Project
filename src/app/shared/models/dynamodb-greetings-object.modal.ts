@@ -3,4 +3,8 @@ export class DynamodbGreetingsObjectModel {
   public day_of_week: string;
   public response_type: string;
   public enabled: boolean;
+
+  constructor() {
+
+  }
 }

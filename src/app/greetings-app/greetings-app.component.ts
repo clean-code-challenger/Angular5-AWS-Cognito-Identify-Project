@@ -17,15 +17,20 @@ export class GreetingsAppComponent implements OnInit {
   public objectList: Array<DynamodbGreetingsObjectModel>;
   public loadingObjs: boolean;
   public editObj: DynamodbGreetingsObjectModel;
+  public changeObj: DynamodbGreetingsObjectModel;
+  public responses: Array<any>;
 
   @ViewChild('myModal') modal: BsModalComponent;
 
 
   constructor(private dynamodbSandboxService: DynamodbSandboxService) {
     this.objectList = new Array<DynamodbGreetingsObjectModel>();
+    this.responses = new Array<any>();
     this.loadingObjs = true;
     this.tableName = environment.greetings_app.dynamodb_table_name;
     this.year = new Date().getFullYear();
+    this.editObj = new DynamodbGreetingsObjectModel();
+    this.changeObj = new DynamodbGreetingsObjectModel();
   }
 
   ngOnInit() {
@@ -33,9 +38,13 @@ export class GreetingsAppComponent implements OnInit {
   }
 
   public loadObjects() {
-    this.dynamodbSandboxService.getGreetingItemsFromDynamoDb(this.tableName).subscribe(items => {
+    this.dynamodbSandboxService.getGreetingItemsFromDynamoDb(environment.greetings_app.dynamodb_table_name).subscribe(items => {
       this.objectList = items;
       this.loadingObjs = false;
+    });
+    this.dynamodbSandboxService.getGreetingResponsesItemsFromDynamoDb
+    (environment.greetings_app.greetings_config_response_types_table).subscribe(items => {
+      this.responses = items;
     });
   }
 
@@ -49,14 +58,20 @@ export class GreetingsAppComponent implements OnInit {
   }
 
   public updateObject() {
+    this.changeObj = this.editObj;
     this.modal.close();
   }
 
   public onEnabledChange($event, o: DynamodbGreetingsObjectModel) {
     o.enabled = !o.enabled;
-    this.dynamodbSandboxService.updateGreetingsItemFromDynamoDb(o, this.tableName).subscribe(items => {
+    this.dynamodbSandboxService.updateGreetingsItemFromDynamoDb(o, this.tableName).subscribe();
+  }
 
-    });
+  public transformEnabled(enabled: boolean) {
+    if (enabled) {
+      return 'ENABLED';
+    }
+    return 'DISABLED';
   }
 
 }
