@@ -6,20 +6,20 @@
   <div class="container">
       <div class="row">
           <div class="col-md-12">
-              <strong><h2> <i class="fa fa-cog"></i>GREETINGS <span class="text-primary">SETTINGS</span></h2></strong>
+              <strong><h2> <i class="fa fa-cog"></i>GREETINGS APP <span class="text-primary">SETTINGS</span></h2></strong>
           </div>
       </div>
         <hr>
       <div *ngIf="!loadingObjs && objectList.length > 0" class="container" style="min-height: 700px;">
-        <div *ngFor="let o of objectList" class="col-md-6 col-sm-6 col-xs-12">
+        <div *ngFor="let o of objectList" class="col-md-6 col-sm-6 col-xs-12" >
             <div class="well">
               <div class="card-body">
                 <!-- <i class="fa fa-edit pull-right" (click)="openEditModal(o)" style="cursor:pointer"></i> -->
                 <span class="enabled-text" [ngClass]="{'text-success': o.enabled, 'text-danger': !o.enabled}">{{transformEnabled(o.enabled)}}</span>
-                <h2 class="card-title"><i class="fa fa-calendar" style="padding-left: 0;"></i>{{o.day_of_week}} </h2>
-                <label class="response-dropdown">Response Type</label>
+                <h2 class="card-title" [ngClass]="{'text-muted': !o.enabled}"><i class="fa fa-calendar" style="padding-left: 0;"></i>{{o.day_of_week}} </h2>
+                <label class="response-dropdown" [ngClass]="{'text-muted': !o.enabled}">Response Type</label>
                 <div style="padding-bottom: 25px;">
-                    <select [(ngModel)]="o.response_type" (change)="onResponseTypeChange($event, o)">
+                    <select [(ngModel)]="o.response_type" (change)="onResponseTypeChange($event, o)" [disabled]="!o.enabled" [ngClass]="{'text-muted': !o.enabled}">
                         <option *ngFor="let r of responses" [value]="r.name" class="response-text">{{r.name}}</option>
                     </select>
                 </div>

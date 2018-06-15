@@ -14,7 +14,7 @@ export const environment = {
   },
   greetings_app: {
     dynamodb_table_name: 'greetings-config',
-    greetings_config_response_types_table: 'greetings-config-response-types';
+    greetings_config_response_types_table: 'greetings-config-response-types'
   },
   auth0: {
     clientID: 'o10co8Eu-ethIXGsm36vwKdvbIY9FdTp',
