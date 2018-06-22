@@ -18,6 +18,7 @@ import { ValidationMessagesService } from './shared/validation-messages/validati
 import { ReactiveFormsModule } from '@angular/forms';
 import { ValidationMessagesComponent } from './shared/validation-messages/validation-messages.component';
 import { CallbackComponent } from './shared/callback/callback.component';
+import { NpHelperComponent } from './shared/np-helper/np-helper.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { CallbackComponent } from './shared/callback/callback.component';
     NavbarComponent,
     S3SandboxComponent,
     ValidationMessagesComponent,
-    CallbackComponent
+    CallbackComponent,
+    NpHelperComponent
 
   ],
   imports: [
