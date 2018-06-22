@@ -90,7 +90,7 @@ export class DynamodbSandboxService {
     const params = {
       ExpressionAttributeValues: {
        ':k': object.enabled,
-       ':r': object.response_type
+       ':r': object.response_type,
       },
       Key: { greetings_config_id : object.greetings_config_id },
       TableName: tableName,

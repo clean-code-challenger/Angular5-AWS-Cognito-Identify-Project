@@ -20,7 +20,7 @@
                 <label class="response-dropdown" [ngClass]="{'text-muted': !o.enabled}">Response Type</label>
                 <div style="padding-bottom: 25px;">
                     <select [(ngModel)]="o.response_type" (change)="onResponseTypeChange($event, o)" [disabled]="!o.enabled" [ngClass]="{'text-muted': !o.enabled}">
-                        <option *ngFor="let r of responses" [value]="r.name" class="response-text">{{r.name}}</option>
+                        <option *ngFor="let r of responses" [value]="r.response_name" class="response-text">{{r.response_name}}</option>
                     </select>
                 </div>
                 <ui-switch [checked]="o.enabled" (change)="onEnabledChange($event, o)"></ui-switch>
@@ -55,7 +55,7 @@
       <label>Response</label>
         <div>
             <select [(ngModel)]="editObj.response_type">
-                <option *ngFor="let r of responses" [value]="r.name">{{r.name}}</option>
+                <option *ngFor="let r of responses" [value]="r.response_name">{{r.response_name}}</option>
             </select>
         </div>
   </bs-modal-body>
