@@ -34,8 +34,8 @@
           </tbody>
           </table>
       </div>
-      <div *ngIf="!loadingAttendance && attendanceList.length <= 0"  class="container text-center" style="min-height: 700px;">
-          <span class="alert alert-danger col-md-12">No QR created for any classes today.</span>
+      <div *ngIf="!loadingAttendance && attendanceList.length <= 0"  class="container text-center" style="min-height: 500px;">
+          <span class="alert alert-danger col-md-12">No QR codes created today.</span>
       </div>
       <div *ngIf="loadingAttendance"  class="container text-center" style="min-height: 700px;">
           <i class="fa fa-circle-o-notch fa-spin" style="font-size:50px"></i>

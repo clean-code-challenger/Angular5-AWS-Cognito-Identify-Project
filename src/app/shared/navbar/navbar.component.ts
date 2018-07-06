@@ -38,6 +38,8 @@ export class NavbarComponent implements OnInit {
           break;
         case '/portfolio':
         case '/s3-sandbox':
+        case '/qr-reader':
+        case '/qr-reader/attendance':
           this.isPortfolioActive = true;
           this.titleService.setTitle('Portfolio | Brock Tubre');
           break;
