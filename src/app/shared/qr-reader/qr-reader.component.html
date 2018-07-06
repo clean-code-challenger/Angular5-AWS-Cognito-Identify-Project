@@ -20,7 +20,7 @@
     </div>
 
     <div [hidden]="!hasCameras || !selectedDevice">
-      <h1 *ngIf="!hasResults" class="text-primary text-center">Please scan QR code...</h1>
+      <h1 *ngIf="!hasResults" class="text-primary text-center">Scan QR code.</h1>
       <div *ngIf="hasResults && qrCodeResult.enabled" class="text-center text-success">
             <h1>Thank you <strong>{{qrCodeResult.students_first_name}}</strong>!</h1>
             <h3>You have been successfully been marked present for <strong>{{qrCodeResult.class_date}}</strong> class.</h3>

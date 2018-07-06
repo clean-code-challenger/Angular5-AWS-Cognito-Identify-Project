@@ -49,6 +49,7 @@ export class QrReaderComponent implements OnInit {
     }
 
     handleQrCodeResult(resultString: string) {
+        this.inputSubmitMessage = null;
         this.qrResultString = resultString.slice(0, -1);
         console.log('Result: ', this.qrResultString);
         this.qrService.processQrCode(this.qrResultString).subscribe((result: QrCodeObject) => {
