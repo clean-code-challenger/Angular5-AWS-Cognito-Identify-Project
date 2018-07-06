@@ -53,10 +53,12 @@ export class QrReaderComponent implements OnInit {
     }
 
     handleQrCodeResult(resultString: string) {
-        console.log('Result: ', resultString);
-        this.qrResultString = resultString;
-        debugger;
-        this.qrService.processQrCode(this.qrResultString);
+        this.qrResultString = resultString.slice(0, -1);
+        console.log('Result: ', this.qrResultString);
+        this.qrService.processQrCode(this.qrResultString).subscribe((result) => {
+          debugger;
+          console.log(result);
+        });
     }
 
     onDeviceSelectChange(selectedValue: string) {

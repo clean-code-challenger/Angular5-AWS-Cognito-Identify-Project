@@ -21,6 +21,7 @@ import { ValidationMessagesComponent } from './shared/validation-messages/valida
 import { CallbackComponent } from './shared/callback/callback.component';
 import { QrReaderComponent } from './shared/qr-reader/qr-reader.component';
 import { ZXingScannerModule } from '@zxing/ngx-scanner';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { ZXingScannerModule } from '@zxing/ngx-scanner';
     RouterModule.forRoot(routes),
     BsModalModule,
     ReactiveFormsModule,
-    ZXingScannerModule.forRoot()
+    ZXingScannerModule.forRoot(),
+    HttpClientModule
   ],
   providers: [
     Title,
