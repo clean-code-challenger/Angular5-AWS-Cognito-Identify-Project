@@ -1,3 +1,4 @@
+import { QrReaderService } from './shared/qr-reader/qr-reader.service';
 import { DynamodbSandboxService } from './shared/dynamodb-sandbox/dynamodb-sandbox.service';
 import { S3SandboxService } from './shared/s3-sandbox/s3-sandbox.service';
 import { BrowserModule, Title } from '@angular/platform-browser';
@@ -18,6 +19,8 @@ import { ValidationMessagesService } from './shared/validation-messages/validati
 import { ReactiveFormsModule } from '@angular/forms';
 import { ValidationMessagesComponent } from './shared/validation-messages/validation-messages.component';
 import { CallbackComponent } from './shared/callback/callback.component';
+import { QrReaderComponent } from './shared/qr-reader/qr-reader.component';
+import { ZXingScannerModule } from '@zxing/ngx-scanner';
 
 
 @NgModule({
@@ -30,14 +33,16 @@ import { CallbackComponent } from './shared/callback/callback.component';
     NavbarComponent,
     S3SandboxComponent,
     ValidationMessagesComponent,
-    CallbackComponent
+    CallbackComponent,
+    QrReaderComponent
 
   ],
   imports: [
     BrowserModule,
     RouterModule.forRoot(routes),
     BsModalModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ZXingScannerModule.forRoot()
   ],
   providers: [
     Title,
@@ -45,7 +50,8 @@ import { CallbackComponent } from './shared/callback/callback.component';
     DynamodbSandboxService,
     AuthService,
     AuthGuardService,
-    ValidationMessagesService
+    ValidationMessagesService,
+    QrReaderService
   ],
   bootstrap: [AppComponent]
 })

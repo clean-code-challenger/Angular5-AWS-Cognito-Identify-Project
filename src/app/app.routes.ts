@@ -1,3 +1,4 @@
+import { QrReaderComponent } from './shared/qr-reader/qr-reader.component';
 import { AboutComponent } from './about/about.component';
 import { PortfolioComponent } from './portfolio/portfolio.component';
 import { HomeComponent } from './home/home.component';
@@ -17,6 +18,7 @@ export const routes: Routes = [
     { path: 'about', component: AboutComponent },
     { path: 'callback', component: CallbackComponent },
     { path: 's3-sandbox', component: S3SandboxComponent, canActivate: [AuthGuard] },
+    { path: 'qr-reader', component: QrReaderComponent, canActivate: [AuthGuard] },
     { path: '**', redirectTo: '' }
 ];
 

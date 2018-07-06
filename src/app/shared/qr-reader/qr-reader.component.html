@@ -1,0 +1,79 @@
+
+<app-navbar></app-navbar>
+
+<!-- [BEGIN] Entire Page Container -->
+<div class="container-fluid background" style="padding: 0;" >
+  <!-- [BEGIN] Content Container -->
+  <div class="container">
+    <div *ngIf="availableDevices">
+      <select (change)="onDeviceSelectChange($event.target.value)">
+        <option value="" [selected]="!selectedDevice">No Device</option>
+        <option *ngFor="let device of availableDevices" [value]="device.deviceId" [selected]="selectedDevice && device.deviceId === selectedDevice.deviceId">{{ device.label }}</option>
+      </select>
+    </div>
+
+    <div [hidden]="!hasCameras">
+
+      <zxing-scanner #scanner class="test-class" start="true" [device]="selectedDevice" (scanSuccess)="handleQrCodeResult($event)"></zxing-scanner>
+
+      <h2 *ngIf="!this.selectedDevice">No camera selected.</h2>
+
+      <p>
+        Result:
+        <strong>{{ qrResultString }}</strong>
+      </p>
+
+    </div>
+
+    <div *ngIf="!hasCameras && hasPermission === true">
+
+      <h1>Looks like your actual device does not has cameras, or I could no find'em. </h1>
+
+    </div>
+
+    <div *ngIf="hasPermission === undefined">
+
+      <h1>Waiting for permissions.</h1>
+
+      <blockquote>
+        <h2>If your device does not has cameras, no permissions will be asked.</h2>
+      </blockquote>
+
+    </div>
+
+    <div *ngIf="hasPermission === false">
+
+      <h1>You denied the camera permissions, we can't scan anything without it. 😪</h1>
+
+    </div>
+  <app-footer></app-footer>
+  <!-- [END] Footer content row -->
+  </div>
+  <!-- [END] Content Container -->
+
+<!-- [BEGIN] Footer Container -->
+<footer class="navbar-default" style="margin-top: 25px;">
+  <div class="container-fluid" style="padding: 5px 0 5px 0;">
+    <div class="text-center">
+      <p style="color: #FFFFFF;"> © {{year}} Created by Brock Tubre.</p>
+    </div>
+  </div>
+</footer>
+<!-- [END] Footer Container -->
+</div>
+<!-- [END] Entire Page Container -->
+
+<bs-modal #myModal>
+  <bs-modal-header [showDismiss]="true">
+      <h4 class="modal-title">Edit Upload</h4>
+  </bs-modal-header>
+  <bs-modal-body>
+      <label>Name</label>
+      <input class="form-control" type="text" value="{{inputFieldVal ? inputFieldVal : null}}" (change)="updateInputVal($event)">
+      <span *ngIf="inputFieldValidationMessage" class="text-danger">{{inputFieldValidationMessage}}</span>
+  </bs-modal-body>
+  <bs-modal-footer>
+      <button class="btn btn-default" type="button" (click)="closeEditModal()"> Cancel </button>
+      <button class="btn btn-primary" type="button" (click)="updateObject()"> Save </button>
+  </bs-modal-footer>
+</bs-modal>
