@@ -49,3 +49,7 @@ a{
   padding-bottom: 500px;
   padding-top: 50px;
 }
+
+.qr-scanner > video {
+  width: 500px !important;
+}

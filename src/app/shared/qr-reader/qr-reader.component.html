@@ -13,38 +13,27 @@
     </div>
 
     <div [hidden]="!hasCameras">
-
-      <zxing-scanner #scanner class="test-class" start="true" [device]="selectedDevice" (scanSuccess)="handleQrCodeResult($event)"></zxing-scanner>
-
-      <h2 *ngIf="!this.selectedDevice">No camera selected.</h2>
-
-      <p>
-        Result:
-        <strong>{{ qrResultString }}</strong>
-      </p>
-
+      <h1 *ngIf="!hasResults" class="text-primary text-center">Please scan QR code...</h1>
+      <div *ngIf="hasResults" class="text-center text-success">
+          <h1>Thank you <strong>{{qrCodeResult.students_first_name}}!</strong></h1>
+          <p>You have been successfully verified.</p>
+      </div>
+      <zxing-scanner #scanner class="qr-scanner text-center" start="true" [device]="selectedDevice" (scanSuccess)="handleQrCodeResult($event)"></zxing-scanner>
+      <!-- <h2 *ngIf="!this.selectedDevice">No camera selected.</h2> -->
     </div>
 
     <div *ngIf="!hasCameras && hasPermission === true">
-
       <h1>Looks like your actual device does not has cameras, or I could no find'em. </h1>
-
     </div>
 
     <div *ngIf="hasPermission === undefined">
-
       <h1>Waiting for permissions.</h1>
-
       <blockquote>
         <h2>If your device does not has cameras, no permissions will be asked.</h2>
       </blockquote>
-
     </div>
-
     <div *ngIf="hasPermission === false">
-
-      <h1>You denied the camera permissions, we can't scan anything without it. 😪</h1>
-
+      <h1>You denied the camera permissions, we can't scan anything without it.</h1>
     </div>
   <app-footer></app-footer>
   <!-- [END] Footer content row -->

@@ -13,5 +13,8 @@ export const environment = {
     redirectUri: 'https://brocktubre.com/callback',
     scope: 'openid profile'
   },
+  apiGateway: {
+    processQrCodeUrl: 'https://dr1yb4vbs0.execute-api.us-east-1.amazonaws.com/integration/process-code/'
+  },
   env: 'prod'
 };

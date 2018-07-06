@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ZXingScannerComponent } from '@zxing/ngx-scanner';
 import { QrReaderService } from './qr-reader.service';
+import { QrCodeObject } from '../models/qr-code-object.model';
 
 
 @Component({
@@ -10,36 +11,27 @@ import { QrReaderService } from './qr-reader.service';
 })
 export class QrReaderComponent implements OnInit {
   public year: number;
+  @ViewChild('scanner') scanner: ZXingScannerComponent;
+  public hasCameras = false;
+  public hasPermission: boolean;
+  public qrResultString: string;
+  public availableDevices: MediaDeviceInfo[];
+  public selectedDevice: MediaDeviceInfo;
+  public qrCodeResult: QrCodeObject;
+  public hasResults: boolean;
+
   constructor(private qrService: QrReaderService) {
     this.year = new Date().getFullYear();
+    this.qrCodeResult = new QrCodeObject();
+    this.hasResults = false;
   }
-
-    @ViewChild('scanner')
-    scanner: ZXingScannerComponent;
-
-    hasCameras = false;
-    hasPermission: boolean;
-    qrResultString: string;
-
-    availableDevices: MediaDeviceInfo[];
-    selectedDevice: MediaDeviceInfo;
 
     ngOnInit(): void {
 
         this.scanner.camerasFound.subscribe((devices: MediaDeviceInfo[]) => {
             this.hasCameras = true;
-
             console.log('Devices: ', devices);
             this.availableDevices = devices;
-
-            // selects the devices's back camera by default
-            // for (const device of devices) {
-            //     if (/back|rear|environment/gi.test(device.label)) {
-            //         this.scanner.changeDevice(device);
-            //         this.selectedDevice = device;
-            //         break;
-            //     }
-            // }
         });
 
         this.scanner.camerasNotFound.subscribe((devices: MediaDeviceInfo[]) => {
@@ -55,9 +47,16 @@ export class QrReaderComponent implements OnInit {
     handleQrCodeResult(resultString: string) {
         this.qrResultString = resultString.slice(0, -1);
         console.log('Result: ', this.qrResultString);
-        this.qrService.processQrCode(this.qrResultString).subscribe((result) => {
-          debugger;
-          console.log(result);
+        this.qrService.processQrCode(this.qrResultString).subscribe((result: QrCodeObject) => {
+          this.qrCodeResult = result;
+          this.hasResults = true;
+          const audio = new Audio();
+          audio.src = '../assets/sounds/mode.wav';
+          audio.load();
+          audio.play();
+          setTimeout(() => {
+            this.hasResults = false;
+          }, 5000);
         });
     }
 
