@@ -21,7 +21,6 @@ export class QrReaderService {
     const processQrCode = this.http.post(processUrl, httpOptions);
 
     processQrCode.subscribe((result) => {
-      debugger;
       sendResult.next(result.toString());
     });
 
