@@ -14,9 +14,12 @@
 
     <div [hidden]="!hasCameras">
       <h1 *ngIf="!hasResults" class="text-primary text-center">Please scan QR code...</h1>
-      <div *ngIf="hasResults" class="text-center text-success">
-          <h1>Thank you <strong>{{qrCodeResult.students_first_name}}!</strong></h1>
-          <p>You have been successfully verified.</p>
+      <div *ngIf="hasResults && qrCodeResult.enabled" class="text-center text-success">
+            <h1>Thank you <strong>{{qrCodeResult.students_first_name}}</strong>!</h1>
+            <h3>You have been successfully been marked present for <strong>{{qrCodeResult.class_date}}</strong> class.</h3>
+      </div>
+      <div *ngIf="hasResults && !qrCodeResult.enabled" class="text-center text-success">
+          <h1>Sorry, this QR code is no longer valid.</h1>
       </div>
       <zxing-scanner #scanner class="qr-scanner text-center" start="true" [device]="selectedDevice" (scanSuccess)="handleQrCodeResult($event)"></zxing-scanner>
       <!-- <h2 *ngIf="!this.selectedDevice">No camera selected.</h2> -->

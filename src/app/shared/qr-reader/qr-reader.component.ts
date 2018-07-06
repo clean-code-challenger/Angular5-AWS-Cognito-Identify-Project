@@ -49,11 +49,9 @@ export class QrReaderComponent implements OnInit {
         console.log('Result: ', this.qrResultString);
         this.qrService.processQrCode(this.qrResultString).subscribe((result: QrCodeObject) => {
           this.qrCodeResult = result;
+          debugger;
           this.hasResults = true;
-          const audio = new Audio();
-          audio.src = '../assets/sounds/mode.wav';
-          audio.load();
-          audio.play();
+          this.playAudio();
           setTimeout(() => {
             this.hasResults = false;
           }, 5000);
@@ -63,6 +61,13 @@ export class QrReaderComponent implements OnInit {
     onDeviceSelectChange(selectedValue: string) {
         console.log('Selection changed: ', selectedValue);
         this.selectedDevice = this.scanner.getDeviceById(selectedValue);
+    }
+
+    public playAudio() {
+        const audio = new Audio();
+        audio.src = '../assets/sounds/mode.wav';
+        audio.load();
+        audio.play();
     }
 
 }
