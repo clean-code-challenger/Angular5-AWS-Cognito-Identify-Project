@@ -11,11 +11,12 @@
         </div>
     </div>
     <hr>
-    <div *ngIf="availableDevices">
+    <div *ngIf="availableDevices" [ngClass]="{ 'padding-bottom-lg': !selectedDevice}">
       <select (change)="onDeviceSelectChange($event.target.value)">
         <option value="" [selected]="!selectedDevice">No Device</option>
         <option *ngFor="let device of availableDevices" [value]="device.deviceId" [selected]="selectedDevice && device.deviceId === selectedDevice.deviceId">{{ device.label }}</option>
       </select>
+      <h1 *ngIf="!selectedDevice" class="text-primary text-center">Please select a scanning device.</h1>
     </div>
 
     <div [hidden]="!hasCameras || !selectedDevice">
@@ -35,10 +36,18 @@
                           'scan-done': hasResults && qrCodeResult.enabled,
                           'scan-error': hasResults && !qrCodeResult.enabled }"></div>
       </div>
+      <div class="row" style="padding-top: 50px;">
+          <div class="form-group col-md-4 col-md-offset-4">
+            <h3>No QR Code?</h3>
+            <input class="form-control" type="text" value="" placeholder="Student ID" #studentID/>
+            <button class="btn btn-primary form-control" style="margin-top: 15px;" (click)="submitStudentId()"> Submit </button>
+            <h5 class="text-danger" *ngIf="inputSubmitMessage"><strong>{{inputSubmitMessage}}</strong></h5>
+          </div>
+        </div>
     </div>
 
     <div *ngIf="!hasCameras && hasPermission === true">
-      <h1>Looks like your actual device does not has cameras, or I could no find'em. </h1>
+      <h1>Looks like your actual device does not has cameras, or I could not find them. </h1>
     </div>
 
     <div *ngIf="hasPermission === undefined" style="padding-top: 200px;">

@@ -23,6 +23,7 @@ import { QrReaderComponent } from './shared/qr-reader/qr-reader.component';
 import { ZXingScannerModule } from '@zxing/ngx-scanner';
 import { HttpClientModule } from '@angular/common/http';
 import { AttendanceComponent } from './shared/qr-reader/attendance/attendance.component';
+import { MomentModule } from 'angular2-moment/moment.module';
 
 
 @NgModule({
@@ -46,7 +47,8 @@ import { AttendanceComponent } from './shared/qr-reader/attendance/attendance.co
     BsModalModule,
     ReactiveFormsModule,
     ZXingScannerModule.forRoot(),
-    HttpClientModule
+    HttpClientModule,
+    MomentModule
   ],
   providers: [
     Title,

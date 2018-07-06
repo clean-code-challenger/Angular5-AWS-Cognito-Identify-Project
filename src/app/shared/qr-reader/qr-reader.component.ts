@@ -1,7 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ZXingScannerComponent } from '@zxing/ngx-scanner';
 import { QrReaderService } from './qr-reader.service';
 import { QrCodeObject } from '../models/qr-code-object.model';
+import * as moment from 'moment';
 
 
 @Component({
@@ -12,6 +13,7 @@ import { QrCodeObject } from '../models/qr-code-object.model';
 export class QrReaderComponent implements OnInit {
   public year: number;
   @ViewChild('scanner') scanner: ZXingScannerComponent;
+  @ViewChild('studentID') studentID: ElementRef;
   public hasCameras = false;
   public hasPermission: boolean;
   public qrResultString: string;
@@ -19,11 +21,13 @@ export class QrReaderComponent implements OnInit {
   public selectedDevice: MediaDeviceInfo;
   public qrCodeResult: QrCodeObject;
   public hasResults: boolean;
+  public inputSubmitMessage: string;
 
   constructor(private qrService: QrReaderService) {
     this.year = new Date().getFullYear();
     this.qrCodeResult = new QrCodeObject();
     this.hasResults = false;
+    this.inputSubmitMessage = null;
   }
 
     ngOnInit(): void {
@@ -71,6 +75,35 @@ export class QrReaderComponent implements OnInit {
         }
         audio.load();
         audio.play();
+    }
+
+    public submitStudentId() {
+      debugger;
+      this.inputSubmitMessage = null;
+      const upperCase = this.studentID.nativeElement.value.toUpperCase().trim();
+      if (!upperCase) {
+        this.inputSubmitMessage = 'Please enter a StudentID.';
+      } else {
+        const d = new Date();
+        d.setHours(d.getHours() - 5);
+        const todaysDateId = moment(d.toISOString()).format('MM-DD-YYYY');
+        const submitKey = todaysDateId + '_' + upperCase + '.png';
+        this.qrService.processQrCode(submitKey).subscribe((result: QrCodeObject) => {
+          if (!result) {
+            this.inputSubmitMessage = 'This is an invalid StudentID.';
+          } else {
+            this.inputSubmitMessage = null;
+            this.studentID.nativeElement.value = null;
+            this.qrCodeResult = result;
+            this.hasResults = true;
+            this.playAudio(this.qrCodeResult.enabled);
+            setTimeout(() => {
+              this.hasResults = false;
+            }, 5000);
+          }
+        });
+      }
+
     }
 
 }
