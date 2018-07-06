@@ -1,161 +1,87 @@
-    <app-navbar></app-navbar>
+  <app-navbar></app-navbar>
 
-    <!-- [BEGIN] Entire Page Container -->
-    <div class="container-fluid background" >
-
-      <!-- [BEGIN] Content Container -->
-        <div class="container">
-          <div class="row">
-            <div class="col-md-12">
-              <strong><h2> <i class="fa fa-cubes"></i>PORTFOLIO <span class="text-primary"></span></h2></strong>
+  <!-- [BEGIN] Entire Page Container -->
+  <div class="container-fluid background" style="padding: 0;">
+    <!-- [BEGIN] Content Container -->
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <strong><h2> <i class="fa fa-cubes"></i>PORTFOLIO <span class="text-primary"></span></h2></strong>
+        </div>
+      </div>
+      <hr>
+      <!-- [BEGIN] Web Applications Section -->
+      <div class="row" style="padding-bottom: 200px;">
+        <div class="col-md-6 col-sm-6 col-xs-12">
+          <div class="well">
+            <div class="card-body">
+              <a class="thumbnail fancybox" rel="ligthbox" href="http://hfservicesshreveport.com">
+                <img class="img-responsive" alt="" src="assets/img/hfservices.jpg" />
+              </a>
+              <h5 class="card-title"><i class="fa fa-car" style="padding-left: 0;"></i> HF Services</h5>
+              <p class="card-text">This is a wordpress website created for HF Services. </p>
+              <a href="http://hfservicesshreveport.com" class="btn btn-primary">View site here <i class="fa fa-chevron-right"></i></a>
             </div>
           </div>
-          <hr>
-
-          <!-- [BEGIN] Web Applications Section -->
-          <div class="row" style="padding-bottom: 200px;">
-            <div class="col-md-6 col-sm-6 col-xs-12">
-                <div class="well">
-                  <div class="card-body">
-                    <a class="thumbnail fancybox" rel="ligthbox" href="http://hfservicesshreveport.com">
-                      <img class="img-responsive" alt="" src="assets/img/hfservices.jpg" />
-                    </a>
-                    <h5 class="card-title"><i class="fa fa-car" style="padding-left: 0;"></i> HF Services</h5>
-                    <p class="card-text">This is a wordpress website created for HF Services. </p>
-                    <a href="http://hfservicesshreveport.com" class="btn btn-primary">View site here <i class="fa fa-chevron-right"></i></a>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6 col-sm-6 col-xs-12">
-                  <div class="well">
-                    <div class="card-body">
-                      <a class="thumbnail fancybox" rel="ligthbox" href="https://orbit-ui.brocktubre.com">
-                        <img class="img-responsive" alt="" src="assets/img/orbit-ui.jpg" />
-                      </a>
-                      <h5 class="card-title"><i class="fa fa-globe" style="padding-left: 0;"></i> Orbit</h5>
-                      <p class="card-text">This is an user interface for viewing tickets in the <a href="https://play.google.com/store/apps/details?id=net.orbit.orbit" >Orbit android application</a>.</p>
-                      <a href="https://orbit-ui.brocktubre.com" class="btn btn-primary">View site here <i class="fa fa-chevron-right"></i></a>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-6 col-sm-6 col-xs-12">
-                    <div class="well">
-                      <div class="card-body">
-                        <a class="thumbnail fancybox" rel="ligthbox" href="assets/img/s3-sandbox-integration.jpg">
-                          <img class="img-responsive" alt="" src="assets/img/s3-sandbox-integration.png" />
-                          <div class='text-right'>
-                              <small class='text-muted'>S3 Store Architecture Diagram</small>
-                          </div> <!-- text-right / end -->
-                        </a>
-                        <h5 class="card-title"><i class="fa fa-hdd-o" style="padding-left: 0;"></i> S3 Store</h5>
-                        <p class="card-text">This is a simple interface to use for uploading objects. It uses AWS services like S3, DynamoDB, & Lambda to read, write, download, & delete objects.</p>
-                        <a href="/s3-sandbox" class="btn btn-primary">Try it now <i class="fa fa-chevron-right"></i></a>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                      <div class="well">
-                        <div class="card-body">
-                          <a class="thumbnail fancybox" rel="ligthbox" href="assets/img/qr-code-generator.jpg">
-                            <img class="img-responsive" alt="" src="assets/img/qr-code-generator.png" />
-                            <div class='text-right'>
-                                <small class='text-muted'>QR Attendance Architecture</small>
-                            </div> <!-- text-right / end -->
-                          </a>
-                          <h5 class="card-title"><i class="fa fa-qrcode" style="padding-left: 0;"></i> QR Attendance</h5>
-                          <p class="card-text">This is an attendance tracker for students in LSUS CSC 440/640 Fall 2018 course. It uses AWS services like S3, DynamoDB, Lambda, API Gateway, & SNS to create and validate QR codes associated with students attendance for class.</p>
-                          <a href="/qr-reader" class="btn btn-primary">Scan QR code <i class="fa fa-chevron-right"></i></a>
-                          <a href="/qr-reader/attendance" class="btn btn-default">See attendance <i class="fa fa-chevron-right"></i></a>
-                        </div>
-                      </div>
-                    </div>
-            <!--<div  class="col-md-4 col-sm-4 col-xs-12">
-              <a href="http://sundowntavern.biz">
-                <div class="thumbnail">
-                  <img class="img-responsive" src="assets/img/sundown.jpg" alt="">
-                    <div class="caption text-center">
-                      <h6><i class="fa fa-glass"></i>Sundown Tavern</h6>
-
-                  </div>
-                </div>
-              </a>
-            </div>-->
-            <!--<div  class="col-md-6 col-sm-6 col-xs-12">
-              <a href="http://watson.latech.edu">
-                <div class="thumbnail">
-                  <img class="img-responsive" src="assets/img/watsonApp.png" alt="">
-                    <div class="caption text-center">
-                      <h6><i class="fa fa-book"></i>Heavy Feather Brewing</h6>
-                  </div>
-                </div>
-              </a>
-            </div>-->
-            <!-- <div  class="col-md-6 col-sm-6 col-xs-12">
-              <a href="http://brocktubre-001-site1.smarterasp.net">
-                <div class="thumbnail">
-                  <img class="img-responsive" src="assets/img/sdcApp.png" alt="">
-                    <div class="caption text-center">
-                      <h6><i class="fa fa-database"></i>Squirrel Dog Central</h6>
-                  </div>
-                </div>
-              </a>
-            </div> -->
-            <!-- <div  class="col-md-6 col-sm-6 col-xs-12">
-              <a href="http://shoshoniapparel.com">
-                <div class="thumbnail">
-                  <img class="img-responsive" src="assets/img/shoshoniPage.png" alt="">
-                    <div class="caption text-center">
-                      <h6><i class="fa fa-photo"></i>Shoshoni Apperal</h6>
-                  </div>
-                </div>
-              </div>
-          </a>
-          </div>-->
-            <!--<div  class="col-md-4 col-sm-4 col-xs-12">
-              <a href="http://heavyfeatherbrewing.brocktubre.com">
-                <div class="thumbnail">
-                  <img class="img-responsive" src="assets/img/heavyfeatherApp.png" alt="">
-                    <div class="caption text-center">
-                      <h6><i class="fa fa-beer"></i>Heavy Feather Brewing</h6>
-                  </div>
-                </div>
-              </a>
-            </div>-->
-            <!-- <div  class="col-md-6 col-sm-6 col-xs-12">
-              <a href="http://brocktubre.com/bayou">
-                <div class="thumbnail">
-                  <img class="img-responsive" src="assets/img/bayou.png" alt="">
-                    <div class="caption text-center">
-                      <h6><i class="fa fa-paw"></i>Bayou Hickory Squirrel Dogs</h6>
-                  </div>
-                </div>
-              </a>
-            </div> -->
-            <!-- <div  class="col-md-6 col-sm-6 col-xs-12">
-              <a href="http://info.fieldsight.com">
-                <div class="thumbnail">
-                  <img class="img-responsive" src="assets/img/fieldsight.png" alt="">
-                    <div class="caption text-center">
-                      <h6><i class="fa fa-building"></i>Field Sight</h6>
-                    </div>
-                </div>
-              </a>
-            </div> -->
         </div>
-          <!-- [END] Web Applications Section -->
-          <!-- [BEGIN] row -->
-          <app-footer></app-footer>
-          <!-- [END] Footer content row -->
-        </div>
-      <!-- [END] Content Container -->
-
-      <!-- [BEGIN] Footer Container -->
-      <footer class="navbar-default" style="margin-top: 25px;">
-        <div class="container-fluid" style="padding: 5px 0 5px 0;">
-          <div class="text-center">
-            <p style="color: #FFFFFF;"> © {{year}} Created by Brock Tubre.</p>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+          <div class="well">
+            <div class="card-body">
+              <a class="thumbnail fancybox" rel="ligthbox" href="https://orbit-ui.brocktubre.com">
+                <img class="img-responsive" alt="" src="assets/img/orbit-ui.jpg" />
+              </a>
+              <h5 class="card-title"><i class="fa fa-globe" style="padding-left: 0;"></i> Orbit</h5>
+              <p class="card-text">This is an user interface for viewing tickets in the <a href="https://play.google.com/store/apps/details?id=net.orbit.orbit" >Orbit android application</a>.</p>
+              <a href="https://orbit-ui.brocktubre.com" class="btn btn-primary">View site here <i class="fa fa-chevron-right"></i></a>
+            </div>
           </div>
         </div>
-      </footer>
-      <!-- [END] Footer Container -->
+        <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="well">
+              <div class="card-body">
+                <a class="thumbnail fancybox" rel="ligthbox" href="assets/img/s3-sandbox-integration.jpg">
+                  <img class="img-responsive" alt="" src="assets/img/s3-sandbox-integration.png" />
+                  <div class='text-right'>
+                      <small class='text-muted'>S3 Store Architecture Diagram</small>
+                  </div> <!-- text-right / end -->
+                </a>
+                <h5 class="card-title"><i class="fa fa-hdd-o" style="padding-left: 0;"></i> S3 Store</h5>
+                <p class="card-text">This is a simple interface to use for uploading objects. It uses AWS services like S3, DynamoDB, & Lambda to read, write, download, & delete objects.</p>
+                <a href="/s3-sandbox" class="btn btn-primary">Try it now <i class="fa fa-chevron-right"></i></a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="well">
+              <div class="card-body">
+                <a class="thumbnail fancybox" rel="ligthbox" href="assets/img/qr-code-generator.jpg">
+                  <img class="img-responsive" alt="" src="assets/img/qr-code-generator.png" />
+                  <div class='text-right'>
+                      <small class='text-muted'>QR Attendance Architecture</small>
+                  </div> <!-- text-right / end -->
+                </a>
+                <h5 class="card-title"><i class="fa fa-qrcode" style="padding-left: 0;"></i> QR Attendance</h5>
+                <p class="card-text">This is an attendance tracker for students in LSUS CSC 440/640 Fall 2018 course. It uses AWS services like S3, DynamoDB, Lambda, API Gateway, & SNS to create and validate QR codes associated with students attendance for class.</p>
+                <a href="/qr-reader" class="btn btn-primary">Scan QR code <i class="fa fa-chevron-right"></i></a>
+                <a href="/qr-reader/attendance" class="btn btn-default">See attendance <i class="fa fa-chevron-right"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      <!-- [END] Web Applications Section -->
+      <!-- [BEGIN] row -->
+      <app-footer></app-footer>
+      <!-- [END] Footer content row -->
     </div>
+    <!-- [END] Content Container -->
+
+    <!-- [BEGIN] Footer Container -->
+    <footer class="navbar-default" style="margin-top: 25px;">
+      <div class="container-fluid" style="padding: 5px 0 5px 0;">
+        <div class="text-center">
+          <p style="color: #FFFFFF;"> © {{year}} Created by Brock Tubre.</p>
+        </div>
+      </div>
+    </footer>
+    <!-- [END] Footer Container -->
+</div>
