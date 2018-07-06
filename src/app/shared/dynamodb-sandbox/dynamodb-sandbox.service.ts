@@ -6,6 +6,8 @@ import { Subject } from 'rxjs/Subject';
 import * as AWS from 'aws-sdk';
 import { DynamodbS3ObjectModel } from '../models/dynamodb-s3-object.modal';
 import { AuthService } from '../auth/auth.service';
+import { QrCodeObject } from '../models/qr-code-object.model';
+import { Moment } from 'moment';
 
 @Injectable()
 export class DynamodbSandboxService {
@@ -65,6 +67,30 @@ export class DynamodbSandboxService {
         sendResult.next(data);
        }
       });
+    return sendResult.asObservable();
+  }
+
+  public getAttendanceFromDynamoDb(tableName: string): Observable<Array<QrCodeObject>> {
+    const sendResult = new Subject<Array<QrCodeObject>>();
+    const d = new Date();
+    d.setHours(d.getHours() - 5);
+    const readDate = d.toDateString();
+
+    const params = {
+      TableName: tableName,
+      ExpressionAttributeValues: {
+        ':date': readDate
+       },
+       FilterExpression: 'class_date IN (:date)',
+    };
+
+    this.docClient.scan(params, function(err, data) {
+      if (err) {
+        sendResult.error(err);
+      }else {
+        sendResult.next(data.Items);
+      }
+    });
     return sendResult.asObservable();
   }
 }

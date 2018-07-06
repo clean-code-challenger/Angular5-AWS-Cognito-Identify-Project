@@ -19,7 +19,7 @@ export class QrReaderService {
     const httpOptions = {
       headers: headers
     };
-    let processUrl = environment.apiGateway.processQrCodeUrl;
+    let processUrl = environment.qrReader.apiGateway.processQrCodeUrl;
     processUrl += qrCode;
     const processQrCode = this.http.post(processUrl, httpOptions);
     processQrCode.subscribe((result: any) => {
@@ -28,5 +28,4 @@ export class QrReaderService {
 
     return sendResult.asObservable();
   }
-
 }

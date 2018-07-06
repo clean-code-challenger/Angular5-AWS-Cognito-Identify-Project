@@ -1,0 +1,73 @@
+<app-navbar></app-navbar>
+
+<!-- [BEGIN] Entire Page Container -->
+<div class="container-fluid background" style="padding: 0;" >
+  <!-- [BEGIN] Content Container -->
+  <div class="container">
+      <div class="row">
+          <div class="col-md-12">
+              <strong><h2> <i class="fa fa-id-card-o"></i>{{readDate}} <span class="text-primary"> ATTENDANCE</span></h2></strong>
+          </div>
+        </div>
+        <hr>
+      <div *ngIf="!loadingAttendance && attendanceList.length > 0" class="container" style="min-height: 700px;">
+          <table class="table table-striped table-condensed">
+              <thead>
+              <tr>
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                  <th>Present</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let a of attendanceList">
+                  <td>
+                      {{a.students_first_name}}
+                  </td>
+                  <td>
+                      {{a.students_last_name}}
+                  </td>
+                  <td>
+                      <i *ngIf="a.validated" class="fa fa-check" style="color: #3fb618"></i>
+                  </td>
+              </tr>
+          </tbody>
+          </table>
+      </div>
+      <div *ngIf="!loadingAttendance && attendanceList.length <= 0"  class="container text-center" style="min-height: 700px;">
+          <span class="alert alert-danger col-md-12">No QR created for any classes today.</span>
+      </div>
+      <div *ngIf="loadingAttendance"  class="container text-center" style="min-height: 700px;">
+          <i class="fa fa-circle-o-notch fa-spin" style="font-size:50px"></i>
+      </div>
+  <app-footer></app-footer>
+  <!-- [END] Footer content row -->
+  </div>
+  <!-- [END] Content Container -->
+
+<!-- [BEGIN] Footer Container -->
+<footer class="navbar-default" style="margin-top: 25px;">
+  <div class="container-fluid" style="padding: 5px 0 5px 0;">
+    <div class="text-center">
+      <p style="color: #FFFFFF;"> © {{year}} Created by Brock Tubre.</p>
+    </div>
+  </div>
+</footer>
+<!-- [END] Footer Container -->
+</div>
+<!-- [END] Entire Page Container -->
+
+<bs-modal #myModal>
+  <bs-modal-header [showDismiss]="true">
+      <h4 class="modal-title">Edit Upload</h4>
+  </bs-modal-header>
+  <bs-modal-body>
+      <label>Name</label>
+      <input class="form-control" type="text" value="{{inputFieldVal ? inputFieldVal : null}}" (change)="updateInputVal($event)">
+      <span *ngIf="inputFieldValidationMessage" class="text-danger">{{inputFieldValidationMessage}}</span>
+  </bs-modal-body>
+  <bs-modal-footer>
+      <button class="btn btn-default" type="button" (click)="closeEditModal()"> Cancel </button>
+      <button class="btn btn-primary" type="button" (click)="updateObject()"> Save </button>
+  </bs-modal-footer>
+</bs-modal>

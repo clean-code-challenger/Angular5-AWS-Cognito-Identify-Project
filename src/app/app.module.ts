@@ -22,6 +22,7 @@ import { CallbackComponent } from './shared/callback/callback.component';
 import { QrReaderComponent } from './shared/qr-reader/qr-reader.component';
 import { ZXingScannerModule } from '@zxing/ngx-scanner';
 import { HttpClientModule } from '@angular/common/http';
+import { AttendanceComponent } from './shared/qr-reader/attendance/attendance.component';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { HttpClientModule } from '@angular/common/http';
     S3SandboxComponent,
     ValidationMessagesComponent,
     CallbackComponent,
-    QrReaderComponent
+    QrReaderComponent,
+    AttendanceComponent
 
   ],
   imports: [

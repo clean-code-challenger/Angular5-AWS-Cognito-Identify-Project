@@ -9,6 +9,7 @@ import { S3SandboxComponent } from './shared/s3-sandbox/s3-sandbox.component';
 import { AuthGuardService } from './shared/auth/auth-guard.service';
 import { AuthGuardService as AuthGuard } from './shared/auth/auth-guard.service';
 import { CallbackComponent } from './shared/callback/callback.component';
+import { AttendanceComponent } from './shared/qr-reader/attendance/attendance.component';
 
 // Route Configuration
 export const routes: Routes = [
@@ -19,6 +20,7 @@ export const routes: Routes = [
     { path: 'callback', component: CallbackComponent },
     { path: 's3-sandbox', component: S3SandboxComponent, canActivate: [AuthGuard] },
     { path: 'qr-reader', component: QrReaderComponent, canActivate: [AuthGuard] },
+    { path: 'qr-reader/attendance', component: AttendanceComponent, canActivate: [AuthGuard] },
     { path: '**', redirectTo: '' }
 ];
 
