@@ -51,5 +51,6 @@ a{
 }
 
 .qr-scanner > video {
-  width: 500px !important;
+  width: 400px !important;
+  visibility: hidden;
 }
