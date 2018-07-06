@@ -22,9 +22,8 @@ export class QrReaderService {
     let processUrl = environment.apiGateway.processQrCodeUrl;
     processUrl += qrCode;
     const processQrCode = this.http.post(processUrl, httpOptions);
-
     processQrCode.subscribe((result: any) => {
-      sendResult.next(result.Attributes);
+        sendResult.next(result);
     });
 
     return sendResult.asObservable();

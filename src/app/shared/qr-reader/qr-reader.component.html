@@ -5,6 +5,12 @@
 <div class="container-fluid background" style="padding: 0;" >
   <!-- [BEGIN] Content Container -->
   <div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <strong><h2> <i class="fa fa-qrcode"></i>QR <span class="text-primary"> SCANNER</span></h2></strong>
+        </div>
+    </div>
+    <hr>
     <div *ngIf="availableDevices">
       <select (change)="onDeviceSelectChange($event.target.value)">
         <option value="" [selected]="!selectedDevice">No Device</option>
@@ -18,11 +24,17 @@
             <h1>Thank you <strong>{{qrCodeResult.students_first_name}}</strong>!</h1>
             <h3>You have been successfully been marked present for <strong>{{qrCodeResult.class_date}}</strong> class.</h3>
       </div>
-      <div *ngIf="hasResults && !qrCodeResult.enabled" class="text-center text-success">
+      <div *ngIf="hasResults && !qrCodeResult.enabled" class="text-center text-danger">
           <h1>Sorry, this QR code is no longer valid.</h1>
       </div>
       <zxing-scanner #scanner class="qr-scanner text-center" start="true" [device]="selectedDevice" (scanSuccess)="handleQrCodeResult($event)"></zxing-scanner>
       <!-- <h2 *ngIf="!this.selectedDevice">No camera selected.</h2> -->
+      <div class="row">
+        <div class="center-block well"
+              [ngClass]="{'scan-color': !hasResults,
+                          'scan-done': hasResults && qrCodeResult.enabled,
+                          'scan-error': hasResults && !qrCodeResult.enabled }"></div>
+      </div>
     </div>
 
     <div *ngIf="!hasCameras && hasPermission === true">

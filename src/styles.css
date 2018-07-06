@@ -51,6 +51,39 @@ a{
 }
 
 .qr-scanner > video {
-  width: 400px !important;
+  width: 0 !important;
   visibility: hidden;
+}
+
+.scan-color {
+  height: 200px;
+  width: 200px;
+  background-color: #222;
+  animation-name: color;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes color {
+  0% {
+    background-color: #222;
+  }
+  50% {
+    background-color: #4285f4;
+  }
+  100% {
+    background-color: #222;
+  }
+}
+
+.scan-done {
+  height: 200px;
+  width: 200px;
+  background-color: #3fb618;
+}
+
+.scan-error {
+  height: 200px;
+  width: 200px;
+  background-color: #ff0039;
 }

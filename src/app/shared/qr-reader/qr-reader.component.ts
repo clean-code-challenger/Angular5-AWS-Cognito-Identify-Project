@@ -49,7 +49,6 @@ export class QrReaderComponent implements OnInit {
         console.log('Result: ', this.qrResultString);
         this.qrService.processQrCode(this.qrResultString).subscribe((result: QrCodeObject) => {
           this.qrCodeResult = result;
-          debugger;
           this.hasResults = true;
           this.playAudio();
           setTimeout(() => {
