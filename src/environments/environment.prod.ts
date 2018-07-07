@@ -14,6 +14,9 @@ export const environment = {
     scope: 'openid profile'
   },
   qrReader: {
+    s3: {
+      qrCodeCaptureBucket: 'qr-code-capture'
+    },
     apiGateway: {
       processQrCodeUrl: 'https://dr1yb4vbs0.execute-api.us-east-1.amazonaws.com/integration/process-code/'
     },
