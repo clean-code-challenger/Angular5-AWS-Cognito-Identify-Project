@@ -56,18 +56,3 @@
 <!-- [END] Footer Container -->
 </div>
 <!-- [END] Entire Page Container -->
-
-<bs-modal #myModal>
-  <bs-modal-header [showDismiss]="true">
-      <h4 class="modal-title">Edit Upload</h4>
-  </bs-modal-header>
-  <bs-modal-body>
-      <label>Name</label>
-      <input class="form-control" type="text" value="{{inputFieldVal ? inputFieldVal : null}}" (change)="updateInputVal($event)">
-      <span *ngIf="inputFieldValidationMessage" class="text-danger">{{inputFieldValidationMessage}}</span>
-  </bs-modal-body>
-  <bs-modal-footer>
-      <button class="btn btn-default" type="button" (click)="closeEditModal()"> Cancel </button>
-      <button class="btn btn-primary" type="button" (click)="updateObject()"> Save </button>
-  </bs-modal-footer>
-</bs-modal>
