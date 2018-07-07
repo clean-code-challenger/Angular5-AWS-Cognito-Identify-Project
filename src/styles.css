@@ -91,3 +91,8 @@ a{
 .padding-bottom-lg {
   padding-bottom: 500px;
 }
+
+#video, #canvas {
+  visibility: hidden;
+  height: 0px;
+}

@@ -1,4 +1,6 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { environment } from './../../../environments/environment';
+import { S3SandboxService } from './../s3-sandbox/s3-sandbox.service';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { ZXingScannerComponent } from '@zxing/ngx-scanner';
 import { QrReaderService } from './qr-reader.service';
 import { QrCodeObject } from '../models/qr-code-object.model';
@@ -10,7 +12,7 @@ import * as moment from 'moment';
   templateUrl: './qr-reader.component.html',
   styleUrls: ['./qr-reader.component.css']
 })
-export class QrReaderComponent implements OnInit {
+export class QrReaderComponent implements OnInit, AfterViewInit {
   public year: number;
   @ViewChild('scanner') scanner: ZXingScannerComponent;
   @ViewChild('studentID') studentID: ElementRef;
@@ -23,7 +25,11 @@ export class QrReaderComponent implements OnInit {
   public hasResults: boolean;
   public inputSubmitMessage: string;
 
-  constructor(private qrService: QrReaderService) {
+  @ViewChild('video') public video: ElementRef;
+  @ViewChild('canvas') public canvas: ElementRef;
+
+
+  constructor(private qrService: QrReaderService, private s3SandboxService: S3SandboxService) {
     this.year = new Date().getFullYear();
     this.qrCodeResult = new QrCodeObject();
     this.hasResults = false;
@@ -31,24 +37,37 @@ export class QrReaderComponent implements OnInit {
   }
 
     ngOnInit(): void {
-
         this.scanner.camerasFound.subscribe((devices: MediaDeviceInfo[]) => {
             this.hasCameras = true;
             console.log('Devices: ', devices);
             this.availableDevices = devices;
         });
-
         this.scanner.camerasNotFound.subscribe((devices: MediaDeviceInfo[]) => {
             console.error('An error has occurred when trying to enumerate your video-stream-enabled devices.');
         });
-
         this.scanner.permissionResponse.subscribe((answer: boolean) => {
           this.hasPermission = answer;
         });
 
     }
 
+    public ngAfterViewInit() {
+      if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+          navigator.mediaDevices.getUserMedia({ video: true }).then(stream => {
+              this.video.nativeElement.src = window.URL.createObjectURL(stream);
+              this.video.nativeElement.play();
+          });
+      }
+  }
+
+    public capture() {
+      const context = this.canvas.nativeElement.getContext('2d').drawImage(this.video.nativeElement, 0, 0, 640, 480);
+      const capture = this.canvas.nativeElement.toDataURL('image/png');
+      return capture;
+    }
+
     handleQrCodeResult(resultString: string) {
+        const imgCapture = this.capture();
         this.inputSubmitMessage = null;
         this.qrResultString = resultString.slice(0, -1);
         console.log('Result: ', this.qrResultString);
@@ -56,6 +75,7 @@ export class QrReaderComponent implements OnInit {
           this.qrCodeResult = result;
           this.hasResults = true;
           this.playAudio(this.qrCodeResult.enabled);
+          this.s3SandboxService.uploadCaptureImage(environment.qrReader.s3.qrCodeCaptureBucket, imgCapture, this.qrCodeResult).subscribe();
           setTimeout(() => {
             this.hasResults = false;
           }, 5000);
@@ -79,7 +99,7 @@ export class QrReaderComponent implements OnInit {
     }
 
     public submitStudentId() {
-      debugger;
+      const imgCapture = this.capture();
       this.inputSubmitMessage = null;
       const upperCase = this.studentID.nativeElement.value.toUpperCase().trim();
       if (!upperCase) {
@@ -98,6 +118,9 @@ export class QrReaderComponent implements OnInit {
             this.qrCodeResult = result;
             this.hasResults = true;
             this.playAudio(this.qrCodeResult.enabled);
+            this.s3SandboxService.uploadCaptureImage( environment.qrReader.s3.qrCodeCaptureBucket,
+                                                      imgCapture,
+                                                      this.qrCodeResult).subscribe();
             setTimeout(() => {
               this.hasResults = false;
             }, 5000);

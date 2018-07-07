@@ -9,6 +9,7 @@ import 'rxjs/add/observable/of';
 import { Subject } from 'rxjs/Subject';
 import { v4 as uuid } from 'uuid';
 import { AuthService } from '../auth/auth.service';
+import { QrCodeObject } from '../models/qr-code-object.model';
 
 @Injectable()
 export class S3SandboxService {
@@ -102,6 +103,29 @@ export class S3SandboxService {
           // do something with data.Body
         }
       });
+    return sendResult.asObservable();
+  }
+
+  public uploadCaptureImage(bucketName: string, object: any, result: QrCodeObject): Observable<Array<S3ObjectModel>> {
+    const sendResult = new Subject<Array<S3ObjectModel>>();
+
+    const buf = new Buffer(object.replace(/^data:image\/\w+;base64,/, ''), 'base64');
+    const params = {
+      ACL: 'authenticated-read',
+      Body: buf,
+      Bucket: bucketName,
+      Key: result.object_name,
+      ContentEncoding: 'base64',
+      ContentType: 'image/png'
+    };
+
+    this.s3.putObject(params, function(err, data) {
+      if (err) {
+        sendResult.error(err);
+      }else {
+        sendResult.next(data.Contents);
+      }
+    });
     return sendResult.asObservable();
   }
 
