@@ -1,8 +1,9 @@
+import { S3SandboxService } from './../../s3-sandbox/s3-sandbox.service';
 import { DynamodbSandboxService } from './../../dynamodb-sandbox/dynamodb-sandbox.service';
-import { QrReaderService } from './../qr-reader.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { QrCodeObject } from '../../models/qr-code-object.model';
+import * as FileSaver from 'file-saver';
 
 @Component({
   selector: 'app-attendance',
@@ -16,8 +17,10 @@ export class AttendanceComponent implements OnInit {
   public tableName: string;
   public year: number;
   public readDate: string;
+  private IMG_CAPTURE_BUCKET = 'qr-code-capture';
 
-  constructor(private dynamodbSandboxService: DynamodbSandboxService) {
+  constructor(private dynamodbSandboxService: DynamodbSandboxService,
+              private s3SandboxService: S3SandboxService) {
     this.attendanceList = new Array<QrCodeObject>();
     this.loadingAttendance = true;
     this.tableName = environment.qrReader.dynamoDb.tableName;
@@ -37,6 +40,13 @@ export class AttendanceComponent implements OnInit {
     this.dynamodbSandboxService.getAttendanceFromDynamoDb(this.tableName).subscribe(items => {
       this.attendanceList = items;
       this.loadingAttendance = false;
+    });
+  }
+
+  public getImageSnap(a: any) {
+    this.s3SandboxService.getObjectFromS3(this.IMG_CAPTURE_BUCKET, a.object_name).subscribe(item => {
+      const blob = new Blob([item.Body], { type: item.ContentType });
+      FileSaver.saveAs(blob, a.object_name);
     });
   }
 

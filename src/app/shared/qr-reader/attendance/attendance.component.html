@@ -17,6 +17,7 @@
                   <th>First Name</th>
                   <th>Last Name</th>
                   <th>Present</th>
+                  <th></th>
               </tr>
           </thead>
           <tbody>
@@ -29,6 +30,9 @@
                   </td>
                   <td>
                       <i *ngIf="a.validated" class="fa fa-check" style="color: #3fb618"></i>
+                  </td>
+                  <td>
+                      <i *ngIf="a.validated" (click)="getImageSnap(a);" class="fa fa-image fa-bt-link"></i>
                   </td>
               </tr>
           </tbody>

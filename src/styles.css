@@ -96,3 +96,7 @@ a{
   visibility: hidden;
   height: 0px;
 }
+
+.fa-bt-link {
+  cursor: pointer;
+}
