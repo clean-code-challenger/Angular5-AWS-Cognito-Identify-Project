@@ -28,10 +28,13 @@ export class AttendanceComponent implements OnInit {
     const d = new Date();
     d.setHours(d.getHours() - 5);
     this.readDate = d.toDateString();
+    setInterval(() => {
+      this.loadAttendance();
+    }, 10000);
   }
 
   ngOnInit() {
-      this.loadAttendance();
+    this.loadAttendance();
   }
 
   public loadAttendance() {
