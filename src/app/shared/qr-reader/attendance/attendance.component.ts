@@ -31,9 +31,7 @@ export class AttendanceComponent implements OnInit {
   }
 
   ngOnInit() {
-    setInterval(() => {
       this.loadAttendance();
-    }, 10000);
   }
 
   public loadAttendance() {
