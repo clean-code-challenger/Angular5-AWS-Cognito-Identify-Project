@@ -1,17 +1,19 @@
+import { Observable } from 'rxjs/Observable';
 import { environment } from './../../../environments/environment';
 import { S3SandboxService } from './../s3-sandbox/s3-sandbox.service';
-import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, OnChanges, SimpleChanges } from '@angular/core';
 import { ZXingScannerComponent } from '@zxing/ngx-scanner';
 import { QrReaderService } from './qr-reader.service';
 import { QrCodeObject } from '../models/qr-code-object.model';
 import * as moment from 'moment';
+import { Subject } from '../../../../node_modules/rxjs/Subject';
 
 @Component({
   selector: 'app-qr-reader',
   templateUrl: './qr-reader.component.html',
   styleUrls: ['./qr-reader.component.css']
 })
-export class QrReaderComponent implements OnInit, AfterViewInit {
+export class QrReaderComponent implements OnInit {
 
   public year: number;
   @ViewChild('studentID') studentID: ElementRef;
@@ -47,23 +49,52 @@ export class QrReaderComponent implements OnInit, AfterViewInit {
 
     }
 
+    // ngOnChanges(changes: SimpleChanges) {
+    //   if (changes.input) {
+    //     console.log(this.studentID.nativeElement.value);
+    //   }
+    // }
+
     public getUSBDevices() {
       this.scannerFound = true;
+      let device: any;
       let newVariable: any;
-        newVariable = window.navigator;
-        newVariable.usb.requestDevice({filters: []}).then(function(device){
-          const openPromise = device.open();
-          openPromise.then(function(){
-              const transferPromise = device.transferIn(1, 6);
-              transferPromise.then(function(data) {
-                this.handleQrCodeResult(data);
-                debugger;
-              });
-          });
-       });
+      newVariable = window.navigator;
+      newVariable.usb.requestDevice( { filters: [{ vendorId: 0x2DD6 }] } )
+        .then(selectedDevice => {
+          device = selectedDevice;
+          //  const num = device.configuration.interfaces[0].interfaceNumber;
+          return device.open(); // Begin a session.
+        })
+        // .then(() => device.selectConfiguration(1)) // Select configuration #1 for the device.
+        // .then(() =>
+        //   device.claimInterface(1) // Request exclusive control over interface #2.
+        // .then(() => device.controlTransferOut({
+        //     requestType: 'class',
+        //     recipient: 'endpoint',
+        //     request: 0x22,
+        //     value: 0x01,
+        //     index: 0x02})
+        // ) // Ready to receive data
+        // .then(() => device.transferIn(1, 64)) // Waiting for 64 bytes of data from endpoint #5.
+        // .then(result => {
+        //   console.log(result);
+        //   // const decoder = new TextDecoder();
+        //   // console.log('Received: ' + decoder.decode(result.data));
+        //   debugger;
+        // })
+        .catch(error => {
+          console.log(error);
+        });
     }
 
-    public ngAfterViewInit() {
+    public checkStudentId(event) {
+      const resultString = this.studentID.nativeElement.value;
+      if (resultString.indexOf('!') > -1) {
+        this.handleQrCodeResult(resultString);
+        this.studentID.nativeElement.value = null;
+        this.studentID.nativeElement.focus();
+      }
     }
 
     public capture() {
@@ -85,6 +116,7 @@ export class QrReaderComponent implements OnInit, AfterViewInit {
           // .subscribe();
           setTimeout(() => {
             this.hasResults = false;
+            this.studentID.nativeElement.focus();
           }, 5000);
         });
     }
@@ -106,6 +138,7 @@ export class QrReaderComponent implements OnInit, AfterViewInit {
     }
 
     public submitStudentId() {
+      debugger;
       // const imgCapture = this.capture();
       this.inputSubmitMessage = null;
       const upperCase = this.studentID.nativeElement.value.toUpperCase().trim();
@@ -121,6 +154,7 @@ export class QrReaderComponent implements OnInit, AfterViewInit {
             this.inputSubmitMessage = 'This is an invalid StudentID.';
           } else {
             this.inputSubmitMessage = null;
+            this.studentID.nativeElement.focus();
             this.studentID.nativeElement.value = null;
             this.qrCodeResult = result;
             this.hasResults = true;
@@ -130,6 +164,7 @@ export class QrReaderComponent implements OnInit, AfterViewInit {
             //                                           this.qrCodeResult).subscribe();
             setTimeout(() => {
               this.hasResults = false;
+              this.studentID.nativeElement.focus();
             }, 5000);
           }
         });
