@@ -13,7 +13,7 @@
     <hr>
     <div *ngIf="!scannerFound">
       <button class="btn btn-default" (click)="getUSBDevices()"> Get QR Scanner </button>
-      <div class="col-md-12" style="padding-bottom: 500px;"></div>
+      <div class="col-md-12" style="padding-bottom: 400px;"></div>
     </div>
     <div *ngIf="scannerFound">
       <h1 *ngIf="!hasResults" class="text-primary text-center">Scan QR code.</h1>

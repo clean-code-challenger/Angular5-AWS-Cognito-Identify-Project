@@ -1,4 +1,5 @@
 import { Observable } from 'rxjs/Observable';
+import { interval } from 'rxjs/observable/interval';
 import { environment } from './../../../environments/environment';
 import { S3SandboxService } from './../s3-sandbox/s3-sandbox.service';
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, OnChanges, SimpleChanges } from '@angular/core';
@@ -13,7 +14,7 @@ import { Subject } from '../../../../node_modules/rxjs/Subject';
   templateUrl: './qr-reader.component.html',
   styleUrls: ['./qr-reader.component.css']
 })
-export class QrReaderComponent implements OnInit {
+export class QrReaderComponent implements OnInit, AfterViewInit {
 
   public year: number;
   @ViewChild('studentID') studentID: ElementRef;
@@ -55,7 +56,13 @@ export class QrReaderComponent implements OnInit {
     //   }
     // }
 
+    ngAfterViewInit() {
+    }
+
     public getUSBDevices() {
+      interval(500).subscribe(x => {
+        this.studentID.nativeElement.focus();
+      });
       this.scannerFound = true;
       let device: any;
       let newVariable: any;
@@ -97,11 +104,11 @@ export class QrReaderComponent implements OnInit {
       }
     }
 
-    public capture() {
-      // const context = this.canvas.nativeElement.getContext('2d').drawImage(this.video.nativeElement, 0, 0, 640, 480);
-      // const capture = this.canvas.nativeElement.toDataURL('image/png');
-      // return capture;
-    }
+    // public capture() {
+    //   // const context = this.canvas.nativeElement.getContext('2d').drawImage(this.video.nativeElement, 0, 0, 640, 480);
+    //   // const capture = this.canvas.nativeElement.toDataURL('image/png');
+    //   // return capture;
+    // }
 
     handleQrCodeResult(resultString: string) {
         // const imgCapture = this.capture();
