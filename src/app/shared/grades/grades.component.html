@@ -38,31 +38,34 @@
                   </td>
                   <td>
                       <!-- <i *ngIf="a.validated" class="fa fa-check" style="color: #3fb618"></i> -->
-                      {{a.assignment_1_1}}
+                      {{formatGrade(a.assignment_1_1)}}
                   </td>
                   <td>
-                    {{a.assignment_1_2}}
+                    {{formatGrade(a.assignment_1_2)}}
                   </td>
                   <td>
-                    {{a.assignment_1_3}}
+                    {{formatGrade(a.assignment_1_3)}}
                   </td>
                   <td>
-                    {{a.assignment_2_1}}
+                    {{formatGrade(a.assignment_2_1)}}
                   </td>
                   <td>
-                    {{a.assignment_2_2}}
+                    {{formatGrade(a.assignment_2_2)}}
                   </td>
                   <td>
-                    {{a.assignment_2_3}}
+                    {{formatGrade(a.assignment_2_3)}}
                   </td>
                   <td>
-                    {{a.midterm}}
+                    {{formatGrade(a.midterm)}}
                   </td>
                   <td>
-                    {{a.graduate_presentation}}
+                    {{formatGrade(a.graduate_presentation)}}
                   </td>
                   <td>
-                    {{a.assignment_final}}
+                    {{formatGrade(a.assignment_final)}}
+                  </td>
+                  <td>
+                    {{formatGrade(finalGrade)}}
                   </td>
               </tr>
           </tbody>

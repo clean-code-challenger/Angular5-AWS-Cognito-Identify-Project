@@ -15,6 +15,7 @@ export class GradesComponent implements OnInit {
   public tableName: string;
   public year: number;
   public readDate: string;
+  public finalGrade: string;
 
   constructor(private dynamodbSandboxService: DynamodbSandboxService) {
     this.gradesList = new Array<GradesObjectModel>();
@@ -35,6 +36,14 @@ export class GradesComponent implements OnInit {
       this.gradesList = items;
       this.loadingGrades = false;
     });
+  }
+
+  public formatGrade(input: number) {
+    if (input === -1) {
+      return '';
+    } else {
+      return input;
+    }
   }
 
 }
