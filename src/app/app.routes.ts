@@ -23,6 +23,7 @@ export const routes: Routes = [
     { path: 'qr-reader', component: QrReaderComponent, canActivate: [AuthGuard] },
     { path: 'qr-reader/attendance', component: AttendanceComponent, canActivate: [AuthGuard] },
     { path: 'grades', component: GradesComponent, canActivate: [AuthGuard] },
+    { path: 'grades/:id', component: GradesComponent, canActivate: [AuthGuard] },
     { path: '**', redirectTo: '' }
 ];
 

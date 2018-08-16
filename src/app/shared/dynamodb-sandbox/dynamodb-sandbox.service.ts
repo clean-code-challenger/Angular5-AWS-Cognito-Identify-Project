@@ -111,4 +111,24 @@ export class DynamodbSandboxService {
     });
     return sendResult.asObservable();
   }
+  public getGradesFromDynamoDBBySecretId(tableName: string, secretId: string) {
+    const sendResult = new Subject<Array<GradesObjectModel>>();
+
+    const params = {
+      TableName: tableName,
+      ExpressionAttributeValues: {
+        ':secret_id': secretId
+       },
+       FilterExpression: 'secret_id IN (:secret_id)',
+    };
+
+    this.docClient.scan(params, function(err, data) {
+      if (err) {
+        sendResult.error(err);
+      }else {
+        sendResult.next(data.Items);
+      }
+    });
+    return sendResult.asObservable();
+  }
 }

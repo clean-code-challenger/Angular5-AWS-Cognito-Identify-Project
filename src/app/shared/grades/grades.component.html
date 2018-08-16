@@ -4,24 +4,31 @@
 <div class="container-fluid background" style="padding: 0;" >
   <!-- [BEGIN] Content Container -->
   <div class="container">
-      <div class="row">
+        <div class="row">
           <div class="col-md-12">
               <strong><h2> <i class="fa fa-graduation-cap"></i>CSC 460/660<span class="text-primary"> GRADES</span></h2></strong>
           </div>
         </div>
         <hr>
-      <div *ngIf="!loadingGrades && gradesList.length > 0" class="container" style="min-height: 700px;">
+        <div *ngIf="!hasSecretID" class="row" style="padding-top: 50px; padding-bottom: 500px;">
+          <div class="form-group col-md-4 col-md-offset-4">
+            <h3>Enter Sercret ID</h3>
+            <input autofocus class="form-control" type="text" value="" placeholder="Secret ID" #secretID />
+            <button class="btn btn-primary form-control" style="margin-top: 15px;" (click)="submitSecretId()"> Submit </button>
+            <h5 class="text-danger" *ngIf="inputSubmitMessage"><strong>{{inputSubmitMessage}}</strong></h5>
+          </div>
+        </div>
+        <div *ngIf="hasSecretID && !loadingGrades && gradesList.length > 0" class="container" style="min-height: 700px;">
           <table class="table table-striped table-condensed">
               <thead>
               <tr>
-                  <th>First Name</th>
-                  <th>Last Name</th>
-                  <th>A 1 V1</th>
-                  <th>A 1 V2</th>
-                  <th>A 1 V3</th>
-                  <th>A 2 V1</th>
-                  <th>A 2 V2</th>
-                  <th>A 2 V3</th>
+                  <th></th>
+                  <th>A 1.1</th>
+                  <th>A 1.2</th>
+                  <th>A 1.3</th>
+                  <th>A 2.1</th>
+                  <th>A 2.2</th>
+                  <th>A 2.3</th>
                   <th>Midterm</th>
                   <th>Graduate Presentation</th>
                   <th>Final</th>
@@ -30,12 +37,7 @@
           </thead>
           <tbody>
               <tr *ngFor="let a of gradesList">
-                  <td>
-                      {{a.students_first_name}}
-                  </td>
-                  <td>
-                      {{a.students_last_name}}
-                  </td>
+                  <td>{{formatSecretId(a.secret_id)}}</td>
                   <td>
                       <!-- <i *ngIf="a.validated" class="fa fa-check" style="color: #3fb618"></i> -->
                       {{formatGrade(a.assignment_1_1)}}
@@ -65,13 +67,13 @@
                     {{formatGrade(a.assignment_final)}}
                   </td>
                   <td>
-                    {{formatGrade(finalGrade)}}
+                    {{formatGrade(calculateFinalGrade(a))}}
                   </td>
               </tr>
           </tbody>
           </table>
       </div>
-      <div *ngIf="loadingGrades"  class="container text-center" style="min-height: 700px;">
+      <div *ngIf="hasSecretID && loadingGrades"  class="container text-center" style="min-height: 700px;">
           <i class="fa fa-circle-o-notch fa-spin" style="font-size:50px"></i>
       </div>
   <app-footer></app-footer>
