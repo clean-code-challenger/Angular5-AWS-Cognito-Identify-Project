@@ -1,3 +1,89 @@
-<p>
-  grades works!
-</p>
+<app-navbar></app-navbar>
+
+<!-- [BEGIN] Entire Page Container -->
+<div class="container-fluid background" style="padding: 0;" >
+  <!-- [BEGIN] Content Container -->
+  <div class="container">
+      <div class="row">
+          <div class="col-md-12">
+              <strong><h2> <i class="fa fa-graduation-cap"></i>CSC 460/660<span class="text-primary"> GRADES</span></h2></strong>
+          </div>
+        </div>
+        <hr>
+      <div *ngIf="!loadingGrades && gradesList.length > 0" class="container" style="min-height: 700px;">
+          <table class="table table-striped table-condensed">
+              <thead>
+              <tr>
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                  <th>A 1 V1</th>
+                  <th>A 1 V2</th>
+                  <th>A 1 V3</th>
+                  <th>A 2 V1</th>
+                  <th>A 2 V2</th>
+                  <th>A 2 V3</th>
+                  <th>Midterm</th>
+                  <th>Graduate Presentation</th>
+                  <th>Final</th>
+                  <th>Average</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let a of gradesList">
+                  <td>
+                      {{a.students_first_name}}
+                  </td>
+                  <td>
+                      {{a.students_last_name}}
+                  </td>
+                  <td>
+                      <!-- <i *ngIf="a.validated" class="fa fa-check" style="color: #3fb618"></i> -->
+                      {{a.assignment_1_1}}
+                  </td>
+                  <td>
+                    {{a.assignment_1_2}}
+                  </td>
+                  <td>
+                    {{a.assignment_1_3}}
+                  </td>
+                  <td>
+                    {{a.assignment_2_1}}
+                  </td>
+                  <td>
+                    {{a.assignment_2_2}}
+                  </td>
+                  <td>
+                    {{a.assignment_2_3}}
+                  </td>
+                  <td>
+                    {{a.midterm}}
+                  </td>
+                  <td>
+                    {{a.graduate_presentation}}
+                  </td>
+                  <td>
+                    {{a.assignment_final}}
+                  </td>
+              </tr>
+          </tbody>
+          </table>
+      </div>
+      <div *ngIf="loadingGrades"  class="container text-center" style="min-height: 700px;">
+          <i class="fa fa-circle-o-notch fa-spin" style="font-size:50px"></i>
+      </div>
+  <app-footer></app-footer>
+  <!-- [END] Footer content row -->
+  </div>
+  <!-- [END] Content Container -->
+
+<!-- [BEGIN] Footer Container -->
+<footer class="navbar-default" style="margin-top: 25px;">
+  <div class="container-fluid" style="padding: 5px 0 5px 0;">
+    <div class="text-center">
+      <p style="color: #FFFFFF;"> © {{year}} Created by Brock Tubre.</p>
+    </div>
+  </div>
+</footer>
+<!-- [END] Footer Container -->
+</div>
+<!-- [END] Entire Page Container -->

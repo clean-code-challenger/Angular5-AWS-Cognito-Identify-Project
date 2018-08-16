@@ -24,7 +24,7 @@ import { ZXingScannerModule } from '@zxing/ngx-scanner';
 import { HttpClientModule } from '@angular/common/http';
 import { AttendanceComponent } from './shared/qr-reader/attendance/attendance.component';
 import { MomentModule } from 'angular2-moment/moment.module';
-import { GradesComponent } from './grades/grades.component';
+import { GradesComponent } from './shared/grades/grades.component';
 
 
 @NgModule({

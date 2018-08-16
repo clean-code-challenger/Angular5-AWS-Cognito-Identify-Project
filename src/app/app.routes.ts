@@ -1,3 +1,4 @@
+import { GradesComponent } from './shared/grades/grades.component';
 import { QrReaderComponent } from './shared/qr-reader/qr-reader.component';
 import { AboutComponent } from './about/about.component';
 import { PortfolioComponent } from './portfolio/portfolio.component';
@@ -21,6 +22,7 @@ export const routes: Routes = [
     { path: 's3-sandbox', component: S3SandboxComponent, canActivate: [AuthGuard] },
     { path: 'qr-reader', component: QrReaderComponent, canActivate: [AuthGuard] },
     { path: 'qr-reader/attendance', component: AttendanceComponent, canActivate: [AuthGuard] },
+    { path: 'grades', component: GradesComponent },
     { path: '**', redirectTo: '' }
 ];
 
