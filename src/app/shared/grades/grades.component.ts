@@ -52,7 +52,7 @@ export class GradesComponent implements OnInit {
 
   public loadAttendance(secretId: string) {
     this.lambdaSandboxService.triggerFunction(this.functionName, secretId).subscribe(items => {
-      this.gradesList = items;
+      this.gradesList = this.shuffle(items);
       this.loadingGrades = false;
     });
   }
@@ -83,7 +83,7 @@ export class GradesComponent implements OnInit {
     });
   }
 
-  public calculateFinalGrade(a: any) {
+  public calculateFinalGrade(a: GradesObjectModel) {
       const assignment_1_1 = a.assignment_1_1;
       const assignment_1_2 = a.assignment_1_2;
       const assignment_1_3 = a.assignment_1_3;
@@ -113,8 +113,37 @@ export class GradesComponent implements OnInit {
           totalPoints += g;
         }
         this.finalGrade = Math.round(totalPoints / totalGradedGrades * 100) / 100;
+        a.final_grade = this.finalGrade;
       });
       return this.finalGrade;
+  }
+
+  public checkCurrentStudent(a: GradesObjectModel) {
+    const secretId = this.activeRoute.snapshot.params['id'];
+    if (a.secret_id === secretId) {
+      return true;
+    }
+    return false;
+  }
+
+  public shuffle(array: any) {
+    let currentIndex = array.length;
+    let temporaryValue = null;
+    let randomIndex = null;
+
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+
+      // Pick a remaining element...
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+
+      // And swap it with the current element.
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+    }
+    return array;
   }
 
 }
