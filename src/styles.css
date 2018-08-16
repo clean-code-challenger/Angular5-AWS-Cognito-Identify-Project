@@ -100,3 +100,7 @@ a{
 .fa-bt-link {
   cursor: pointer;
 }
+
+.selectedRow {
+  background-color: #c3dbf7 !important;
+}

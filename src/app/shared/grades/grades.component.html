@@ -1,0 +1,94 @@
+<app-navbar></app-navbar>
+
+<!-- [BEGIN] Entire Page Container -->
+<div class="container-fluid background" style="padding: 0;" >
+  <!-- [BEGIN] Content Container -->
+  <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+              <strong><h2> <i class="fa fa-graduation-cap"></i>CSC 460/660<span class="text-primary"> GRADES</span></h2></strong>
+          </div>
+        </div>
+        <hr>
+        <div *ngIf="!hasSecretID" class="row" style="padding-top: 50px; padding-bottom: 500px;">
+          <div class="form-group col-md-4 col-md-offset-4">
+            <h3>Enter Sercret ID</h3>
+            <input autofocus class="form-control" type="text" value="" placeholder="Secret ID" #secretID />
+            <button class="btn btn-primary form-control" style="margin-top: 15px;" (click)="submitSecretId()"> Submit </button>
+            <h5 class="text-danger" *ngIf="inputSubmitMessage"><strong>{{inputSubmitMessage}}</strong></h5>
+          </div>
+        </div>
+        <div *ngIf="hasSecretID && !loadingGrades && gradesList.length > 0" class="container" style="min-height: 700px;">
+          <table class="table table-striped table-condensed">
+              <thead>
+              <tr>
+                  <th>Student</th>
+                  <th>A 1.1</th>
+                  <th>A 1.2</th>
+                  <th>A 1.3</th>
+                  <th>A 2.1</th>
+                  <th>A 2.2</th>
+                  <th>A 2.3</th>
+                  <th>Midterm</th>
+                  <th>Graduate Presentation</th>
+                  <th>Final Project</th>
+                  <th>Average</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let a of gradesList" [ngClass]="{'selectedRow' : checkCurrentStudent(a)}">
+                  <td>{{a.secret_id}}</td>
+                  <td>
+                      <!-- <i *ngIf="a.validated" class="fa fa-check" style="color: #3fb618"></i> -->
+                      {{formatGrade(a.assignment_1_1)}}
+                  </td>
+                  <td>
+                    {{formatGrade(a.assignment_1_2)}}
+                  </td>
+                  <td>
+                    {{formatGrade(a.assignment_1_3)}}
+                  </td>
+                  <td>
+                    {{formatGrade(a.assignment_2_1)}}
+                  </td>
+                  <td>
+                    {{formatGrade(a.assignment_2_2)}}
+                  </td>
+                  <td>
+                    {{formatGrade(a.assignment_2_3)}}
+                  </td>
+                  <td>
+                    {{formatGrade(a.midterm)}}
+                  </td>
+                  <td>
+                    {{formatGrade(a.graduate_presentation)}}
+                  </td>
+                  <td>
+                    {{formatGrade(a.assignment_final)}}
+                  </td>
+                  <td>
+                    {{formatGrade(calculateFinalGrade(a))}}
+                  </td>
+              </tr>
+          </tbody>
+          </table>
+      </div>
+      <div *ngIf="hasSecretID && loadingGrades"  class="container text-center" style="min-height: 700px;">
+          <i class="fa fa-circle-o-notch fa-spin" style="font-size:50px"></i>
+      </div>
+  <app-footer></app-footer>
+  <!-- [END] Footer content row -->
+  </div>
+  <!-- [END] Content Container -->
+
+<!-- [BEGIN] Footer Container -->
+<footer class="navbar-default" style="margin-top: 25px;">
+  <div class="container-fluid" style="padding: 5px 0 5px 0;">
+    <div class="text-center">
+      <p style="color: #FFFFFF;"> © {{year}} Created by Brock Tubre.</p>
+    </div>
+  </div>
+</footer>
+<!-- [END] Footer Container -->
+</div>
+<!-- [END] Entire Page Container -->

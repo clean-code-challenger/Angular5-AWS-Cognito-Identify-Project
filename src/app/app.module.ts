@@ -1,3 +1,4 @@
+import { LambdaSandboxService } from './shared/lambda-sandbox/lambda-sandbox.service';
 import { QrReaderService } from './shared/qr-reader/qr-reader.service';
 import { DynamodbSandboxService } from './shared/dynamodb-sandbox/dynamodb-sandbox.service';
 import { S3SandboxService } from './shared/s3-sandbox/s3-sandbox.service';
@@ -24,6 +25,7 @@ import { ZXingScannerModule } from '@zxing/ngx-scanner';
 import { HttpClientModule } from '@angular/common/http';
 import { AttendanceComponent } from './shared/qr-reader/attendance/attendance.component';
 import { MomentModule } from 'angular2-moment/moment.module';
+import { GradesComponent } from './shared/grades/grades.component';
 
 
 @NgModule({
@@ -38,7 +40,8 @@ import { MomentModule } from 'angular2-moment/moment.module';
     ValidationMessagesComponent,
     CallbackComponent,
     QrReaderComponent,
-    AttendanceComponent
+    AttendanceComponent,
+    GradesComponent
 
   ],
   imports: [
@@ -57,7 +60,8 @@ import { MomentModule } from 'angular2-moment/moment.module';
     AuthService,
     AuthGuardService,
     ValidationMessagesService,
-    QrReaderService
+    QrReaderService,
+    LambdaSandboxService
   ],
   bootstrap: [AppComponent]
 })
