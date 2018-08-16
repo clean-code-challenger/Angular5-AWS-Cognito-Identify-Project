@@ -1,4 +1,4 @@
-import { LambdaSandboxService, LambdaSandboxService } from './../lambda-sandbox/lambda-sandbox.service';
+import { LambdaSandboxService } from './../lambda-sandbox/lambda-sandbox.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { GradesObjectModel } from './../models/grades-object.model';
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
@@ -73,6 +73,7 @@ export class GradesComponent implements OnInit {
     }
 
     this.lambdaSandboxService.triggerFunction(this.functionName, secretId).subscribe(items => {
+      debugger;
       if (items.length === 0) {
         this.inputSubmitMessage = 'Secret ID does not exist.';
         return;
@@ -80,15 +81,6 @@ export class GradesComponent implements OnInit {
         this.router.navigate(['grades/' + secretId]);
       }
     });
-  }
-
-  public formatSecretId(input: string) {
-    const secretId = this.activeRoute.snapshot.params['id'];
-    if (input === secretId) {
-      return input;
-    } else {
-      return 'xxxxxxxx';
-    }
   }
 
   public calculateFinalGrade(a: any) {

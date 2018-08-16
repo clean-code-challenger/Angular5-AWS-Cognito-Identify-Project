@@ -37,7 +37,7 @@
           </thead>
           <tbody>
               <tr *ngFor="let a of gradesList">
-                  <td>{{formatSecretId(a.secret_id)}}</td>
+                  <td>{{a.secret_id}}</td>
                   <td>
                       <!-- <i *ngIf="a.validated" class="fa fa-check" style="color: #3fb618"></i> -->
                       {{formatGrade(a.assignment_1_1)}}

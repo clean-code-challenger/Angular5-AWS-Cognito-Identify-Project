@@ -1,3 +1,4 @@
+import { LambdaSandboxService } from './shared/lambda-sandbox/lambda-sandbox.service';
 import { QrReaderService } from './shared/qr-reader/qr-reader.service';
 import { DynamodbSandboxService } from './shared/dynamodb-sandbox/dynamodb-sandbox.service';
 import { S3SandboxService } from './shared/s3-sandbox/s3-sandbox.service';
@@ -59,7 +60,8 @@ import { GradesComponent } from './shared/grades/grades.component';
     AuthService,
     AuthGuardService,
     ValidationMessagesService,
-    QrReaderService
+    QrReaderService,
+    LambdaSandboxService
   ],
   bootstrap: [AppComponent]
 })

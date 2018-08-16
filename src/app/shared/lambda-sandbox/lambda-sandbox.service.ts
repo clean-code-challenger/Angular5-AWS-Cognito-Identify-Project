@@ -23,6 +23,7 @@ export class LambdaSandboxService {
     });
     const creds = new AWS.Credentials(AWS.config.credentials);
     const lambda = new AWS.Lambda({ region: environment.region, credentials: creds });
+    this.lambda = lambda;
     this.functionName = environment.dynamodb_table_name;
   }
 
@@ -39,7 +40,9 @@ export class LambdaSandboxService {
       if (err) {
         sendResult.error(err);
       }else {
-        sendResult.next(data.Items);
+        let gradesObj = new Array<GradesObjectModel>();
+        gradesObj = JSON.parse(data.Payload);
+        sendResult.next(gradesObj);
       }
     });
     return sendResult.asObservable();
