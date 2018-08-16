@@ -28,5 +28,10 @@ export const environment = {
     dynamoDb : {
       tableName: 'qr-code-info'
     }
+  },
+  grades: {
+    dynamoDb : {
+      tableName: 'grades-table'
+    }
   }
 };

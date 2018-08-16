@@ -1,3 +1,4 @@
+import { GradesObjectModel } from './../models/grades-object.model';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { environment } from '../../../environments/environment';
@@ -82,6 +83,23 @@ export class DynamodbSandboxService {
         ':date': readDate
        },
        FilterExpression: 'class_date IN (:date)',
+    };
+
+    this.docClient.scan(params, function(err, data) {
+      if (err) {
+        sendResult.error(err);
+      }else {
+        sendResult.next(data.Items);
+      }
+    });
+    return sendResult.asObservable();
+  }
+
+  public getGradesFromDynamoDB(tableName: string) {
+    const sendResult = new Subject<Array<GradesObjectModel>>();
+
+    const params = {
+      TableName: tableName
     };
 
     this.docClient.scan(params, function(err, data) {
