@@ -74,6 +74,8 @@ export class GradesComponent implements OnInit {
       if (items.length === 0) {
         this.inputSubmitMessage = 'Secret ID does not exist.';
         return;
+      } else {
+        this.router.navigate(['grades/' + secretId]);
       }
     });
   }
