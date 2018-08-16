@@ -18,11 +18,8 @@ export class AppComponent {
         this.router.navigate(['portfolio']);
       }
     });
-    // authService.gertUserProfile().subscribe(profile => {
-    //   if (profile) {
-    //    authService.userProfile = profile;
-    //   }
-    // });
+
+    authService.handleLimitedAuthentication();
   }
   public setTitle( newTitle: string) {
     this.titleService.setTitle( newTitle );

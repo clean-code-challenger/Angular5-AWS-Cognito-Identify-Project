@@ -5,6 +5,7 @@ import * as auth0 from 'auth0-js';
 import * as AWS from 'aws-sdk';
 import { environment } from '../../../environments/environment';
 import { Subject } from 'rxjs/Subject';
+import * as Auth0Lock from 'auth0-lock';
 
 (window as any).global = window;
 
@@ -32,6 +33,7 @@ export class AuthService {
     const sendResult = new Subject<any>();
     this.auth0.parseHash((err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
+        debugger;
         window.location.hash = '';
         this.setSession(authResult);
         const params = { IdentityPoolId: environment.aws_identity_pool_id };
@@ -75,6 +77,57 @@ export class AuthService {
     });
 
     return sendResult.asObservable();
+  }
+
+  public handleLimitedAuthentication() {
+    console.log('Application starting... Setting limited authentication.');
+    const creds = new AWS.CognitoIdentityCredentials({
+      IdentityPoolId: environment.aws_identity_pool_id
+    });
+    AWS.config.update({
+        region: environment.region,
+        credentials: creds
+    });
+
+    const paramsIdentityPool = {
+      IdentityPoolId: environment.aws_identity_pool_id
+    };
+    const cognitoidentity = new AWS.CognitoIdentity({credentials: AWS.config.credentials});
+    cognitoidentity.getId(paramsIdentityPool, (err, data) => {
+      const paramsIdentityId = {
+        IdentityId: data.IdentityId
+      };
+      cognitoidentity.getOpenIdToken(paramsIdentityId, (errIdentityId, dataIdentityId) => {
+          AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+              IdentityPoolId: environment.aws_identity_pool_id,
+              IdentityId: dataIdentityId.IdentityId,
+              Logins: {
+                'brocktubre.auth0.com': localStorage.getItem('id_token')
+              }
+          });
+          cognitoidentity.getOpenIdToken(paramsIdentityId, (getOpenIdTokenError, getOpenIdTokenData) => {
+            if (getOpenIdTokenError) {
+              console.error(getOpenIdTokenError);
+            }
+            const paramsAssumeRole = {
+              DurationSeconds: 3600,
+              RoleArn: environment.aws_unauth_role,
+              RoleSessionName: 'brocktubre-role-session',
+              WebIdentityToken: getOpenIdTokenData.Token
+            };
+            const sts = new AWS.STS();
+            sts.assumeRoleWithWebIdentity(paramsAssumeRole, (assumeRoleWithWebIdentityError, assumeRoleWithWebIdentityData) => {
+              const cred = {
+                accessKeyId: assumeRoleWithWebIdentityData.Credentials.AccessKeyId,
+                secretAccessKey: assumeRoleWithWebIdentityData.Credentials.SecretAccessKey,
+                region: environment.region,
+                sessionToken: assumeRoleWithWebIdentityData.Credentials.SessionToken
+              };
+              this.setCreds(cred);
+            });
+          });
+      });
+    });
   }
 
   private setSession(authResult): void {

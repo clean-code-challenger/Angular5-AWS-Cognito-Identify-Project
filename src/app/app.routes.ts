@@ -22,8 +22,8 @@ export const routes: Routes = [
     { path: 's3-sandbox', component: S3SandboxComponent, canActivate: [AuthGuard] },
     { path: 'qr-reader', component: QrReaderComponent, canActivate: [AuthGuard] },
     { path: 'qr-reader/attendance', component: AttendanceComponent, canActivate: [AuthGuard] },
-    { path: 'grades', component: GradesComponent, canActivate: [AuthGuard] },
-    { path: 'grades/:id', component: GradesComponent, canActivate: [AuthGuard] },
+    { path: 'grades', component: GradesComponent },
+    { path: 'grades/:id', component: GradesComponent },
     { path: '**', redirectTo: '' }
 ];
 
