@@ -12,7 +12,7 @@
         <hr>
         <div *ngIf="!hasSecretID" class="row" style="padding-top: 50px; padding-bottom: 400px;">
           <div class="form-group col-md-4 col-md-offset-4">
-            <h3>Enter Sercret ID</h3>
+            <h3>Enter Secret ID</h3>
             <input autofocus class="form-control" type="text" value="" placeholder="Secret ID" #secretID />
             <button class="btn btn-primary form-control" style="margin-top: 15px;" (click)="submitSecretId()"> Submit </button>
             <h5 class="text-danger" *ngIf="inputSubmitMessage"><strong>{{inputSubmitMessage}}</strong></h5>
