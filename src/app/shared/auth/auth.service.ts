@@ -5,7 +5,6 @@ import * as auth0 from 'auth0-js';
 import * as AWS from 'aws-sdk';
 import { environment } from '../../../environments/environment';
 import { Subject } from 'rxjs/Subject';
-import * as Auth0Lock from 'auth0-lock';
 
 (window as any).global = window;
 
