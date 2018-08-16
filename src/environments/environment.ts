@@ -33,6 +33,9 @@ export const environment = {
   grades: {
     dynamoDb : {
       tableName: 'grades-table'
+    },
+    lambda : {
+      functionName: 'get-grades-with-secret-id'
     }
   }
 };

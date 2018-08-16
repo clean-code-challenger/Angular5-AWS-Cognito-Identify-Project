@@ -1,3 +1,4 @@
+import { LambdaSandboxService, LambdaSandboxService } from './../lambda-sandbox/lambda-sandbox.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { GradesObjectModel } from './../models/grades-object.model';
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
@@ -13,7 +14,7 @@ export class GradesComponent implements OnInit {
 
   public gradesList: Array<GradesObjectModel>;
   public loadingGrades: boolean;
-  public tableName: string;
+  public functionName: string;
   public year: number;
   public readDate: string;
   public finalGrade: number;
@@ -24,9 +25,10 @@ export class GradesComponent implements OnInit {
 
   constructor(private dynamodbSandboxService: DynamodbSandboxService,
               private router: Router,
-              private activeRoute: ActivatedRoute) {
+              private activeRoute: ActivatedRoute,
+              private lambdaSandboxService: LambdaSandboxService) {
     this.gradesList = new Array<GradesObjectModel>();
-    this.tableName = environment.grades.dynamoDb.tableName;
+    this.functionName = environment.grades.lambda.functionName;
     this.year = new Date().getFullYear();
     const d = new Date();
     d.setHours(d.getHours() - 5);
@@ -36,11 +38,11 @@ export class GradesComponent implements OnInit {
   ngOnInit() {
     const secretId = this.activeRoute.snapshot.params['id'];
     if (secretId) {
-      this.dynamodbSandboxService.getGradesFromDynamoDBBySecretId(this.tableName, secretId).subscribe(items => {
+      this.lambdaSandboxService.triggerFunction(this.functionName, secretId).subscribe(items => {
         if (items.length !== 0) {
           this.hasSecretID = true;
           this.loadingGrades = true;
-          this.loadAttendance();
+          this.loadAttendance(secretId);
         } else {
           this.router.navigate(['grades']);
         }
@@ -48,8 +50,8 @@ export class GradesComponent implements OnInit {
     }
   }
 
-  public loadAttendance() {
-    this.dynamodbSandboxService.getGradesFromDynamoDB(this.tableName).subscribe(items => {
+  public loadAttendance(secretId: string) {
+    this.lambdaSandboxService.triggerFunction(this.functionName, secretId).subscribe(items => {
       this.gradesList = items;
       this.loadingGrades = false;
     });
@@ -70,7 +72,7 @@ export class GradesComponent implements OnInit {
       return;
     }
 
-    this.dynamodbSandboxService.getGradesFromDynamoDBBySecretId(this.tableName, secretId).subscribe(items => {
+    this.lambdaSandboxService.triggerFunction(this.functionName, secretId).subscribe(items => {
       if (items.length === 0) {
         this.inputSubmitMessage = 'Secret ID does not exist.';
         return;
