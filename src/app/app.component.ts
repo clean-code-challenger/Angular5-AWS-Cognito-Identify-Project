@@ -14,13 +14,16 @@ export class AppComponent {
   constructor(private titleService: Title, private authService: AuthService, private router: Router) {
     authService.handleAuthentication()
     .subscribe(creds => {
+      debugger;
       if (creds) {
         this.authService.setCreds(creds);
         this.router.navigate(['portfolio']);
       }
     }, error => {
-      if (error) {
+      if (error && localStorage.getItem('role_type') !== 'full') {
+        debugger;
         console.log(error);
+        this.authService.clearSession();
         authService.handleLimitedAuthentication();
       }
     });

@@ -57,7 +57,7 @@ export class NavbarComponent implements OnInit {
         break;
     }
 
-    if (!this.authService.isSessionExpired()) {
+    if (!this.authService.isSessionExpired() && localStorage.getItem('role_type') === 'full') {
       this.isUserLoggedIn = true;
       this.usersEmail = localStorage.getItem('userEmail');
     }

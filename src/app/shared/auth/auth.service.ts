@@ -57,6 +57,7 @@ export class AuthService {
             };
             const sts = new AWS.STS();
             sts.assumeRoleWithWebIdentity(paramsAssumeRole, (assumeRoleWithWebIdentityError, assumeRoleWithWebIdentityData) => {
+              localStorage.setItem('role_type', 'full');
               const cred = {
                 accessKeyId: assumeRoleWithWebIdentityData.Credentials.AccessKeyId,
                 secretAccessKey: assumeRoleWithWebIdentityData.Credentials.SecretAccessKey,
@@ -141,16 +142,20 @@ export class AuthService {
 
   public logout(): void {
     // Remove tokens and expiry time from localStorage
-    localStorage.removeItem('access_token');
-    localStorage.removeItem('id_token');
-    localStorage.removeItem('expires_at');
-    localStorage.removeItem('accessKeyId');
-    localStorage.removeItem('secretAccessKey');
-    localStorage.removeItem('sessionToken');
-    localStorage.removeItem('userEmail');
-    localStorage.removeItem('role_type');
+    this.clearSession();
     // Go back to the home route
     this.router.navigate(['home']);
+  }
+
+  public clearSession() {
+      localStorage.removeItem('access_token');
+      localStorage.removeItem('id_token');
+      localStorage.removeItem('expires_at');
+      localStorage.removeItem('accessKeyId');
+      localStorage.removeItem('secretAccessKey');
+      localStorage.removeItem('sessionToken');
+      localStorage.removeItem('userEmail');
+      localStorage.removeItem('role_type');
   }
 
   public isSessionExpired(): boolean {
