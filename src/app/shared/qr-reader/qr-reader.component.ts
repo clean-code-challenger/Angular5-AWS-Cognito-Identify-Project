@@ -1,13 +1,9 @@
-import { Observable } from 'rxjs/Observable';
 import { interval } from 'rxjs/observable/interval';
-import { environment } from './../../../environments/environment';
 import { S3SandboxService } from './../s3-sandbox/s3-sandbox.service';
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, OnChanges, SimpleChanges } from '@angular/core';
-import { ZXingScannerComponent } from '@zxing/ngx-scanner';
 import { QrReaderService } from './qr-reader.service';
 import { QrCodeObject } from '../models/qr-code-object.model';
 import * as moment from 'moment';
-import { Subject } from '../../../../node_modules/rxjs/Subject';
 
 @Component({
   selector: 'app-qr-reader',

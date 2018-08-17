@@ -21,11 +21,11 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ValidationMessagesComponent } from './shared/validation-messages/validation-messages.component';
 import { CallbackComponent } from './shared/callback/callback.component';
 import { QrReaderComponent } from './shared/qr-reader/qr-reader.component';
-import { ZXingScannerModule } from '@zxing/ngx-scanner';
 import { HttpClientModule } from '@angular/common/http';
 import { AttendanceComponent } from './shared/qr-reader/attendance/attendance.component';
 import { MomentModule } from 'angular2-moment/moment.module';
 import { GradesComponent } from './shared/grades/grades.component';
+import { Ng2TableModule } from 'ng2-table/ng2-table';
 
 
 @NgModule({
@@ -49,9 +49,9 @@ import { GradesComponent } from './shared/grades/grades.component';
     RouterModule.forRoot(routes),
     BsModalModule,
     ReactiveFormsModule,
-    ZXingScannerModule.forRoot(),
     HttpClientModule,
-    MomentModule
+    MomentModule,
+    Ng2TableModule
   ],
   providers: [
     Title,
