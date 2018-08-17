@@ -195,6 +195,7 @@ export class GradesComponent implements OnInit {
     this.lambdaSandboxService.triggerFunction(this.functionName, secretId).subscribe(items => {
       if (items.length === 0) {
         this.inputSubmitMessage = 'Secret ID does not exist.';
+        this.secretID.nativeElement.value = '';
         return;
       } else {
         this.router.navigate(['grades/' + secretId]);
