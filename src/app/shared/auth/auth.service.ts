@@ -78,6 +78,10 @@ export class AuthService {
   }
 
   public handleLimitedAuthentication() {
+
+    if (this.isAuthenticated()) {
+      return;
+    }
     console.log('Application starting... Setting limited authentication.');
     const creds = new AWS.CognitoIdentityCredentials({
       IdentityPoolId: environment.aws_identity_pool_id
