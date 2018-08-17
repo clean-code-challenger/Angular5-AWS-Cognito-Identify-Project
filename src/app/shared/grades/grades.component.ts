@@ -203,6 +203,10 @@ export class GradesComponent implements OnInit {
   }
 
   public calculateFinalGrade(a: any) {
+      if (a.final_grade !== undefined) {
+        return;
+      }
+
       const assignment_1_1 = a.assignment_1_1;
       const assignment_1_2 = a.assignment_1_2;
       const assignment_1_3 = a.assignment_1_3;
