@@ -187,6 +187,7 @@ export class GradesComponent implements OnInit {
 
   public submitSecretId() {
     const secretId = this.secretID.nativeElement.value;
+    this.inputSubmitMessage = '';
     if (!secretId) {
       this.inputSubmitMessage = 'Please enter in Secret ID.';
       return;
