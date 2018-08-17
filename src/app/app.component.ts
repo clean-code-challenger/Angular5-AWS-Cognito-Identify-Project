@@ -3,7 +3,6 @@ import { AuthService } from './shared/auth/auth.service';
 import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { debug } from 'util';
 
 @Component({
   selector: 'app-root',
@@ -13,14 +12,19 @@ import { debug } from 'util';
 export class AppComponent {
 
   constructor(private titleService: Title, private authService: AuthService, private router: Router) {
-    authService.handleAuthentication().subscribe(creds => {
+    authService.handleAuthentication()
+    .subscribe(creds => {
       if (creds) {
         this.authService.setCreds(creds);
         this.router.navigate(['portfolio']);
       }
+    }, error => {
+      if (error) {
+        console.log(error);
+        authService.handleLimitedAuthentication();
+      }
     });
 
-    authService.handleLimitedAuthentication();
   }
   public setTitle( newTitle: string) {
     this.titleService.setTitle( newTitle );

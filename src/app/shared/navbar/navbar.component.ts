@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { AuthService } from '../auth/auth.service';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-navbar',
@@ -56,7 +57,7 @@ export class NavbarComponent implements OnInit {
         break;
     }
 
-    if (this.authService.isAuthenticated()) {
+    if (!this.authService.isSessionExpired()) {
       this.isUserLoggedIn = true;
       this.usersEmail = localStorage.getItem('userEmail');
     }
