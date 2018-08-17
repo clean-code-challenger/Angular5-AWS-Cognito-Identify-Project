@@ -35,7 +35,7 @@ export class GradesComponent implements OnInit {
     {title: 'Midterm', name: 'midterm'},
     {title: 'Graduate Presentations', name: 'graduate_presentation', sort: ''},
     {title: 'Final', name: 'assignment_final'},
-    {title: 'Average', name: 'final_grade', sort: 'desc', className: ['office-header', 'text-success']}
+    {title: 'Average', name: 'final_grade', sort: 'desc'}
   ];
   public page: Number = 1;
   public itemsPerPage: Number = 20;
