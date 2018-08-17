@@ -39,7 +39,7 @@ export class GradesComponent implements OnInit {
     const secretId = this.activeRoute.snapshot.params['id'];
     if (secretId) {
       this.lambdaSandboxService.triggerFunction(this.functionName, secretId).subscribe(items => {
-        if (items.length !== 0) {
+        if (items && items.length !== 0) {
           this.hasSecretID = true;
           this.loadingGrades = true;
           this.loadAttendance(secretId);
@@ -73,7 +73,6 @@ export class GradesComponent implements OnInit {
     }
 
     this.lambdaSandboxService.triggerFunction(this.functionName, secretId).subscribe(items => {
-      debugger;
       if (items.length === 0) {
         this.inputSubmitMessage = 'Secret ID does not exist.';
         return;

@@ -32,7 +32,6 @@ export class AuthService {
     const sendResult = new Subject<any>();
     this.auth0.parseHash((err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
-        debugger;
         window.location.hash = '';
         this.setSession(authResult);
         const params = { IdentityPoolId: environment.aws_identity_pool_id };

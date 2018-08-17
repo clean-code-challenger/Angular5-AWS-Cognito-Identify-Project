@@ -70,26 +70,8 @@ export class QrReaderComponent implements OnInit, AfterViewInit {
       newVariable.usb.requestDevice( { filters: [{ vendorId: 0x2DD6 }] } )
         .then(selectedDevice => {
           device = selectedDevice;
-          //  const num = device.configuration.interfaces[0].interfaceNumber;
           return device.open(); // Begin a session.
         })
-        // .then(() => device.selectConfiguration(1)) // Select configuration #1 for the device.
-        // .then(() =>
-        //   device.claimInterface(1) // Request exclusive control over interface #2.
-        // .then(() => device.controlTransferOut({
-        //     requestType: 'class',
-        //     recipient: 'endpoint',
-        //     request: 0x22,
-        //     value: 0x01,
-        //     index: 0x02})
-        // ) // Ready to receive data
-        // .then(() => device.transferIn(1, 64)) // Waiting for 64 bytes of data from endpoint #5.
-        // .then(result => {
-        //   console.log(result);
-        //   // const decoder = new TextDecoder();
-        //   // console.log('Received: ' + decoder.decode(result.data));
-        //   debugger;
-        // })
         .catch(error => {
           console.log(error);
         });
@@ -145,7 +127,6 @@ export class QrReaderComponent implements OnInit, AfterViewInit {
     }
 
     public submitStudentId() {
-      debugger;
       // const imgCapture = this.capture();
       this.inputSubmitMessage = null;
       const upperCase = this.studentID.nativeElement.value.toUpperCase().trim();
