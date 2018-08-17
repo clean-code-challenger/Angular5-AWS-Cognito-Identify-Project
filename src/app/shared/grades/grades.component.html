@@ -10,7 +10,7 @@
           </div>
         </div>
         <hr>
-        <div *ngIf="!hasSecretID" class="row" style="padding-top: 50px; padding-bottom: 400px;">
+        <div *ngIf="!hasSecretID && !errorOccured" class="row" style="padding-top: 50px; padding-bottom: 400px;">
           <div class="form-group col-md-4 col-md-offset-4">
             <h3>Enter Secret ID</h3>
             <input autofocus class="form-control" type="text" value="" placeholder="Secret ID" #secretID />
@@ -28,6 +28,9 @@
       <div *ngIf="hasSecretID && loadingGrades"  class="container text-center" style="min-height: 700px;">
           <i class="fa fa-circle-o-notch fa-spin" style="font-size:50px"></i>
       </div>
+      <div *ngIf="!hasSecretID && errorOccured"  class="container text-center alert alert-danger" style="margin-bottom: 400px;">
+        <p>Looks like something went wrong. Please refresh browser and try again.</p>
+    </div>
   <app-footer></app-footer>
   <!-- [END] Footer content row -->
   </div>

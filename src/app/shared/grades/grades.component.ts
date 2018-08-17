@@ -22,6 +22,7 @@ export class GradesComponent implements OnInit {
   public inputSubmitMessage: string;
   @ViewChild('secretID') secretID: ElementRef;
   public hasSecretID: boolean;
+  public errorOccured: boolean;
 
   public rows: Array<any> = [];
   public columns: Array<any> = [
@@ -186,22 +187,27 @@ export class GradesComponent implements OnInit {
   }
 
   public submitSecretId() {
-    const secretId = this.secretID.nativeElement.value;
-    this.inputSubmitMessage = '';
-    if (!secretId) {
-      this.inputSubmitMessage = 'Please enter in Secret ID.';
-      return;
-    }
-
-    this.lambdaSandboxService.triggerFunction(this.functionName, secretId).subscribe(items => {
-      if (items.length === 0) {
-        this.inputSubmitMessage = 'Secret ID does not exist.';
-        this.secretID.nativeElement.value = '';
+    try {
+      const secretId = this.secretID.nativeElement.value;
+      this.inputSubmitMessage = '';
+      if (!secretId) {
+        this.inputSubmitMessage = 'Please enter in Secret ID.';
         return;
-      } else {
-        this.router.navigate(['grades/' + secretId]);
       }
-    });
+
+      this.lambdaSandboxService.triggerFunction(this.functionName, secretId).subscribe(items => {
+        if (items.length === 0) {
+          this.inputSubmitMessage = 'Secret ID does not exist.';
+          this.secretID.nativeElement.value = '';
+          return;
+        } else {
+          this.router.navigate(['grades/' + secretId]);
+        }
+      });
+    } catch (e) {
+      console.error(e);
+      this.errorOccured = true;
+    }
   }
 
   public calculateFinalGrade(a: any) {
