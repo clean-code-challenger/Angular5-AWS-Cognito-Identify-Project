@@ -12,7 +12,7 @@ export class AuthGuardService implements CanActivate {
 
 
   public canActivate(): boolean {
-    if (this.auth.isSessionExpired()) {
+    if (!this.auth.isAuthenticated()) {
       this.auth.login();
       return false;
     }

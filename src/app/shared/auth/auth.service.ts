@@ -71,8 +71,6 @@ export class AuthService {
         sendResult.error(err);
         this.router.navigate(['home']);
         console.log(err);
-      } else {
-        sendResult.error('User needs limited access.');
       }
     });
 
@@ -80,6 +78,10 @@ export class AuthService {
   }
 
   public handleLimitedAuthentication() {
+
+    if (this.isAuthenticated()) {
+      return;
+    }
     console.log('Application starting... Setting limited authentication.');
     const creds = new AWS.CognitoIdentityCredentials({
       IdentityPoolId: environment.aws_identity_pool_id
@@ -117,7 +119,6 @@ export class AuthService {
             };
             const sts = new AWS.STS();
             sts.assumeRoleWithWebIdentity(paramsAssumeRole, (assumeRoleWithWebIdentityError, assumeRoleWithWebIdentityData) => {
-              localStorage.setItem('expires_at', assumeRoleWithWebIdentityData.Credentials.Expiration.getTime().toString());
               const cred = {
                 accessKeyId: assumeRoleWithWebIdentityData.Credentials.AccessKeyId,
                 secretAccessKey: assumeRoleWithWebIdentityData.Credentials.SecretAccessKey,
@@ -148,16 +149,15 @@ export class AuthService {
     localStorage.removeItem('secretAccessKey');
     localStorage.removeItem('sessionToken');
     localStorage.removeItem('userEmail');
-    localStorage.removeItem('role_type');
     // Go back to the home route
     this.router.navigate(['home']);
   }
 
-  public isSessionExpired(): boolean {
+  public isAuthenticated(): boolean {
     // Check whether the current time is past the
     // Access Token's expiry time
     const expiresAt = JSON.parse(localStorage.getItem('expires_at') || '{}');
-    return !(new Date().getTime() < expiresAt);
+    return new Date().getTime() < expiresAt;
   }
 
   public setCreds(creds: any) {
