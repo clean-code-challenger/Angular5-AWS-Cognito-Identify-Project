@@ -243,10 +243,14 @@ export class GradesComponent implements OnInit {
           totalGradedGrades++;
           totalPoints += g;
         }
-        this.finalGrade = Math.round(totalPoints / totalGradedGrades * 100) / 100;
-        a.final_grade = this.finalGrade;
       });
+      this.finalGrade = Math.round(totalPoints / totalGradedGrades * 100) / 100;
+      a.final_grade = this.finalGrade;
       this.formatGrades(a);
+
+      if (totalGradedGrades === 0 && totalPoints === 0) {
+        a.final_grade = 0;
+      }
   }
 
   public checkCurrentStudent(a: GradesObjectModel) {
