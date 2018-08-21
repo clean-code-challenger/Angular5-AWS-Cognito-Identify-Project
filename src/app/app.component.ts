@@ -1,9 +1,7 @@
-import { routes } from './app.routes';
 import { AuthService } from './shared/auth/auth.service';
 import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { debug } from 'util';
 
 @Component({
   selector: 'app-root',
