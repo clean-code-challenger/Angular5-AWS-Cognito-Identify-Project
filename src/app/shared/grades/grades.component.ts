@@ -1,16 +1,18 @@
+import { AuthService } from './../auth/auth.service';
 import { LambdaSandboxService } from './../lambda-sandbox/lambda-sandbox.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { GradesObjectModel } from './../models/grades-object.model';
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { DynamodbSandboxService } from '../dynamodb-sandbox/dynamodb-sandbox.service';
 import { environment } from '../../../environments/environment';
+import { AuthHelper } from '../auth/auth.helper';
 
 @Component({
   selector: 'app-grades',
   templateUrl: './grades.component.html',
   styleUrls: ['./grades.component.css']
 })
-export class GradesComponent implements OnInit {
+export class GradesComponent extends AuthHelper implements OnInit {
 
   public gradesList: Array<GradesObjectModel>;
   public loadingGrades: boolean;
@@ -57,7 +59,9 @@ export class GradesComponent implements OnInit {
   constructor(private dynamodbSandboxService: DynamodbSandboxService,
               private router: Router,
               private activeRoute: ActivatedRoute,
-              private lambdaSandboxService: LambdaSandboxService) {
+              private lambdaSandboxService: LambdaSandboxService,
+              private authService: AuthService) {
+    super(authService);
     this.gradesList = new Array<GradesObjectModel>();
     this.functionName = environment.grades.lambda.functionName;
     this.year = new Date().getFullYear();

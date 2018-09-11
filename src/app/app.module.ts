@@ -25,6 +25,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AttendanceComponent } from './shared/qr-reader/attendance/attendance.component';
 import { MomentModule } from 'angular2-moment/moment.module';
 import { GradesComponent } from './shared/grades/grades.component';
+import { AuthHelper } from './shared/auth/auth.helper';
 import { Ng2TableModule } from 'ng2-table/ng2-table';
 
 
@@ -61,7 +62,8 @@ import { Ng2TableModule } from 'ng2-table/ng2-table';
     AuthGuardService,
     ValidationMessagesService,
     QrReaderService,
-    LambdaSandboxService
+    LambdaSandboxService,
+    AuthHelper
   ],
   bootstrap: [AppComponent]
 })

@@ -11,11 +11,6 @@ import { Router } from '@angular/router';
 export class AppComponent {
 
   constructor(private titleService: Title, private authService: AuthService, private router: Router) {
-    authService.handleLimitedAuthentication().subscribe((creds) => {
-
-    }, (error) => {
-      console.log(error);
-    });
   }
   public setTitle( newTitle: string) {
     this.titleService.setTitle( newTitle );
