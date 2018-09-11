@@ -29,6 +29,7 @@ export class GradesComponent implements OnInit {
     {title: 'Secret ID', name: 'secret_id', sort: false},
     {title: 'A 1.1', name: 'assignment_1_1', sort: ''},
     {title: 'A 1.2', name: 'assignment_1_2', sort: ''},
+    {title: 'Arch. Assignment', name: 'arch_assignment', sort: ''},
     {title: 'A 1.3', name: 'assignment_1_3', sort: ''},
     {title: 'A 2.1', name: 'assignment_2_1', sort: ''},
     {title: 'A 2.2', name: 'assignment_2_2', sort: ''},
@@ -181,6 +182,7 @@ export class GradesComponent implements OnInit {
     a.assignment_2_1 = a.assignment_2_1 === -1 ? '' : a.assignment_2_1;
     a.assignment_2_2 = a.assignment_2_2 === -1 ? '' : a.assignment_2_2;
     a.assignment_2_3 = a.assignment_2_3 === -1 ? '' : a.assignment_2_3;
+    a.arch_assignment = a.arch_assignment === -1 ? '' : a.arch_assignment;
     a.midterm = a.midterm === -1 ? '' : a.midterm;
     a.assignment_final = a.assignment_final === -1 ? '' : a.assignment_final;
     a.graduate_presentation = a.graduate_presentation === -1 ? '' : a.graduate_presentation;
@@ -221,6 +223,7 @@ export class GradesComponent implements OnInit {
       const assignment_2_1 = a.assignment_2_1;
       const assignment_2_2 = a.assignment_2_2;
       const assignment_2_3 = a.assignment_2_3;
+      const arch_assignment = a.arch_assignment;
       const midterm = a.midterm;
       const assignment_final = a.assignment_final;
       const graduate_presentation = a.graduate_presentation;
@@ -228,6 +231,7 @@ export class GradesComponent implements OnInit {
       const allGrades = new Array<any>();
       allGrades.push(assignment_1_1);
       allGrades.push(assignment_1_2);
+      allGrades.push(arch_assignment);
       allGrades.push(assignment_1_3);
       allGrades.push(assignment_2_1);
       allGrades.push(assignment_2_2);
@@ -244,7 +248,8 @@ export class GradesComponent implements OnInit {
           totalPoints += g;
         }
       });
-      this.finalGrade = Math.round(totalPoints / totalGradedGrades * 100) / 100;
+      const goldenTotal = 210;
+      this.finalGrade = Math.round((totalPoints / goldenTotal * 100) * 100) / 100;
       a.final_grade = this.finalGrade;
       this.formatGrades(a);
 

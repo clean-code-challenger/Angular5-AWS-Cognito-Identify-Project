@@ -11,4 +11,5 @@ export class GradesObjectModel {
   public assignment_final: number;
   public graduate_presentation: number;
   public final_grade: number;
+  public arch_assignment: number;
 }
