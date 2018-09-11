@@ -11,14 +11,11 @@ import { Router } from '@angular/router';
 export class AppComponent {
 
   constructor(private titleService: Title, private authService: AuthService, private router: Router) {
-    authService.handleAuthentication().subscribe(creds => {
-      if (creds) {
-        this.authService.setCreds(creds);
-        this.router.navigate(['portfolio']);
-      }
-    });
+    authService.handleLimitedAuthentication().subscribe((creds) => {
 
-    authService.handleLimitedAuthentication();
+    }, (error) => {
+      console.log(error);
+    });
   }
   public setTitle( newTitle: string) {
     this.titleService.setTitle( newTitle );

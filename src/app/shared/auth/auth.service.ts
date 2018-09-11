@@ -39,33 +39,33 @@ export class AuthService {
 
         const cognitoidentity = new AWS.CognitoIdentity();
         const val = cognitoidentity.getId(params, (getIdError, getIdData) => {
-          const paramsIdentityId = {
-            IdentityId: getIdData.IdentityId,
-            Logins: {
-              'brocktubre.auth0.com': localStorage.getItem('id_token')
+          // This creates a Authenticated Identity with Cognito User Identity Pool
+        const paramsIdentityId = {
+          IdentityId: getIdData.IdentityId,
+          Logins: {
+            [environment.auth0.domain] : authResult.idToken
+          }
+        };
+        cognitoidentity.getCredentialsForIdentity(paramsIdentityId, (getCredentialsForIdentityErr, getCredentialsForIdentityData) => {
+            if (err) {
+              console.error(err);
+              sendResult.error(err);
             }
-          };
-          cognitoidentity.getOpenIdToken(paramsIdentityId, (getOpenIdTokenError, getOpenIdTokenData) => {
-            if (getOpenIdTokenError) {
-              console.error(getOpenIdTokenError);
-            }
-            const paramsAssumeRole = {
-              DurationSeconds: 3600,
-              RoleArn: environment.aws_auth_role,
-              RoleSessionName: 'brocktubre-role-session',
-              WebIdentityToken: getOpenIdTokenData.Token
-            };
-            const sts = new AWS.STS();
-            sts.assumeRoleWithWebIdentity(paramsAssumeRole, (assumeRoleWithWebIdentityError, assumeRoleWithWebIdentityData) => {
-              const cred = {
-                accessKeyId: assumeRoleWithWebIdentityData.Credentials.AccessKeyId,
-                secretAccessKey: assumeRoleWithWebIdentityData.Credentials.SecretAccessKey,
-                region: environment.region,
-                sessionToken: assumeRoleWithWebIdentityData.Credentials.SessionToken
-              };
-              sendResult.next(cred);
+            AWS.config.update({
+              accessKeyId: getCredentialsForIdentityData.Credentials.AccessKeyId,
+              secretAccessKey: getCredentialsForIdentityData.Credentials.SecretKey,
+              sessionToken: getCredentialsForIdentityData.Credentials.SessionToken
             });
-          });
+            const localSotrageCred = {
+              accessKeyId: getCredentialsForIdentityData.Credentials.AccessKeyId,
+              secretAccessKey: getCredentialsForIdentityData.Credentials.SecretKey,
+              region: environment.region,
+              sessionToken: getCredentialsForIdentityData.Credentials.SessionToken
+            };
+            const creds = new AWS.Credentials(AWS.config.credentials);
+            this.setCreds(localSotrageCred);
+            sendResult.next(creds);
+        });
         });
       } else if (err) {
         sendResult.error(err);
@@ -77,10 +77,10 @@ export class AuthService {
     return sendResult.asObservable();
   }
 
-  public handleLimitedAuthentication() {
-
+  public handleLimitedAuthentication(): Observable<any> {
+    const sendResult = new Subject<any>();
     if (this.isAuthenticated()) {
-      return;
+      sendResult.complete();
     }
     console.log('Application starting... Setting limited authentication.');
     const creds = new AWS.CognitoIdentityCredentials({
@@ -99,37 +99,28 @@ export class AuthService {
       const paramsIdentityId = {
         IdentityId: data.IdentityId
       };
-      cognitoidentity.getOpenIdToken(paramsIdentityId, (errIdentityId, dataIdentityId) => {
-          AWS.config.credentials = new AWS.CognitoIdentityCredentials({
-              IdentityPoolId: environment.aws_identity_pool_id,
-              IdentityId: dataIdentityId.IdentityId,
-              Logins: {
-                'brocktubre.auth0.com': localStorage.getItem('id_token')
-              }
+      cognitoidentity.getCredentialsForIdentity(paramsIdentityId, (getCredentialsForIdentityErr, getCredentialsForIdentityData) => {
+          if (err) {
+            console.error(err);
+            sendResult.error(err);
+          }
+          AWS.config.update({
+            accessKeyId: getCredentialsForIdentityData.Credentials.AccessKeyId,
+            secretAccessKey: getCredentialsForIdentityData.Credentials.SecretKey,
+            sessionToken: getCredentialsForIdentityData.Credentials.SessionToken
           });
-          cognitoidentity.getOpenIdToken(paramsIdentityId, (getOpenIdTokenError, getOpenIdTokenData) => {
-            if (getOpenIdTokenError) {
-              console.error(getOpenIdTokenError);
-            }
-            const paramsAssumeRole = {
-              DurationSeconds: 3600,
-              RoleArn: environment.aws_unauth_role,
-              RoleSessionName: 'brocktubre-role-session',
-              WebIdentityToken: getOpenIdTokenData.Token
-            };
-            const sts = new AWS.STS();
-            sts.assumeRoleWithWebIdentity(paramsAssumeRole, (assumeRoleWithWebIdentityError, assumeRoleWithWebIdentityData) => {
-              const cred = {
-                accessKeyId: assumeRoleWithWebIdentityData.Credentials.AccessKeyId,
-                secretAccessKey: assumeRoleWithWebIdentityData.Credentials.SecretAccessKey,
-                region: environment.region,
-                sessionToken: assumeRoleWithWebIdentityData.Credentials.SessionToken
-              };
-              this.setCreds(cred);
-            });
-          });
+          const localSotrageCred = {
+            accessKeyId: getCredentialsForIdentityData.Credentials.AccessKeyId,
+            secretAccessKey: getCredentialsForIdentityData.Credentials.SecretKey,
+            region: environment.region,
+            sessionToken: getCredentialsForIdentityData.Credentials.SessionToken
+          };
+          this.setCreds(localSotrageCred);
+          const credsResult = new AWS.Credentials(AWS.config.credentials);
+          sendResult.next(credsResult);
       });
     });
+    return sendResult.asObservable();
   }
 
   private setSession(authResult): void {
@@ -145,10 +136,12 @@ export class AuthService {
     localStorage.removeItem('access_token');
     localStorage.removeItem('id_token');
     localStorage.removeItem('expires_at');
+    localStorage.removeItem('userEmail');
+
     localStorage.removeItem('accessKeyId');
     localStorage.removeItem('secretAccessKey');
     localStorage.removeItem('sessionToken');
-    localStorage.removeItem('userEmail');
+
     // Go back to the home route
     this.router.navigate(['home']);
   }
@@ -158,12 +151,6 @@ export class AuthService {
     // Access Token's expiry time
     const expiresAt = JSON.parse(localStorage.getItem('expires_at') || '{}');
     return new Date().getTime() < expiresAt;
-  }
-
-  public setCreds(creds: any) {
-    localStorage.setItem('accessKeyId', creds.accessKeyId);
-    localStorage.setItem('secretAccessKey', creds.secretAccessKey);
-    localStorage.setItem('sessionToken', creds.sessionToken);
   }
 
   public gertUserProfile(): Observable<any> {
@@ -179,4 +166,11 @@ export class AuthService {
     }
     return sendResult.asObservable();
   }
+
+  public setCreds(creds: any) {
+    localStorage.setItem('accessKeyId', creds.accessKeyId);
+    localStorage.setItem('secretAccessKey', creds.secretAccessKey);
+    localStorage.setItem('sessionToken', creds.sessionToken);
+  }
+
 }
