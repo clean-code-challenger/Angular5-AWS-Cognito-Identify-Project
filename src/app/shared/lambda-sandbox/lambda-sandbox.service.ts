@@ -47,4 +47,23 @@ export class LambdaSandboxService {
     });
     return sendResult.asObservable();
   }
+
+  public triggerFunctionGetTotal(functionName: string): Observable<number> {
+    const sendResult = new Subject<number>();
+    const invokeParams = {
+      FunctionName : functionName,
+      InvocationType : 'RequestResponse',
+      LogType : 'None'
+    };
+
+    this.lambda.invoke(invokeParams, function(err, data) {
+      if (err) {
+        sendResult.error(err);
+      }else {
+        debugger;
+        sendResult.next(data.Payload);
+      }
+    });
+    return sendResult.asObservable();
+  }
 }
