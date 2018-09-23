@@ -28,7 +28,8 @@ export const environment = {
       tableName: 'grades-table'
     },
     lambda : {
-      functionName: 'get-grades-with-secret-id'
+      functionName: 'get-grades-with-secret-id',
+      functionNameGetTotal: 'get-total-points'
     }
   },
   env: 'prod'
