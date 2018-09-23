@@ -60,7 +60,6 @@ export class LambdaSandboxService {
       if (err) {
         sendResult.error(err);
       }else {
-        debugger;
         sendResult.next(data.Payload);
       }
     });
