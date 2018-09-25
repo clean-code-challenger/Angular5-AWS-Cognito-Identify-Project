@@ -17,9 +17,11 @@ export class GradesComponent extends AuthHelper implements OnInit {
   public gradesList: Array<GradesObjectModel>;
   public loadingGrades: boolean;
   public functionName: string;
+  public functionNameGetTotal: string;
   public year: number;
   public readDate: string;
   public finalGrade: number;
+  public goldenTotal: number;
 
   public inputSubmitMessage: string;
   @ViewChild('secretID') secretID: ElementRef;
@@ -29,10 +31,10 @@ export class GradesComponent extends AuthHelper implements OnInit {
   public rows: Array<any> = [];
   public columns: Array<any> = [
     {title: 'Secret ID', name: 'secret_id', sort: false},
-    {title: 'A 1.1', name: 'assignment_1_1', sort: ''},
-    {title: 'A 1.2', name: 'assignment_1_2', sort: ''},
-    {title: 'Arch. Assignment', name: 'arch_assignment', sort: ''},
-    {title: 'A 1.3', name: 'assignment_1_3', sort: ''},
+    {title: 'A 1.1 (100)', name: 'assignment_1_1', sort: ''},
+    {title: 'A 1.2 (100)', name: 'assignment_1_2', sort: ''},
+    {title: 'Arch. Assignment (10)', name: 'arch_assignment', sort: ''},
+    {title: 'A 1.3 (250)', name: 'assignment_1_3', sort: ''},
     {title: 'A 2.1', name: 'assignment_2_1', sort: ''},
     {title: 'A 2.2', name: 'assignment_2_2', sort: ''},
     {title: 'A 2.3', name: 'assignment_2_3', sort: ''},
@@ -64,6 +66,7 @@ export class GradesComponent extends AuthHelper implements OnInit {
     super(authService);
     this.gradesList = new Array<GradesObjectModel>();
     this.functionName = environment.grades.lambda.functionName;
+    this.functionNameGetTotal = environment.grades.lambda.functionNameGetTotal;
     this.year = new Date().getFullYear();
     const d = new Date();
     d.setHours(d.getHours() - 5);
@@ -171,11 +174,14 @@ export class GradesComponent extends AuthHelper implements OnInit {
 
   public loadAttendance(secretId: string) {
     this.lambdaSandboxService.triggerFunction(this.functionName, secretId).subscribe(items => {
-      this.length = items.length;
-      this.data = items;
-      this.gradesList = this.data;
-      this.onChangeTable(this.config);
-      this.loadingGrades = false;
+      this.lambdaSandboxService.triggerFunctionGetTotal(this.functionNameGetTotal).subscribe(total => {
+        this.goldenTotal = total;
+        this.length = items.length;
+        this.data = items;
+        this.gradesList = this.data;
+        this.onChangeTable(this.config);
+        this.loadingGrades = false;
+      });
     });
   }
 
@@ -252,7 +258,7 @@ export class GradesComponent extends AuthHelper implements OnInit {
           totalPoints += g;
         }
       });
-      const goldenTotal = 210;
+      const goldenTotal = this.goldenTotal;
       this.finalGrade = Math.round((totalPoints / goldenTotal * 100) * 100) / 100;
       a.final_grade = this.finalGrade;
       this.formatGrades(a);
