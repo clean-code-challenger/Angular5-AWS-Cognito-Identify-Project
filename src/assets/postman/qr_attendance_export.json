@@ -1,0 +1,140 @@
+{
+	"info": {
+		"_postman_id": "30c546b7-9946-49fb-a6a7-240d39cbf906",
+		"name": "QR Attendance API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Generate QR Codes",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"students\": [\n\t\t{\n\t\t\t\"first_name\" : \"Mark\",\n\t\t\t\"last_name\" : \"Black\",\n\t\t\t\"student_id\" : \"M14004410\",\n\t\t\t\"email\" : \"blackm10@lsus.edu\"\n\t\t},\n        {\n\t\t\t\"first_name\" : \"Carson\",\n\t\t\t\"last_name\" : \"Mullins\",\n\t\t\t\"student_id\" : \"C12003562\",\n\t\t\t\"email\" : \"carsonmullins@yahoo.com\"\n\t\t},\n        {\n\t\t\t\"first_name\" : \"Clayton\",\n\t\t\t\"last_name\" : \"Conly\",\n\t\t\t\"student_id\" : \"C07017999\",\n\t\t\t\"email\" : \"CONLYC99@lsus.edu\"\n\t\t},\n        {\n\t\t\t\"first_name\" : \"Efemena\",\n\t\t\t\"last_name\" : \"Ogodo\",\n\t\t\t\"student_id\" : \"E17003229\",\n\t\t\t\"email\" : \"ogodoe29@lsus.edu\"\n\t\t},\n        {\n\t\t\t\"first_name\" : \"Gilbert\",\n\t\t\t\"last_name\" : \"Salcedo\",\n\t\t\t\"student_id\" : \"G06001234\",\n\t\t\t\"email\" : \"SALCEDOG34@lsus.edu\"\n\t\t},\n        {\n\t\t\t\"first_name\" : \"James\",\n\t\t\t\"last_name\" : \"Thomas\",\n\t\t\t\"student_id\" : \"J15005481\",\n\t\t\t\"email\" : \"thomasj5481@lsus.edu\"\n\t\t},\n        {\n\t\t\t\"first_name\" : \"Jay\",\n\t\t\t\"last_name\" : \"Jain\",\n\t\t\t\"student_id\" : \"J12004461\",\n\t\t\t\"email\" : \"JAINJ61@lsus.edu\"\n\t\t},\n        {\n\t\t\t\"first_name\" : \"Jonathan\",\n\t\t\t\"last_name\" : \"Taylor\",\n\t\t\t\"student_id\" : \"J16006975\",\n\t\t\t\"email\" : \"Jonathan.taylor931@gmail.com\"\n\t\t},\n        {\n\t\t\t\"first_name\" : \"Kevin\",\n\t\t\t\"last_name\" : \"Stanley\",\n\t\t\t\"student_id\" : \"K04000766\",\n\t\t\t\"email\" : \"kevin.patrick.stanley@gmail.com\"\n\t\t},\n        {\n\t\t\t\"first_name\" : \"Kurt\",\n\t\t\t\"last_name\" : \"Gehl\",\n\t\t\t\"student_id\" : \"K17007519\",\n\t\t\t\"email\" : \"gehlk19@lsus.edu\"\n\t\t},\n        {\n\t\t\t\"first_name\" : \"Madelynn\",\n\t\t\t\"last_name\" : \"Cook\",\n\t\t\t\"student_id\" : \"M14004741\",\n\t\t\t\"email\" : \"COOKM41@lsus.edu\"\n\t\t},\n        {\n\t\t\t\"first_name\" : \"Nathan\",\n\t\t\t\"last_name\" : \"Cowart\",\n\t\t\t\"student_id\" : \"N14001366\",\n\t\t\t\"email\" : \"COWARTN66@lsus.edu\"\n\t\t},\n        {\n\t\t\t\"first_name\" : \"Noah\",\n\t\t\t\"last_name\" : \"Sorkey\",\n\t\t\t\"student_id\" : \"N13000823\",\n\t\t\t\"email\" : \"SORKEYN23@lsus.edu\"\n\t\t},\n        {\n\t\t\t\"first_name\" : \"Yasmine\",\n\t\t\t\"last_name\" : \"Smith\",\n\t\t\t\"student_id\" : \"Y14000319\",\n\t\t\t\"email\" : \"smithy19@lsus.edu\"\n\t\t},\n        {\n\t\t\t\"first_name\" : \"Zachary\",\n\t\t\t\"last_name\" : \"Fondal\",\n\t\t\t\"student_id\" : \"Z11000403\",\n\t\t\t\"email\" : \"FONDALZ03@lsus.edu\"\n\t\t},\n        {\n\t\t\t\"first_name\" : \"Andrew\",\n\t\t\t\"last_name\" : \"Guillory\",\n\t\t\t\"student_id\" : \"A15000474\",\n\t\t\t\"email\" : \"guillorya74@lsus.edu\"\n\t\t},\n        {\n\t\t\t\"first_name\" : \"Michael\",\n\t\t\t\"last_name\" : \"Rogers\",\n\t\t\t\"student_id\" : \"M14004758\",\n\t\t\t\"email\" : \"rogersm58@lsus.edu\"\n\t\t}\n\t]\n}"
+				},
+				"url": {
+					"raw": "{{url}}/integration/generate-codes",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"integration",
+						"generate-codes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Generate QR Codes TEST",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"students\": [\n\t\t{\n\t\t\t\"first_name\" : \"Brock\",\n\t\t\t\"last_name\" : \"Tubre\",\n\t\t\t\"student_id\" : \"B08018558\",\n\t\t\t\"email\" : \"brocktubre@gmail.com\"\n\t\t}\n\t]\n}"
+				},
+				"url": {
+					"raw": "{{url}}/integration/generate-codes",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"integration",
+						"generate-codes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Process QR Code",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url}}/integration/process-code/07-05-2018_B08018777.png",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"integration",
+						"process-code",
+						"07-05-2018_B08018777.png"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Disable All Codes",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url}}/integration/disable-codes",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"integration",
+						"disable-codes"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "c0a0d585-dc3a-4a18-8366-ae8591921676",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "4fb7d634-0f4d-41ac-a15a-8063b7b0b364",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
