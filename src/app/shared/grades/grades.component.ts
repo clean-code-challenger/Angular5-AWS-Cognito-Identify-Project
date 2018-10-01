@@ -35,7 +35,7 @@ export class GradesComponent extends AuthHelper implements OnInit {
     {title: 'A 1.2 (100)', name: 'assignment_1_2', sort: ''},
     {title: 'Arch. Assignment (10)', name: 'arch_assignment', sort: ''},
     {title: 'A 1.3 (250)', name: 'assignment_1_3', sort: ''},
-    {title: 'A 2.1', name: 'assignment_2_1', sort: ''},
+    {title: 'A 2.1 (100)', name: 'assignment_2_1', sort: ''},
     {title: 'A 2.2', name: 'assignment_2_2', sort: ''},
     {title: 'A 2.3', name: 'assignment_2_3', sort: ''},
     {title: 'Midterm', name: 'midterm'},
