@@ -1,3 +1,4 @@
+import { KinesisSandboxService } from './shared/kinesis-sandbox/kinesis-sandbox.service';
 import { LambdaSandboxService } from './shared/lambda-sandbox/lambda-sandbox.service';
 import { QrReaderService } from './shared/qr-reader/qr-reader.service';
 import { DynamodbSandboxService } from './shared/dynamodb-sandbox/dynamodb-sandbox.service';
@@ -27,6 +28,7 @@ import { MomentModule } from 'angular2-moment/moment.module';
 import { GradesComponent } from './shared/grades/grades.component';
 import { AuthHelper } from './shared/auth/auth.helper';
 import { Ng2TableModule } from 'ng2-table/ng2-table';
+import { FirehoseSandboxService } from './shared/firehose-sandbox/firehose-sandbox.service';
 
 
 @NgModule({
@@ -63,7 +65,9 @@ import { Ng2TableModule } from 'ng2-table/ng2-table';
     ValidationMessagesService,
     QrReaderService,
     LambdaSandboxService,
-    AuthHelper
+    AuthHelper,
+    KinesisSandboxService,
+    FirehoseSandboxService
   ],
   bootstrap: [AppComponent]
 })

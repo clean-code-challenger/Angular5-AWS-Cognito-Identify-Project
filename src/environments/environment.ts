@@ -36,5 +36,8 @@ export const environment = {
       functionName: 'get-grades-with-secret-id',
       functionNameGetTotal: 'get-total-points'
     }
+  },
+  firehose : {
+    stream_name: 'website-capture-sandbox-delivery-stream'
   }
 };
