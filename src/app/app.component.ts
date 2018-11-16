@@ -20,14 +20,31 @@ export class AppComponent {
     this.titleService.setTitle( newTitle );
   }
 
-  @HostListener('mousemove', ['$event'])
-  onMousemove(event: MouseEvent) {
-    const payload = {
-      type: event.type,
-      x: event.x,
-      y: event.y,
-      url: this.router.url
-    };
-    this.firehose.putMouseMoveRecord(payload);
-  }
+  // @HostListener('mousemove', ['$event'])
+  // onMousemove(event: MouseEvent) {
+  //   const payload = {
+  //     type: event.type,
+  //     x: event.x,
+  //     y: event.y,
+  //     url: this.router.url
+  //   };
+  //   this.firehose.putMouseMoveRecord(payload);
+  // }
+
+  // @HostListener('document:click', ['$event'])
+  // public documentClick(event: Event) {
+  //   if (event.currentTarget['activeElement'].indexOf('a') > -1) {
+  //     debugger;
+  //     return;
+  //   }
+
+  //   const buttonClicked = event.currentTarget['activeElement'].innerText;
+  //   const payload = {
+  //       type: event.type,
+  //       buttonClicked: buttonClicked,
+  //       url: this.router.url
+  //   };
+  //   debugger;
+  //   this.firehose.putMouseMoveRecord(payload);
+  // }
 }
