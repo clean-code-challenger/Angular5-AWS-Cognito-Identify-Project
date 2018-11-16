@@ -6,7 +6,7 @@
   <div class="container">
       <div class="row">
           <div class="col-md-12">
-              <strong><h2> <i class="fa fa-hdd-o"></i>S3 <span class="text-primary">STORE</span></h2></strong>
+              <strong><h2> <i class="fa fa-hdd-o"></i>S3 <span class="text-warning">STORE</span></h2></strong>
           </div>
         </div>
         <hr>
@@ -56,7 +56,7 @@
       <div class="col-md-12 col-sm-12 col-12">
           <div class="input-group">
               <label class="input-group-btn">
-                  <span class="btn btn-primary" [ngClass]="{'disabled' : loadingObjs}">
+                  <span class="btn btn-warning" [ngClass]="{'disabled' : loadingObjs}">
                       Browse&hellip; <input type="file" style="display: none;" multiple #fileInput (change)="fileChanged($event)">
                   </span>
               </label>
@@ -96,6 +96,6 @@
   </bs-modal-body>
   <bs-modal-footer>
       <button class="btn btn-default" type="button" (click)="closeEditModal()"> Cancel </button>
-      <button class="btn btn-primary" type="button" (click)="updateObject()"> Save </button>
+      <button class="btn btn-warning" type="button" (click)="updateObject()"> Save </button>
   </bs-modal-footer>
 </bs-modal>

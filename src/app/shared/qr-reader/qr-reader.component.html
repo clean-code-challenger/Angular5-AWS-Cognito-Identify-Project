@@ -7,7 +7,7 @@
   <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <strong><h2> <i class="fa fa-qrcode"></i>QR <span class="text-primary"> SCANNER</span></h2></strong>
+            <strong><h2> <i class="fa fa-qrcode"></i>QR <span class="text-warning"> SCANNER</span></h2></strong>
         </div>
     </div>
     <hr>
@@ -16,7 +16,7 @@
       <div class="col-md-12" style="padding-bottom: 400px;"></div>
     </div>
     <div *ngIf="scannerFound">
-      <h1 *ngIf="!hasResults" class="text-primary text-center">Scan QR code.</h1>
+      <h1 *ngIf="!hasResults" class="text-warning text-center">Scan QR code.</h1>
       <div *ngIf="hasResults && qrCodeResult.enabled" class="text-center text-success">
             <h1>Thank you <strong>{{qrCodeResult.students_first_name}}</strong>!</h1>
             <h3>You have been successfully been marked present for <strong>{{qrCodeResult.class_date}}</strong> class.</h3>
@@ -34,7 +34,7 @@
           <div class="form-group col-md-4 col-md-offset-4">
             <h3>No QR Code?</h3>
             <input autofocus class="form-control" type="text" value="" placeholder="Student ID" #studentID (change)="checkStudentId($event)"/>
-            <button class="btn btn-primary form-control" style="margin-top: 15px;" (click)="submitStudentId()"> Submit </button>
+            <button class="btn btn-warning form-control" style="margin-top: 15px;" (click)="submitStudentId()"> Submit </button>
             <h5 class="text-danger" *ngIf="inputSubmitMessage"><strong>{{inputSubmitMessage}}</strong></h5>
           </div>
         </div>

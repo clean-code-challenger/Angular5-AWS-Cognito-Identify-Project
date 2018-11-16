@@ -26,7 +26,11 @@ body p{
 }
 
 a{
-	color: #3399f3;
+	color: #ff7518;
+}
+
+a:hover{
+	color: #aa4e10;
 }
 
 .nav a{
