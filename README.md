@@ -1,27 +1,31 @@
-# BtWebsite
+<img src="https://brocktubre.com/assets/img/singLogo.png" alt="logo" width="100"/>
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.5.0.
+# Brock Tubre's Personal Website
 
-## Development server
+## Introduction
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+My name is Brock Tubre and welcome to brocktubre.com repository. I have a passion for creating useful, reliable, and creative software solutions. I have built and been a part of many large projects and enjoy all that goes into it. Please navigate through my repository to see some of the projects I have collaborated and contributed to. Thank you. This website was created using the [Angular Cli](https://cli.angular.io/). 
 
-## Code scaffolding
+### Some Screenshots
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+<img src="https://brocktubre.com/assets/img/home_ss.png" alt="home page" width="300"/>
+*Home*
 
-## Build
+<img src="https://brocktubre.com/assets/img/portfolio_ss.png" alt="portfolio page" width="300"/>
+*Portfolio*
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+<img src="https://brocktubre.com/assets/img/about_ss.png" alt="about page" width="300"/>
+*About*
 
-## Running unit tests
+## Links
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Website: https://brocktubre.com
 
-## Running end-to-end tests
+Portfolio: https://brocktubre.com/portfolio
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+About Me: https://brocktubre.com/about
 
-## Further help
+GitHub: https://github.com/brocktubre
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+LinkedIn: www.linkedin.com/in/brock-tubre-59954361
+
