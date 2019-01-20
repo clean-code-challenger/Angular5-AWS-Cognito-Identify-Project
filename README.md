@@ -10,21 +10,21 @@ My name is Brock Tubre and welcome to the brocktubre.com repository. I have a pa
 
 *Home*
 
-<img src="https://brocktubre.com/assets/img/home_ss.png" alt="home page" width="75%"/>
+<a href="https://brocktubre.com" ><img src="https://brocktubre.com/assets/img/home_ss.png" alt="home page" width="75%"/></a>
 
 
 
 
 *Portfolio*
 
-<img src="https://brocktubre.com/assets/img/portfolio_ss.png" alt="portfolio page" width="75%"/>
+<a href="https://brocktubre.com/portfolio" ><img src="https://brocktubre.com/assets/img/portfolio_ss.png" alt="portfolio page" width="75%"/></a>
 
-<img src="https://brocktubre.com/assets/img/portfolio2_ss.png" alt="portfolio page" width="75%"/>
+<a href="https://brocktubre.com/portfolio" ><img src="https://brocktubre.com/assets/img/portfolio2_ss.png" alt="portfolio page" width="75%"/></a>
 
 
 *About*
 
-<img src="https://brocktubre.com/assets/img/about_ss.png" alt="about page" width="70%"/>
+<a href="https://brocktubre.com/about" ><img src="https://brocktubre.com/assets/img/about_ss.png" alt="about page" width="70%"/></a>
 
 ## Links
 
