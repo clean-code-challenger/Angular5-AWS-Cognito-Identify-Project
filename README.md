@@ -4,18 +4,27 @@
 
 ## Introduction
 
-My name is Brock Tubre and welcome to brocktubre.com repository. I have a passion for creating useful, reliable, and creative software solutions. I have built and been a part of many large projects and enjoy all that goes into it. Please navigate through my repository to see some of the projects I have collaborated and contributed to. Thank you. This website was created using the [Angular Cli](https://cli.angular.io/). 
+My name is Brock Tubre and welcome to the brocktubre.com repository. I have a passion for creating useful, reliable, and creative software solutions. I have built and been a part of many large projects and enjoy all that goes into it. Please navigate through my repository to see some of the projects I have collaborated and contributed to. Thank you. This website was created using the [Angular Cli](https://cli.angular.io/). 
 
 ### Some Screenshots
 
-<img src="https://brocktubre.com/assets/img/home_ss.png" alt="home page" width="300"/>
 *Home*
 
-<img src="https://brocktubre.com/assets/img/portfolio_ss.png" alt="portfolio page" width="300"/>
+<img src="https://brocktubre.com/assets/img/home_ss.png" alt="home page" width="75%"/>
+
+
+
+
 *Portfolio*
 
-<img src="https://brocktubre.com/assets/img/about_ss.png" alt="about page" width="300"/>
+<img src="https://brocktubre.com/assets/img/portfolio_ss.png" alt="portfolio page" width="75%"/>
+
+<img src="https://brocktubre.com/assets/img/portfolio2_ss.png" alt="portfolio page" width="75%"/>
+
+
 *About*
+
+<img src="https://brocktubre.com/assets/img/about_ss.png" alt="about page" width="70%"/>
 
 ## Links
 
