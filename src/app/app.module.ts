@@ -27,6 +27,7 @@ import { MomentModule } from 'angular2-moment/moment.module';
 import { GradesComponent } from './shared/grades/grades.component';
 import { AuthHelper } from './shared/auth/auth.helper';
 import { Ng2TableModule } from 'ng2-table/ng2-table';
+import { CUHackitComponent } from './shared/cuhackit/cuhackit.component';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { Ng2TableModule } from 'ng2-table/ng2-table';
     CallbackComponent,
     QrReaderComponent,
     AttendanceComponent,
-    GradesComponent
+    GradesComponent,
+    CUHackitComponent
 
   ],
   imports: [
