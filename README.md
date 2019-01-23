@@ -1,27 +1,40 @@
-# BtWebsite
+<img src="https://brocktubre.com/assets/img/singLogo.png" alt="logo" width="100"/>
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.5.0.
+# Brock Tubre's Personal Website
 
-## Development server
+## Introduction
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+My name is Brock Tubre and welcome to the brocktubre.com repository. I have a passion for creating useful, reliable, and creative software solutions. I have built and been a part of many large projects and enjoy all that goes into it. Please navigate through my repository to see some of the projects I have collaborated and contributed to. Thank you. This website was created using the [Angular Cli](https://cli.angular.io/). 
 
-## Code scaffolding
+### Some Screenshots
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+*Home*
 
-## Build
+<a href="https://brocktubre.com" ><img src="https://brocktubre.com/assets/img/home_ss.png" alt="home page" width="75%"/></a>
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
 
-## Running unit tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
+*Portfolio*
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+<a href="https://brocktubre.com/portfolio" ><img src="https://brocktubre.com/assets/img/portfolio_ss.png" alt="portfolio page" width="75%"/></a>
 
-## Further help
+<a href="https://brocktubre.com/portfolio" ><img src="https://brocktubre.com/assets/img/portfolio2_ss.png" alt="portfolio page" width="75%"/></a>
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+*About*
+
+<a href="https://brocktubre.com/about" ><img src="https://brocktubre.com/assets/img/about_ss.png" alt="about page" width="70%"/></a>
+
+## Links
+
+Website: https://brocktubre.com
+
+Portfolio: https://brocktubre.com/portfolio
+
+About Me: https://brocktubre.com/about
+
+GitHub: https://github.com/brocktubre
+
+LinkedIn: www.linkedin.com/in/brock-tubre-59954361
+

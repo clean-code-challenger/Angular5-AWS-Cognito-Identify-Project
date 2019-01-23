@@ -29,6 +29,7 @@ import { GradesComponent } from './shared/grades/grades.component';
 import { AuthHelper } from './shared/auth/auth.helper';
 import { Ng2TableModule } from 'ng2-table/ng2-table';
 import { FirehoseSandboxService } from './shared/firehose-sandbox/firehose-sandbox.service';
+import { CUHackitComponent } from './shared/cuhackit/cuhackit.component';
 
 
 @NgModule({
@@ -44,7 +45,8 @@ import { FirehoseSandboxService } from './shared/firehose-sandbox/firehose-sandb
     CallbackComponent,
     QrReaderComponent,
     AttendanceComponent,
-    GradesComponent
+    GradesComponent,
+    CUHackitComponent
 
   ],
   imports: [

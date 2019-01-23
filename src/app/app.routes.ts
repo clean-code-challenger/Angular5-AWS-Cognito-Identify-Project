@@ -1,3 +1,4 @@
+import { CUHackitComponent } from './shared/cuhackit/cuhackit.component';
 import { GradesComponent } from './shared/grades/grades.component';
 import { QrReaderComponent } from './shared/qr-reader/qr-reader.component';
 import { AboutComponent } from './about/about.component';
@@ -24,6 +25,7 @@ export const routes: Routes = [
     { path: 'qr-reader/attendance', component: AttendanceComponent, canActivate: [AuthGuard] },
     { path: 'grades', component: GradesComponent },
     { path: 'grades/:id', component: GradesComponent },
+    { path: 'cuhackit', component: CUHackitComponent },
     { path: '**', redirectTo: '' }
 ];
 
