@@ -39,5 +39,10 @@ export const environment = {
   },
   firehose : {
     stream_name: 'website-capture-sandbox-delivery-stream'
+  },
+  cuhackit: {
+    api: {
+      get_tweets: 'https://iaxktfzlre.execute-api.us-east-1.amazonaws.com/integration/get-tweets'
+    }
   }
 };

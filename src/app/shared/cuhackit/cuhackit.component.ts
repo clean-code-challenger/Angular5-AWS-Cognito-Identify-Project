@@ -1,3 +1,4 @@
+import { CUHackitTweetObjectModel } from './../models/cuhackit-tweet-object.model';
 import { ComprehendSandboxService } from './../comprehend-sandbox/comprehend-sandbox.service';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 
@@ -10,12 +11,17 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 export class CUHackitComponent implements OnInit {
   public year: number;
   @ViewChild('textInput') textInput: ElementRef;
+  public tweetsList: Array<CUHackitTweetObjectModel>;
 
   constructor(private comprehendService: ComprehendSandboxService) {
     this.year = new Date().getFullYear();
   }
 
   ngOnInit() {
+    this.comprehendService.getAllNegativeTweets().subscribe((result: CUHackitTweetObjectModel) => {
+      // this.tweetsList = results;
+      console.log(result);
+    });
   }
 
   private submitText() {
