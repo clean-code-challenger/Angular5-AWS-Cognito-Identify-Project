@@ -30,6 +30,7 @@ import { AuthHelper } from './shared/auth/auth.helper';
 import { Ng2TableModule } from 'ng2-table/ng2-table';
 import { FirehoseSandboxService } from './shared/firehose-sandbox/firehose-sandbox.service';
 import { CUHackitComponent } from './shared/cuhackit/cuhackit.component';
+import { ComprehendSandboxService } from './shared/comprehend-sandbox/comprehend-sandbox.service';
 
 
 @NgModule({
@@ -69,7 +70,8 @@ import { CUHackitComponent } from './shared/cuhackit/cuhackit.component';
     LambdaSandboxService,
     AuthHelper,
     KinesisSandboxService,
-    FirehoseSandboxService
+    FirehoseSandboxService,
+    ComprehendSandboxService
   ],
   bootstrap: [AppComponent]
 })
