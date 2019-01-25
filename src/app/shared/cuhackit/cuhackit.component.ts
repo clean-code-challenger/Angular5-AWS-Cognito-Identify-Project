@@ -12,8 +12,8 @@ import * as moment from 'moment';
 export class CUHackitComponent implements OnInit {
   public year: number;
   @ViewChild('textInput') textInput: ElementRef;
-  public tweetsList: Array<CUHackitTweetObjectModel>;
   public tweetsListNext: Array<CUHackitTweetObjectModel>;
+  public tweetsListFirst: Array<CUHackitTweetObjectModel>;
 
   constructor(private comprehendService: ComprehendSandboxService) {
     this.year = new Date().getFullYear();
@@ -33,13 +33,17 @@ export class CUHackitComponent implements OnInit {
 
   private getTweets() {
     this.comprehendService.getAllNegativeTweets().subscribe((results) => {
-      this.tweetsList = results;
-      this.tweetsList.sort((a, b) => a.id - b.id);
-      this.tweetsList = this.tweetsList.slice(-10);
-      this.tweetsListNext = this.tweetsList.slice(-5);
-      this.tweetsList = this.tweetsList.slice(0, 5);
-      this.tweetsList.sort((a, b) => b.id - a.id);
+      this.tweetsListNext = results;
+      this.tweetsListNext.sort((a, b) => a.id - b.id);
+      this.tweetsListNext = this.tweetsListNext.slice(-10);
+      this.tweetsListFirst = this.tweetsListNext.slice(-5);
+      this.tweetsListNext = this.tweetsListNext.slice(0, 5);
       this.tweetsListNext.sort((a, b) => b.id - a.id);
+      this.tweetsListFirst.sort((a, b) => b.id - a.id);
+
+      if (results.length < 10) {
+        this.tweetsListNext = new Array<CUHackitTweetObjectModel>();
+      }
     });
   }
 
