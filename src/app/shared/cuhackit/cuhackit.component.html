@@ -15,10 +15,45 @@
         <div class="header text-center">
           <div class="jumbotron">
               <h1 class="display-3">Amazon Web Services (AWS) Challenge</h1>
-              <p class="lead">
+              <p>
                 Improve campus life using AWS artificial intelligence and machine learning services.
                 Register for the AWS Challenge and explore AWS artificial intelligence and machine learning tools using computer vision, natural language processing, speech recognition, text-to-speech, and machine translation. To qualify, use one or more of these AWS services: Amazon Comprehend, Amazon Transcribe, Amazon Polly, Amazon Lex, Amazon Translate, and Amazon Rekognition. Successful challengers will capitalize on AWS Lambda or Amazon SageMaker to turn their ideas into action. The winning project will earn awesome bragging rights by bringing something useful and original to campus life.</p>
               <p><a class="btn btn btn-warning" href="https://github.com/brocktubre/bt-website/tree/cuhackit2019-sandbox" role="button">See source code <i class="fa fa-code"></i></a></p>
+            </div>
+        </div>
+      </div>
+
+      <div class="container mt-5 mb-5">
+        <div class="row" style="padding-bottom: 25px;">
+            <div class="col-md-12 text-center">
+                <img class="" src="https://cdn3.iconfinder.com/data/icons/social-icons-5/607/Twitterbird.png" style="max-width: 150px;" />
+            </div>
+            <div class="col-md-12 text-center">
+                <h1>Latest Hate Tweets</h1>
+            </div>
+          </div>
+        <div class="row">
+          <div class="col-md-6 offset-md-3">
+            <ul class="timeline">
+              <li *ngFor="let t of tweetsListNext" >
+                <img class="" src="{{t.profile_image_url}}" style="max-width: 50px;" />
+                <a target="_blank" href="{{ 'https://twitter.com/' + t.user_name }}">@{{t.user_name}}</a>
+                <span>  {{formatDate(t.timestamp)}}</span>
+                <p>{{t.tweet}}</p>
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-6 offset-md-3">
+              <div class="row"></div>
+
+              <ul class="timeline">
+                <li *ngFor="let t of tweetsList">
+                  <img class="" src="{{t.profile_image_url}}" style="max-width: 50px;" />
+                  <a target="_blank" href="{{ 'https://twitter.com/' + t.user_name }}">@{{t.user_name}}</a>
+                  <span>  {{formatDate(t.timestamp)}}</span>
+                  <p>{{t.tweet}}</p>
+                </li>
+              </ul>
             </div>
         </div>
       </div>

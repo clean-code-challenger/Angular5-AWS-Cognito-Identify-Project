@@ -5,7 +5,7 @@ import { environment } from '../../../environments/environment';
 import { S3ObjectModel } from '../models/s3-object.model';
 import { Subject } from 'rxjs/Subject';
 import * as AWS from 'aws-sdk';
-import { DynamodbS3ObjectModel } from '../models/dynamodb-s3-object.modal';
+import { DynamodbS3ObjectModel } from '../models/dynamodb-s3-object.model';
 import { AuthService } from '../auth/auth.service';
 import { QrCodeObject } from '../models/qr-code-object.model';
 import { Moment } from 'moment';

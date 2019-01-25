@@ -1,4 +1,3 @@
-import { CUHackitTweetObjectModel } from './../models/cuhackit-tweet-object.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import * as AWS from 'aws-sdk';
@@ -6,6 +5,7 @@ import { environment } from './../../../environments/environment';
 import { AuthService } from '../auth/auth.service';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
+import { CUHackitTweetObjectModel } from '../models/cuhackit-tweet-object.model';
 
 @Injectable()
 export class ComprehendSandboxService {
@@ -35,8 +35,8 @@ export class ComprehendSandboxService {
     });
   }
 
-  public getAllNegativeTweets(): Observable<CUHackitTweetObjectModel> {
-      const sendResult = new Subject<CUHackitTweetObjectModel>();
+  public getAllNegativeTweets(): Observable<Array<CUHackitTweetObjectModel>> {
+      const sendResult = new Subject<Array<CUHackitTweetObjectModel>>();
       let headers = new HttpHeaders();
       headers = headers.set('Content-Type', 'application/json;');
       const httpOptions = {
@@ -44,10 +44,9 @@ export class ComprehendSandboxService {
       };
       const getUrl = environment.cuhackit.api.get_tweets;
       const getNegativeTweets = this.http.get(getUrl, httpOptions);
-      getNegativeTweets.subscribe((result: any) => {
-          sendResult.next(result);
+      getNegativeTweets.subscribe((results: any) => {
+          sendResult.next(results);
       });
       return sendResult.asObservable();
     }
-  }
 }

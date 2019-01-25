@@ -5,7 +5,7 @@ import { environment } from '../../../environments/environment';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import * as FileSaver from 'file-saver';
 import { BsModalComponent } from 'ng2-bs3-modal';
-import { DynamodbS3ObjectModel } from '../models/dynamodb-s3-object.modal';
+import { DynamodbS3ObjectModel } from '../models/dynamodb-s3-object.model';
 
 @Component({
   selector: 'app-s3-sandbox',
