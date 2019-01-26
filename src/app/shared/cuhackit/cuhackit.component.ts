@@ -14,6 +14,7 @@ export class CUHackitComponent implements OnInit {
   @ViewChild('textInput') textInput: ElementRef;
   public tweetsListNext: Array<CUHackitTweetObjectModel>;
   public tweetsListFirst: Array<CUHackitTweetObjectModel>;
+  public loadingTweets: boolean;
 
   constructor(private comprehendService: ComprehendSandboxService) {
     this.year = new Date().getFullYear();
@@ -22,6 +23,7 @@ export class CUHackitComponent implements OnInit {
 
   ngOnInit() {
     setInterval(() => {
+      this.loadingTweets = true;
       this.getTweets();
     }, 5000);
   }
@@ -40,10 +42,7 @@ export class CUHackitComponent implements OnInit {
       this.tweetsListNext = this.tweetsListNext.slice(0, 5);
       this.tweetsListNext.sort((a, b) => b.id - a.id);
       this.tweetsListFirst.sort((a, b) => b.id - a.id);
-
-      if (results.length < 10) {
-        this.tweetsListNext = new Array<CUHackitTweetObjectModel>();
-      }
+      this.loadingTweets = false;
     });
   }
 

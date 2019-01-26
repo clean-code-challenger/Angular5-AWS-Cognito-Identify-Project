@@ -22,14 +22,15 @@
             </div>
         </div>
       </div>
-
       <div class="container mt-5 mb-5">
         <div class="row" style="padding-bottom: 25px;">
             <div class="col-md-12 text-center">
-                <img class="" src="https://cdn3.iconfinder.com/data/icons/social-icons-5/607/Twitterbird.png" style="max-width: 150px;" />
+                <img class="" src="https://cdn3.iconfinder.com/data/icons/social-icons-5/607/Twitterbird.png" style="max-width: 100px;" />
             </div>
             <div class="col-md-12 text-center">
                 <h1>Latest Hate Tweets</h1>
+                <i *ngIf="loadingTweets" class="fa fa-spinner fa-pulse fa-lg"></i>
+                <br *ngIf="!loadingTweets">
             </div>
           </div>
         <div class="row">
