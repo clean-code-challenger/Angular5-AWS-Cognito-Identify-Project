@@ -78,12 +78,13 @@ export class AuthService {
   }
 
   public handleLimitedAuthentication(): Observable<any> {
+    console.log('Application starting... ');
     const sendResult = new Subject<any>();
     if (this.isAuthenticated()) {
       sendResult.error('User is authenticated.');
       return sendResult.asObservable();
     }
-    console.log('Application starting... Setting limited authentication.');
+    console.log('Setting limited authentication.');
     const creds = new AWS.CognitoIdentityCredentials({
       IdentityPoolId: environment.aws_identity_pool_id
     });

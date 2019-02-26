@@ -11,7 +11,7 @@ export class AuthHelper implements OnDestroy {
 
   constructor(private auth: AuthService) {
     this.sub = this.auth.handleLimitedAuthentication().subscribe(
-      data => console.log('Go user`s creds.'),
+      data => console.log('Got limited user`s creds.'),
       err => console.log(err)
     );
   }
