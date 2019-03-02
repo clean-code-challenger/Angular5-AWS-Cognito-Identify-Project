@@ -13,8 +13,7 @@ export class AppComponent {
 
   constructor(private titleService: Title,
               private authService: AuthService,
-              private router: Router,
-              private firehose: FirehoseSandboxService) {
+              private router: Router) {
   }
   public setTitle( newTitle: string) {
     this.titleService.setTitle( newTitle );
