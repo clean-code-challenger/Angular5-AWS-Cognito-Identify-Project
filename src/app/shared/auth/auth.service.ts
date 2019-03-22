@@ -34,7 +34,11 @@ export class AuthService {
       if (authResult && authResult.accessToken && authResult.idToken) {
         window.location.hash = '';
         this.setSession(authResult);
-        const params = { IdentityPoolId: environment.aws_identity_pool_id };
+        const params = { IdentityPoolId: environment.aws_identity_pool_id,
+            Logins: {
+              'accounts.google.com': 'xxx'
+            }
+        };
         AWS.config.update({ region: environment.region });
 
         const cognitoidentity = new AWS.CognitoIdentity();
@@ -94,7 +98,10 @@ export class AuthService {
     });
 
     const paramsIdentityPool = {
-      IdentityPoolId: environment.aws_identity_pool_id
+      IdentityPoolId: environment.aws_identity_pool_id,
+      Logins: {
+        'accounts.google.com': 'xxx'
+      }
     };
     const cognitoidentity = new AWS.CognitoIdentity({credentials: AWS.config.credentials});
     cognitoidentity.getId(paramsIdentityPool, (err, data) => {
